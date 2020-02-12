@@ -6,7 +6,7 @@
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 16:26:15 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/02/12 14:44:39 by mbaxmann         ###   ########.fr       */
+/*   Updated: 2020/02/12 16:13:30 by mbaxmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ typedef	struct s_data
 	void *img;
 	t_position *player;
 	char **map;
+	char *path;
 	t_win_dim *dim;
 }		t_data;
 

@@ -6,7 +6,7 @@
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 16:05:28 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/02/12 15:08:11 by mbaxmann         ###   ########.fr       */
+/*   Updated: 2020/02/12 16:23:25 by mbaxmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,19 +130,21 @@ void	ft_fill_image(void *img, int size, int i, t_win_dim *win)
 	int bpp;
 	int size_line;
 	int j = 0;
+	int edian;
 
 	bpp = 32;
-	size_line = bpp * win->x;
-	pixel = mlx_get_data_addr(img, &bpp, &size_line, 0);
-	pixel += 300;
-	while (j < 10000)
+	edian = 1;
+	size_line = 4 * win->x;
+	pixel = mlx_get_data_addr(img, &bpp, &size_line, &edian) + 4 * i;
+	pixel += size_line * ((win->y - size) / 2);
+	while (j < size * size_line)
 	{
 		pixel[0] = 0;
 		pixel[1] = -126;
 		pixel[2] = 0;
 		pixel[3] = 0;
 		j += size_line;
-		pixel += j;
+		pixel += size_line;
 	}
 }
 
@@ -162,10 +164,11 @@ void	ft_display_cub(t_position *player, char **map, t_data *data, void *img)
 		ft_check_verticaly(player, map, &C, ft_set_angle(angle), angle);
 		ft_check_horizontaly(player, map, &O, ft_set_angle(angle), angle);
 		size = ft_calculate_slice_size(player, &C, &O, angle);
-		//ft_fill_image(img, size, i, data->dim);
+		ft_fill_image(img, size, i, data->dim);
 		i--;
 		angle += (M_PI / 3) / 1920;
 	}
+	mlx_put_image_to_window(data->mlx, data->win, img, 0, 0);
 }
 
 
@@ -178,9 +181,9 @@ void	ft_algo(char *path, t_data *data, char ***map)
 
 	i = 0;
 	j = 0;
+	
 	img = mlx_new_image(data->mlx, 1920, 1080);
 	data->img = img;
 	ft_init(path, map, &tab, data);
 	ft_display_cub(data->player, *map, data, img);
-	mlx_put_image_to_window(data->mlx, data->win, img, 200, 200);
 }

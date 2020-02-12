@@ -6,7 +6,7 @@
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/24 14:40:20 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/02/12 15:09:12 by mbaxmann         ###   ########.fr       */
+/*   Updated: 2020/02/12 16:18:02 by mbaxmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ int	ft_test(int keycode, void *param)
 {
 	t_data *param2;
 	param2 = param;
+	void *img;
 	if (keycode == 53)
 		mlx_destroy_window(param2->mlx, param2->win);
 	if (keycode == 124)
@@ -31,7 +32,8 @@ int	ft_test(int keycode, void *param)
 		param2->player->angle += (2 * M_PI) / 360;
 	}
 	mlx_clear_window(param2->mlx, param2->win);
-	ft_display_cub(param2->player, param2->map, param2, param2->img);
+	img = mlx_new_image(param2->mlx, 1920, 1080);
+	ft_display_cub(param2->player, param2->map, param2, img);
 	return (0);
 }
 
@@ -70,6 +72,7 @@ int main(int ac, char **av)
 
 	int  i = 0;
 	t_data *data;
+	data->path = ft_strdup(av[1]);
 	data->player = &player;
 	mlx_ptr = mlx_init();
 	win_ptr = mlx_new_window(mlx_ptr, 1920, 1080, "cub3d");
@@ -78,7 +81,7 @@ int main(int ac, char **av)
 	data->win = win_ptr;
 	data->dim = win_dim;
 	//ft_put_ray(data, 200, 512, 576);
-	ft_algo(av[1], data, &map);
+	ft_algo(data->path, data, &map);
 	data->map = map;
 	mlx_hook(win_ptr, 2, 1L << 0, &ft_test, data);
 	mlx_loop(mlx_ptr);

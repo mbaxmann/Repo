@@ -6,7 +6,7 @@
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 17:17:19 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/02/12 15:07:51 by mbaxmann         ###   ########.fr       */
+/*   Updated: 2020/02/12 15:53:51 by mbaxmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -184,12 +184,11 @@ void	ft_init(char *path, char ***map, char ***tab, t_data *data)
 	fd = open(path, O_RDONLY);
 	*tab = ft_get_texture(fd);
 	*map = ft_get_map(fd);
-	write(1, "A", 1);
+	data->dim = (t_win_dim *)malloc(sizeof(t_win_dim));
 	data->dim->x = ft_atoi(tab[0][0]);
 	while (tab[0][0][i] >= '0' && tab[0][0][i] <= '9')
 		i++;
 	data->dim->y = ft_atoi(&tab[0][0][i]);
-	write(1, "B", 1);
 	ft_find_player(data->player, *map);
 }
 
