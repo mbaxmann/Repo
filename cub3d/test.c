@@ -6,7 +6,7 @@
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/24 14:40:20 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/02/12 16:18:02 by mbaxmann         ###   ########.fr       */
+/*   Updated: 2020/02/13 14:37:32 by mbaxmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,20 +31,12 @@ int	ft_test(int keycode, void *param)
 	{
 		param2->player->angle += (2 * M_PI) / 360;
 	}
+	ft_update_player_position(param2->player, keycode, param2->map);
 	mlx_clear_window(param2->mlx, param2->win);
 	img = mlx_new_image(param2->mlx, 1920, 1080);
 	ft_display_cub(param2->player, param2->map, param2, img);
 	return (0);
 }
-
-/*void	ft_update_player_position(t_position *player)
-{
-	int x;
-	int y;
-
-	x = 0;
-	y = 0;
-}*/
 
 void	ft_put_ray(t_data data, int l, int res1, int res2)
 {

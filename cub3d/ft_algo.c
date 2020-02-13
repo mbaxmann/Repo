@@ -6,7 +6,7 @@
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 16:05:28 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/02/12 16:23:25 by mbaxmann         ###   ########.fr       */
+/*   Updated: 2020/02/13 15:42:33 by mbaxmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,6 +135,8 @@ void	ft_fill_image(void *img, int size, int i, t_win_dim *win)
 	bpp = 32;
 	edian = 1;
 	size_line = 4 * win->x;
+	if (size > win->y)
+		size = win->y - 1;
 	pixel = mlx_get_data_addr(img, &bpp, &size_line, &edian) + 4 * i;
 	pixel += size_line * ((win->y - size) / 2);
 	while (j < size * size_line)
@@ -158,6 +160,7 @@ void	ft_display_cub(t_position *player, char **map, t_data *data, void *img)
 
 	angle = player->angle - (M_PI / 6);
 	i = 1920;
+	printf("player x : %f	player y : %f\n", player->x, player->y);
 	while (i)
 	{
 		angle = ft_modulo_pi(angle);
@@ -182,8 +185,12 @@ void	ft_algo(char *path, t_data *data, char ***map)
 	i = 0;
 	j = 0;
 	
+	int k = 1080;
+	int l = 1920;
+	img = mlx_xpm_file_to_image(data->mlx, "./textur/greystone.xpm", &k, &l);
+	mlx_put_image_to_window(data->mlx, data->win, img, 0, 0);
 	img = mlx_new_image(data->mlx, 1920, 1080);
 	data->img = img;
 	ft_init(path, map, &tab, data);
-	ft_display_cub(data->player, *map, data, img);
+	//ft_display_cub(data->player, *map, data, img);
 }
