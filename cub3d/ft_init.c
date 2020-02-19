@@ -6,7 +6,7 @@
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 17:17:19 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/02/12 15:53:51 by mbaxmann         ###   ########.fr       */
+/*   Updated: 2020/02/19 13:51:32 by mbaxmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -190,6 +190,7 @@ void	ft_init(char *path, char ***map, char ***tab, t_data *data)
 		i++;
 	data->dim->y = ft_atoi(&tab[0][0][i]);
 	ft_find_player(data->player, *map);
+	data->map = *map;
 }
 
 /*int main(int ac, char **av)

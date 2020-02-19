@@ -6,7 +6,7 @@
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/13 13:33:09 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/02/13 15:21:10 by mbaxmann         ###   ########.fr       */
+/*   Updated: 2020/02/19 13:53:21 by mbaxmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,9 @@
 
 void	ft_check_wall_collision(t_position *player, char **map, int keycode)
 {
-	write(1, "A", 1);
 	while (!ft_isok(player, map) ||
 		map[(int)floor(player->y) / CUBE_SIZE][(int)floor(player->x) / CUBE_SIZE] == '1')
 	{
-		write(1, "B", 1);
 		if (keycode == 13)
 		{
 			player->y += sin(player->angle);

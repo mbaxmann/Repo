@@ -6,7 +6,7 @@
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 16:05:28 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/02/13 15:42:33 by mbaxmann         ###   ########.fr       */
+/*   Updated: 2020/02/19 15:19:23 by mbaxmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,29 +102,31 @@ void	ft_check_verticaly(t_position *player, char **map, t_position *C, double an
 	}
 }
 
-int	ft_calculate_slice_size(t_position *player, t_position *C, t_position *O, double angle)
+int	ft_calculate_slice_size(t_data *data, t_position *C, t_position *O, double angle)
 {
 	double	size_1;
 	double	size_2;
 	double	res;
 
-	size_1 = hypot((O->x - player->x), (O->y - player->y));
-	size_2 = hypot((C->x - player->x), (C->y - player->y));
+	size_1 = hypot((O->x - data->player->x), (O->y - data->player->y));
+	size_2 = hypot((C->x - data->player->x), (C->y - data->player->y));
 	if (size_1 <= size_2)
 	{
-		size_1 *= cos(player->angle - angle);
+		size_1 *= cos(data->player->angle - angle);
 		res = (CUBE_SIZE * (960 / tan(M_PI / 6))) / size_1;
+		data->pt = O;
 	}
 	else
 	{
-		size_2 *= cos(player->angle - angle);
+		size_2 *= cos(data->player->angle - angle);
 		res = (CUBE_SIZE * (960 / tan(M_PI / 6))) / size_2;
+		data->pt = C;
 	}
 	res = (res < 0)? -res : res;
 	return ((int)round(res));
 }
 
-void	ft_fill_image(void *img, int size, int i, t_win_dim *win)
+void	ft_fill_image(void *img, int size, int i, t_data *data)
 {
 	char *pixel;
 	int bpp;
@@ -134,12 +136,12 @@ void	ft_fill_image(void *img, int size, int i, t_win_dim *win)
 
 	bpp = 32;
 	edian = 1;
-	size_line = 4 * win->x;
-	if (size > win->y)
-		size = win->y - 1;
+	size_line = 4 * data->dim->x;
+	if (size > data->dim->y)
+		size = data->dim->y - 1;
 	pixel = mlx_get_data_addr(img, &bpp, &size_line, &edian) + 4 * i;
-	pixel += size_line * ((win->y - size) / 2);
-	while (j < size * size_line)
+	pixel += size_line * ((data->dim->y - size) / 2);
+	/*while (j < size * size_line)
 	{
 		pixel[0] = 0;
 		pixel[1] = -126;
@@ -147,10 +149,11 @@ void	ft_fill_image(void *img, int size, int i, t_win_dim *win)
 		pixel[3] = 0;
 		j += size_line;
 		pixel += size_line;
-	}
+	}*/
+	ft_texturing(data, pixel, size, size_line);
 }
 
-void	ft_display_cub(t_position *player, char **map, t_data *data, void *img)
+void	ft_display_cub(t_position *player, t_data *data, void *img)
 {
 	t_position O;
 	t_position C;
@@ -160,14 +163,13 @@ void	ft_display_cub(t_position *player, char **map, t_data *data, void *img)
 
 	angle = player->angle - (M_PI / 6);
 	i = 1920;
-	printf("player x : %f	player y : %f\n", player->x, player->y);
 	while (i)
 	{
 		angle = ft_modulo_pi(angle);
-		ft_check_verticaly(player, map, &C, ft_set_angle(angle), angle);
-		ft_check_horizontaly(player, map, &O, ft_set_angle(angle), angle);
-		size = ft_calculate_slice_size(player, &C, &O, angle);
-		ft_fill_image(img, size, i, data->dim);
+		ft_check_verticaly(player, data->map, &C, ft_set_angle(angle), angle);
+		ft_check_horizontaly(player, data->map, &O, ft_set_angle(angle), angle);
+		size = ft_calculate_slice_size(data, &C, &O, angle);
+		ft_fill_image(img, size, i, data);
 		i--;
 		angle += (M_PI / 3) / 1920;
 	}
@@ -187,10 +189,10 @@ void	ft_algo(char *path, t_data *data, char ***map)
 	
 	int k = 1080;
 	int l = 1920;
-	img = mlx_xpm_file_to_image(data->mlx, "./textur/greystone.xpm", &k, &l);
-	mlx_put_image_to_window(data->mlx, data->win, img, 0, 0);
+	//mlx_put_image_to_window(data->mlx, data->win, img, 0, 0);
 	img = mlx_new_image(data->mlx, 1920, 1080);
 	data->img = img;
+	data->tab = tab;
 	ft_init(path, map, &tab, data);
-	//ft_display_cub(data->player, *map, data, img);
+	ft_display_cub(data->player, data, img);
 }
