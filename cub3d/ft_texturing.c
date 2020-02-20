@@ -6,7 +6,7 @@
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 13:47:29 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/02/19 15:36:46 by mbaxmann         ###   ########.fr       */
+/*   Updated: 2020/02/20 15:58:51 by mbaxmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void	ft_texturing(t_data *data, char *img, int size, int size_line)
 	void *textur;
 	int j;
 	int edian;
+	clock_t t;
 
 	i = 64;
 	j = 64;
@@ -44,20 +45,20 @@ void	ft_texturing(t_data *data, char *img, int size, int size_line)
 	pixel = ft_load_textur(data);
 	i = 8;
 	j = 64;
-	//pixel = mlx_get_data_addr(textur, &i, &j, &edian);
 	if ((int)data->pt->x % CUBE_SIZE != 0)
 		pixel += ((int)data->pt->x % CUBE_SIZE);
 	else
 		pixel += ((int)data->pt->y % CUBE_SIZE);
 	j = 0;
+	i = 0;
+	t = clock();
 	while (j < size * size_line)
 	{
-		img[0] = pixel[0];
-		img[1] = pixel[0];
-		img[2] = pixel[0];
-		img[3] = pixel[0];
+		img[j] = pixel[i];
+		img[j + 1] = pixel[i + 1];
+		img[j + 2] = pixel[i + 2];
 		j += size_line;
-		img += size_line;
-		//pixel += CUBE_SIZE;
+		i =  (floor((j / size_line) / (size / CUBE_SIZE))) * CUBE_SIZE * 4;
 	}
+	printf("tmp : %lu\n", clock() - t);
 }

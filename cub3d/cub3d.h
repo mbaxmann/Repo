@@ -6,7 +6,7 @@
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 16:26:15 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/02/19 14:38:28 by mbaxmann         ###   ########.fr       */
+/*   Updated: 2020/02/20 14:08:39 by mbaxmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 #include <fcntl.h>
 #include <mlx.h>
 #include "libft/libft.h"
+#include <time.h>
+#include <stdio.h>
 
 # define CUBE_SIZE 64
 # define A write(1, "A", 1);
