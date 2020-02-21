@@ -6,26 +6,57 @@
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 13:47:29 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/02/20 15:58:51 by mbaxmann         ###   ########.fr       */
+/*   Updated: 2020/02/21 17:14:40 by mbaxmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-char	*ft_load_textur(t_data *data)
+char	**ft_load_textur(t_data *data)
 {
-	static int i = 0;
+	char **img;
 	void *textur;
-	static char *pixel;
-	int w = 64;
-	int h = 64;
-	int edian = 0;
+	int util[3];
+	int i;
 
-	if (!i)
+	util[2] = 0;
+	i = 0;
+	img = (char **)malloc(sizeof(char *) * 4);
+	while (i < 4)
 	{
-		textur = mlx_xpm_file_to_image(data->mlx, "./textur/greystone.xpm", &w, &h);
-		pixel = mlx_get_data_addr(textur, &w, &h, &edian);
-		i = 1;
+		A
+		util[1] = 64;
+		util[0] = 64;
+		printf("test : %s\n", data->tab[1]);
+		textur = mlx_xpm_file_to_image(data->mlx, data->tab[i + 1], util, util + 1);
+		util[0] = 32;
+		util[1] = 4 * CUBE_SIZE;
+		img[i] = mlx_get_data_addr(textur, util, util + 1, util + 2);
+		i++;
+	}
+	return (img);
+}
+
+char	*ft_choose_textur(t_data *data)
+{
+	char *pixel;
+
+	printf("%f	%f\n", data->pt->x, data->pt->y);
+	if (data->pt->x)
+	{
+		if (data->pt->angle >= 0 && data->pt->angle <= M_PI)
+			pixel = data->tab2[0];
+		else
+			pixel = data->tab2[1];
+		pixel += ((int)data->pt->x % (CUBE_SIZE)) * 4;
+	}
+	else
+	{
+		if (data->pt->angle >= M_PI_2 && data->pt->angle <= 3 * M_PI_2)
+			pixel = data->tab2[2];
+		else
+			pixel = data->tab2[3];
+		pixel += ((int)data->pt->y % (CUBE_SIZE)) * 4;
 	}
 	return (pixel);
 }
@@ -36,19 +67,9 @@ void	ft_texturing(t_data *data, char *img, int size, int size_line)
 	int i;
 	void *textur;
 	int j;
-	int edian;
 	clock_t t;
 
-	i = 64;
-	j = 64;
-	edian = 0;
-	pixel = ft_load_textur(data);
-	i = 8;
-	j = 64;
-	if ((int)data->pt->x % CUBE_SIZE != 0)
-		pixel += ((int)data->pt->x % CUBE_SIZE);
-	else
-		pixel += ((int)data->pt->y % CUBE_SIZE);
+	pixel = ft_choose_textur(data);
 	j = 0;
 	i = 0;
 	t = clock();
@@ -58,7 +79,7 @@ void	ft_texturing(t_data *data, char *img, int size, int size_line)
 		img[j + 1] = pixel[i + 1];
 		img[j + 2] = pixel[i + 2];
 		j += size_line;
-		i =  (floor((j / size_line) / (size / CUBE_SIZE))) * CUBE_SIZE * 4;
+		i =  (((j / size_line) * CUBE_SIZE) / size) * CUBE_SIZE * 4;
 	}
-	printf("tmp : %lu\n", clock() - t);
+	//printf("tmp : %lu\n", clock() - t);
 }

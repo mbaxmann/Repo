@@ -6,7 +6,7 @@
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 16:05:28 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/02/20 14:10:59 by mbaxmann         ###   ########.fr       */
+/*   Updated: 2020/02/21 17:21:04 by mbaxmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,19 +108,21 @@ int	ft_calculate_slice_size(t_data *data, t_position *C, t_position *O, double a
 	double	size_2;
 	double	res;
 
-	size_1 = hypot((O->x - data->player->x), (O->y - data->player->y));
-	size_2 = hypot((C->x - data->player->x), (C->y - data->player->y));
+	size_1 = hypot((O->x - data->player->x), ((O->y) - data->player->y));
+	size_2 = hypot((C->x - data->player->x), ((C->y) - data->player->y));
 	if (size_1 <= size_2)
 	{
+		data->pt->y = O->y;
+		data->pt->x = 0;
 		size_1 *= cos(data->player->angle - angle);
 		res = (CUBE_SIZE * (960 / tan(M_PI / 6))) / size_1;
-		data->pt = O;
 	}
 	else
 	{
+		data->pt->y = 0;
+		data->pt->x = C->x;
 		size_2 *= cos(data->player->angle - angle);
 		res = (CUBE_SIZE * (960 / tan(M_PI / 6))) / size_2;
-		data->pt = C;
 	}
 	res = (res < 0)? -res : res;
 	return ((int)round(res));
@@ -165,6 +167,7 @@ void	ft_display_cub(t_position *player, t_data *data, void *img)
 	i = 1920;
 	while (i)
 	{
+		data->pt->angle = angle;
 		angle = ft_modulo_pi(angle);
 		ft_check_verticaly(player, data->map, &C, ft_set_angle(angle), angle);
 		ft_check_horizontaly(player, data->map, &O, ft_set_angle(angle), angle);

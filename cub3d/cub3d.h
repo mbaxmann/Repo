@@ -6,7 +6,7 @@
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 16:26:15 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/02/20 14:08:39 by mbaxmann         ###   ########.fr       */
+/*   Updated: 2020/02/21 16:18:33 by mbaxmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ typedef	struct s_data
 	char **map;
 	char *path;
 	char **tab;
+	char **tab2;
 	t_win_dim *dim;
 }		t_data;
 
@@ -79,5 +80,6 @@ double	ft_modulo_pi(double nb);
 void	ft_check_wall_collision(t_position *player, char **map, int keycode);
 int	ft_isok(t_position *pt, char **map);
 void	ft_texturing(t_data *data, char *img, int size, int size_line);
+char	**ft_load_textur(t_data *data);
 
 #endif

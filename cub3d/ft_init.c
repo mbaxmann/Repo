@@ -6,7 +6,7 @@
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 17:17:19 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/02/19 13:51:32 by mbaxmann         ###   ########.fr       */
+/*   Updated: 2020/02/21 16:46:51 by mbaxmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,6 +178,7 @@ void	ft_init(char *path, char ***map, char ***tab, t_data *data)
 {
 	int fd;
 	int i;
+	t_position *pt;
 
 	fd = 0;
 	i = 0;
@@ -191,6 +192,10 @@ void	ft_init(char *path, char ***map, char ***tab, t_data *data)
 	data->dim->y = ft_atoi(&tab[0][0][i]);
 	ft_find_player(data->player, *map);
 	data->map = *map;
+	data->tab = *tab;
+	pt = (t_position *)malloc(sizeof(t_position));
+	data->pt = pt;
+	data->tab2 = ft_load_textur(data);
 }
 
 /*int main(int ac, char **av)
