@@ -6,7 +6,7 @@
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 13:47:29 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/02/21 17:14:40 by mbaxmann         ###   ########.fr       */
+/*   Updated: 2020/02/24 16:43:25 by mbaxmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,25 @@ char	**ft_load_textur(t_data *data)
 	return (img);
 }
 
+void	ft_fill_up(char *pixel, int l, t_data *data)
+{
+	int i;
+
+	i = 0;
+	while (i < l)
+	{
+		pixel[i] = 0;
+		pixel[i + 1] = 127;
+		pixel[i + 2] = 0;
+		i += 4 * data->dim->x;
+	}
+}
+
 char	*ft_choose_textur(t_data *data)
 {
 	char *pixel;
 
-	printf("%f	%f\n", data->pt->x, data->pt->y);
+	//printf("%f	%f\n", data->pt->x, data->pt->y);
 	if (data->pt->x)
 	{
 		if (data->pt->angle >= 0 && data->pt->angle <= M_PI)
@@ -72,14 +86,14 @@ void	ft_texturing(t_data *data, char *img, int size, int size_line)
 	pixel = ft_choose_textur(data);
 	j = 0;
 	i = 0;
-	t = clock();
 	while (j < size * size_line)
 	{
+		t = clock();
 		img[j] = pixel[i];
 		img[j + 1] = pixel[i + 1];
 		img[j + 2] = pixel[i + 2];
+		//printf("tmp : %lu\n", clock() - t);
 		j += size_line;
 		i =  (((j / size_line) * CUBE_SIZE) / size) * CUBE_SIZE * 4;
 	}
-	//printf("tmp : %lu\n", clock() - t);
 }

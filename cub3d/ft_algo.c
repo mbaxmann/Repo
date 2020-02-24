@@ -6,7 +6,7 @@
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 16:05:28 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/02/21 17:21:04 by mbaxmann         ###   ########.fr       */
+/*   Updated: 2020/02/24 16:44:54 by mbaxmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,6 +142,7 @@ void	ft_fill_image(void *img, int size, int i, t_data *data)
 	if (size > data->dim->y)
 		size = data->dim->y - 1;
 	pixel = mlx_get_data_addr(img, &bpp, &size_line, &edian) + 4 * i;
+	ft_fill_up(pixel, size_line * ((data->dim->y - size) / 2), data);
 	pixel += size_line * ((data->dim->y - size) / 2);
 	/*while (j < size * size_line)
 	{
@@ -152,6 +153,7 @@ void	ft_fill_image(void *img, int size, int i, t_data *data)
 		j += size_line;
 		pixel += size_line;
 	}*/
+	ft_fill_up(pixel + (size * size_line), size_line * ((data->dim->y - size) / 2), data);
 	ft_texturing(data, pixel, size, size_line);
 }
 
@@ -174,7 +176,7 @@ void	ft_display_cub(t_position *player, t_data *data, void *img)
 		size = ft_calculate_slice_size(data, &C, &O, angle);
 		ft_fill_image(img, size, i, data);
 		i--;
-		angle += (M_PI / 3) / 1920;
+		angle += ((M_PI / 3) / 1920);
 	}
 	mlx_put_image_to_window(data->mlx, data->win, img, 0, 0);
 }
