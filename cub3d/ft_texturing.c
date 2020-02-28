@@ -6,7 +6,7 @@
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 13:47:29 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/02/24 16:43:25 by mbaxmann         ###   ########.fr       */
+/*   Updated: 2020/02/28 13:20:53 by mbaxmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ char	**ft_load_textur(t_data *data)
 	return (img);
 }
 
-void	ft_fill_up(char *pixel, int l, t_data *data)
+/*void	ft_fill_up(char *pixel, int l, t_data *data)
 {
 	int i;
 
@@ -49,7 +49,7 @@ void	ft_fill_up(char *pixel, int l, t_data *data)
 		pixel[i + 2] = 0;
 		i += 4 * data->dim->x;
 	}
-}
+}*/
 
 char	*ft_choose_textur(t_data *data)
 {
@@ -75,25 +75,35 @@ char	*ft_choose_textur(t_data *data)
 	return (pixel);
 }
 
+void	ft_pixel_put(char *img, int j, char *pixel, int i)
+{
+	char *dst;
+	char *dst2;
+
+	dst2 = pixel + i;
+	dst = img + j;
+	*(unsigned int *)dst = (*(unsigned int *)dst2);
+}
+
 void	ft_texturing(t_data *data, char *img, int size, int size_line)
 {
 	char *pixel;
 	int i;
 	void *textur;
 	int j;
-	clock_t t;
+	int l;
+	int len;
 
 	pixel = ft_choose_textur(data);
 	j = 0;
 	i = 0;
-	while (j < size * size_line)
+	l = (size > 1079) ? ((size % 1079) / 2) * size_line : 0;
+	len = (size > 1079) ? 1079 : size;
+	while (j < len * size_line)
 	{
-		t = clock();
-		img[j] = pixel[i];
-		img[j + 1] = pixel[i + 1];
-		img[j + 2] = pixel[i + 2];
-		//printf("tmp : %lu\n", clock() - t);
+		ft_pixel_put(img, j, pixel, i);
 		j += size_line;
-		i =  (((j / size_line) * CUBE_SIZE) / size) * CUBE_SIZE * 4;
+		i =  ((((j + l) / size_line) * CUBE_SIZE) / size) * CUBE_SIZE * 4;
+		//i = (size > 1079) ? i + (((size % 1079) / 2) * CUBE_SIZE * 4) : i;
 	}
 }

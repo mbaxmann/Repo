@@ -6,7 +6,7 @@
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 16:05:28 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/02/24 16:44:54 by mbaxmann         ###   ########.fr       */
+/*   Updated: 2020/02/28 13:34:36 by mbaxmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,13 +137,11 @@ void	ft_fill_image(void *img, int size, int i, t_data *data)
 	int edian;
 
 	bpp = 32;
-	edian = 1;
+	edian = 0;
 	size_line = 4 * data->dim->x;
-	if (size > data->dim->y)
-		size = data->dim->y - 1;
 	pixel = mlx_get_data_addr(img, &bpp, &size_line, &edian) + 4 * i;
-	ft_fill_up(pixel, size_line * ((data->dim->y - size) / 2), data);
-	pixel += size_line * ((data->dim->y - size) / 2);
+	//ft_fill_up(pixel, size_line * ((data->dim->y - size) / 2), data);
+	pixel += size_line * ((data->dim->y - (size % 1079)) / 2);
 	/*while (j < size * size_line)
 	{
 		pixel[0] = 0;
@@ -153,7 +151,7 @@ void	ft_fill_image(void *img, int size, int i, t_data *data)
 		j += size_line;
 		pixel += size_line;
 	}*/
-	ft_fill_up(pixel + (size * size_line), size_line * ((data->dim->y - size) / 2), data);
+	//ft_fill_up(pixel + (size * size_line), size_line * ((data->dim->y - size) / 2), data);
 	ft_texturing(data, pixel, size, size_line);
 }
 
@@ -167,6 +165,7 @@ void	ft_display_cub(t_position *player, t_data *data, void *img)
 
 	angle = player->angle - (M_PI / 6);
 	i = 1920;
+	clock_t t;
 	while (i)
 	{
 		data->pt->angle = angle;
