@@ -6,7 +6,7 @@
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 16:05:28 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/02/28 13:34:36 by mbaxmann         ###   ########.fr       */
+/*   Updated: 2020/03/04 16:20:53 by mbaxmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,8 +140,8 @@ void	ft_fill_image(void *img, int size, int i, t_data *data)
 	edian = 0;
 	size_line = 4 * data->dim->x;
 	pixel = mlx_get_data_addr(img, &bpp, &size_line, &edian) + 4 * i;
-	//ft_fill_up(pixel, size_line * ((data->dim->y - size) / 2), data);
-	pixel += size_line * ((data->dim->y - (size % 1079)) / 2);
+	edian = (size > 1079) ? 1079 : size;
+	ft_fill_up(pixel, 0, size_line * ((data->dim->y - edian) / 2), data);
 	/*while (j < size * size_line)
 	{
 		pixel[0] = 0;
@@ -151,7 +151,9 @@ void	ft_fill_image(void *img, int size, int i, t_data *data)
 		j += size_line;
 		pixel += size_line;
 	}*/
-	//ft_fill_up(pixel + (size * size_line), size_line * ((data->dim->y - size) / 2), data);
+	ft_fill_up(pixel, (edian + ((data->dim->y - edian) / 2)) * size_line,
+	(data->dim->y - 1) * size_line, data);
+	pixel += size_line * ((data->dim->y - edian) / 2);
 	ft_texturing(data, pixel, size, size_line);
 }
 

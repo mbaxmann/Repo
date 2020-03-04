@@ -6,7 +6,7 @@
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 13:47:29 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/02/28 13:20:53 by mbaxmann         ###   ########.fr       */
+/*   Updated: 2020/03/04 16:36:13 by mbaxmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,19 +37,42 @@ char	**ft_load_textur(t_data *data)
 	return (img);
 }
 
-/*void	ft_fill_up(char *pixel, int l, t_data *data)
+unsigned int	ft_get_color(t_data *data, int start)
 {
-	int i;
+	unsigned int i;
+	int j;
 
 	i = 0;
-	while (i < l)
+	j = 0;
+	start = (!start) ? 6 : 5;
+	i = ft_atoi(&data->tab[start][0]) << 16;
+	while (data->tab[start][j] != ',')
+		j++;
+	j++;
+	i += ft_atoi(&data->tab[start][j]) << 8;
+	while (data->tab[start][j] != ',')
+		j++;
+	j++;
+	i += ft_atoi(&data->tab[start][j]);
+	return (i);
+}
+
+void	ft_fill_up(char *pixel, int start, int end, t_data *data)
+{
+	unsigned int i;
+
+	i = ft_get_color(data, start);
+	if (start >= 0 && end < data->dim->y * 4 * data->dim->x && end >= 0)
 	{
-		pixel[i] = 0;
-		pixel[i + 1] = 127;
-		pixel[i + 2] = 0;
-		i += 4 * data->dim->x;
+		pixel += start;
+		while (start < end)
+		{
+			*(unsigned int *)pixel = i;
+			pixel += 4 * data->dim->x;
+			start += 4 *data->dim->x;
+		}
 	}
-}*/
+}
 
 char	*ft_choose_textur(t_data *data)
 {
@@ -85,25 +108,36 @@ void	ft_pixel_put(char *img, int j, char *pixel, int i)
 	*(unsigned int *)dst = (*(unsigned int *)dst2);
 }
 
+int		ft_offset(int size, t_data *data)
+{
+	int res;
+
+	res = 0;
+	if (size > data->dim->y)
+		res = ((size - data->dim->y) / 2) * 4 * data->dim->x;
+	return (res);
+}
+
 void	ft_texturing(t_data *data, char *img, int size, int size_line)
 {
 	char *pixel;
-	int i;
 	void *textur;
-	int j;
-	int l;
-	int len;
+	int tab[4];
 
 	pixel = ft_choose_textur(data);
-	j = 0;
-	i = 0;
-	l = (size > 1079) ? ((size % 1079) / 2) * size_line : 0;
-	len = (size > 1079) ? 1079 : size;
-	while (j < len * size_line)
+	tab[0] = 0;
+	tab[1] = 0;
+	tab[2] = size;
+	size = (size > 1079) ? 1079 : size;
+	tab[3] = ft_offset(tab[2], data);
+	static int k = 0;
+	k = (k + 1) % 1920;
+	//printf("test : %d	i : %d		size : %d\n", tab[3], k, tab[2]);
+	while (tab[0] < size * size_line)
 	{
-		ft_pixel_put(img, j, pixel, i);
-		j += size_line;
-		i =  ((((j + l) / size_line) * CUBE_SIZE) / size) * CUBE_SIZE * 4;
+		ft_pixel_put(img, tab[0], pixel, tab[1]);
+		tab[0] += size_line;
+		tab[1] = ((((tab[0] + tab[3]) / size_line) * CUBE_SIZE) / tab[2]) * CUBE_SIZE * 4;
 		//i = (size > 1079) ? i + (((size % 1079) / 2) * CUBE_SIZE * 4) : i;
 	}
 }

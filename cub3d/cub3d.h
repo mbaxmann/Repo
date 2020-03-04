@@ -6,7 +6,7 @@
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 16:26:15 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/02/24 16:37:12 by mbaxmann         ###   ########.fr       */
+/*   Updated: 2020/03/04 16:34:09 by mbaxmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,8 @@ void	ft_check_wall_collision(t_position *player, char **map, int keycode);
 int	ft_isok(t_position *pt, char **map);
 void	ft_texturing(t_data *data, char *img, int size, int size_line);
 char	**ft_load_textur(t_data *data);
-void	ft_fill_up(char *pixel, int l, t_data *data);
+void	ft_fill_up(char *pixel, int start, int end, t_data *data);
+int		ft_offset(int size, t_data *data);
+unsigned int	ft_get_color(t_data *data, int start);
 
 #endif

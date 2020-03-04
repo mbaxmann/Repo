@@ -6,7 +6,7 @@
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/13 13:33:09 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/02/19 13:53:21 by mbaxmann         ###   ########.fr       */
+/*   Updated: 2020/03/04 14:04:12 by mbaxmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,23 +19,23 @@ void	ft_check_wall_collision(t_position *player, char **map, int keycode)
 	{
 		if (keycode == 13)
 		{
-			player->y += sin(player->angle);
-			player->x -= cos(player->angle);
+			player->y += 2 * sin(player->angle);
+			player->x -= 2 * cos(player->angle);
 		}
 		else if (keycode == 1)
 		{
-			player->y -= sin(player->angle);
-			player->x += cos(player->angle);
+			player->y -= 2 * sin(player->angle);
+			player->x += 2 * cos(player->angle);
 		}
 		else if (keycode == 0)
 		{
-			player->y += sin(player->angle + M_PI_2);
-			player->x -= cos(player->angle + M_PI_2);
+			player->y += 2 * sin(player->angle + M_PI_2);
+			player->x -= 2 * cos(player->angle + M_PI_2);
 		}
 		else if (keycode == 2)
 		{
-			player->y += sin(player->angle - M_PI_2);
-			player->x -= cos(player->angle - M_PI_2);
+			player->y += 2 * sin(player->angle - M_PI_2);
+			player->x -= 2 * cos(player->angle - M_PI_2);
 		}
 	}
 }
