@@ -6,7 +6,7 @@
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 17:17:19 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/03/04 16:36:19 by mbaxmann         ###   ########.fr       */
+/*   Updated: 2020/03/09 12:34:02 by mbaxmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 
 void	ft_set_player_position(t_position *player, int i, int j, char c)
 {
-	player->x = (j * CUBE_SIZE) - (CUBE_SIZE / 2);
-	player->y = (i * CUBE_SIZE) - (CUBE_SIZE / 2);
+	player->x = (j * CUBE_SIZE) + (CUBE_SIZE / 2);
+	player->y = (i * CUBE_SIZE) + (CUBE_SIZE / 2);
 	if (c == 'N')
 		player->angle = M_PI_2;
 	else if (c == 'E')

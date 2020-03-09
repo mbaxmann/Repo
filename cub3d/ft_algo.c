@@ -6,7 +6,7 @@
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 16:05:28 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/03/04 16:20:53 by mbaxmann         ###   ########.fr       */
+/*   Updated: 2020/03/09 15:50:02 by mbaxmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,21 +35,36 @@ double		ft_set_angle(double angle)
 		return (angle);
 }
 
-int		ft_isok(t_position *pt, char **map)
+int		ft_isok(t_position *pt, char **map, double dir, int m)
 {
+	double (*tab[3])(double x) = {floor, ceil, round};
 	int i;
+	int j;
 
 	i = 0;
+	j = 0;
+	if (m == 1&& ((dir >= 0 && dir <= M_PI_2) || (dir >= 3 * M_PI_2 && dir < 2 * M_PI)))
+		j = 0;
+	else if (m == 1)
+		j = 1;
+	if (!m && (dir >= 0 && dir <= M_PI))
+		j = 1;
+	else if (!m)
+		j = 0;
+	if (m == 2)
+		j = 2;
 	while (map[i])
 		i++;
 	i--;
-	if ((int)floor(pt->y) / CUBE_SIZE < 0)
+	if ((int)tab[j](pt->y) / CUBE_SIZE < 0)
 		return (0);
-	else if ((int)floor(pt->y) / CUBE_SIZE > i)
+	else if ((int)tab[j](pt->y) / CUBE_SIZE > i)
 		return (0);
-	if ((int)floor(pt->x) / CUBE_SIZE < 0)
+	if ((int)tab[j](pt->x) / CUBE_SIZE < 0)
 		return (0);
-	if ((int)floor(pt->x) / CUBE_SIZE > ft_strlen(map[(int)floor(pt->y) / CUBE_SIZE]) - 1)
+	if ((int)tab[j](pt->x) / CUBE_SIZE > ft_strlen(map[(int)tab[j](pt->y) / CUBE_SIZE]) - 1)
+		return (0);
+	if (map[((int)(tab[j])(pt->y) / CUBE_SIZE)][((int)(tab[j])(pt->x) / CUBE_SIZE)] == '1')
 		return (0);
 	return (1);
 }
@@ -62,10 +77,10 @@ void	ft_check_horizontaly(t_position *player, char **map, t_position *O, double 
 	else
 		O->x = floor(player->x / CUBE_SIZE) * CUBE_SIZE - 1;
 	if (dir >= 0 && dir <= M_PI)
-		O->y = player->y - fabs(player->x - O->x) * (tan(angle));
+		O->y = player->y - (fabs(player->x - O->x) * (tan(angle)));
 	else
-		O->y = player->y + fabs(player->x - O->x) * (tan(angle));
-	while (ft_isok(O, map) && map[((int)floor(O->y) / CUBE_SIZE)][((int)floor(O->x) / CUBE_SIZE)] != '1')
+		O->y = player->y + (fabs(player->x - O->x) * (tan(angle)));
+	while (ft_isok(O, map, dir, 0)) 
 	{
 		if ((dir >= 0 && dir <= M_PI_2) ||
 		(dir >= (3 * M_PI_2) && dir < 2 * M_PI))
@@ -73,7 +88,7 @@ void	ft_check_horizontaly(t_position *player, char **map, t_position *O, double 
 		else
 			O->x -= CUBE_SIZE;
 		if (dir >= 0 && dir <= M_PI)
-			O->y -= CUBE_SIZE  * (tan(angle));
+			O->y -= CUBE_SIZE * (tan(angle));
 		else
 			O->y += CUBE_SIZE * (tan(angle));
 	}
@@ -89,14 +104,14 @@ void	ft_check_verticaly(t_position *player, char **map, t_position *C, double an
 		C->x = player->x + (fabs(player->y - C->y) / (tan(angle)));
 	else
 		C->x = player->x - (fabs(player->y - C->y) / (tan(angle)));
-	while (ft_isok(C, map) && map[((int)floor(C->y) / CUBE_SIZE)][((int)floor(C->x) / CUBE_SIZE)] != '1')
+	while (ft_isok(C, map, dir, 1))
 	{
 		if (dir >= 0 && dir <= M_PI)
 			C->y -= CUBE_SIZE;
 		else
 			C->y += CUBE_SIZE;
 		if ((dir >= 0 && dir <= M_PI_2) || (dir >= 3 * M_PI_2 && dir < 2 * M_PI))
-			C->x += CUBE_SIZE  / (tan(angle));
+			C->x += CUBE_SIZE / (tan(angle));
 		else
 			C->x -= CUBE_SIZE / (tan(angle));
 	}
@@ -108,8 +123,8 @@ int	ft_calculate_slice_size(t_data *data, t_position *C, t_position *O, double a
 	double	size_2;
 	double	res;
 
-	size_1 = hypot((O->x - data->player->x), ((O->y) - data->player->y));
-	size_2 = hypot((C->x - data->player->x), ((C->y) - data->player->y));
+	size_1 = hypot(((O->x) - data->player->x), ((O->y) - data->player->y));
+	size_2 = hypot(((C->x) - data->player->x), ((C->y) - data->player->y));
 	if (size_1 <= size_2)
 	{
 		data->pt->y = O->y;

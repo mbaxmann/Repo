@@ -6,7 +6,7 @@
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 16:26:15 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/03/04 16:34:09 by mbaxmann         ###   ########.fr       */
+/*   Updated: 2020/03/09 14:48:31 by mbaxmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,10 +75,10 @@ int	ft_calculate_slice_size(t_data *data, t_position *C, t_position *O, double a
 void	ft_check_verticaly(t_position *play, char **map, t_position *C, double angle, double dir);
 void	ft_check_horizontaly(t_position *player, char **map, t_position *O, double angle, double dir);
 void	ft_put_ray(t_data data, int l, int res1, int res2);
-void	ft_update_player_position(t_position *player, int keycode, char **map);
+void	ft_update_player_position(t_position *player, int keycode, char **map, t_data *data);
 double	ft_modulo_pi(double nb);
-void	ft_check_wall_collision(t_position *player, char **map, int keycode);
-int	ft_isok(t_position *pt, char **map);
+void	ft_check_wall_collision(t_position *player, char **map, int keycode, t_data *data);
+int	ft_isok(t_position *pt, char **map, double dir, int m);
 void	ft_texturing(t_data *data, char *img, int size, int size_line);
 char	**ft_load_textur(t_data *data);
 void	ft_fill_up(char *pixel, int start, int end, t_data *data);
