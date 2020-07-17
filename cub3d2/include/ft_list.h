@@ -1,31 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.h                                            :+:      :+:    :+:   */
+/*   ft_list.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/07/14 09:27:20 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/07/17 10:31:08 by mbaxmann         ###   ########.fr       */
+/*   Created: 2020/07/17 10:10:11 by mbaxmann          #+#    #+#             */
+/*   Updated: 2020/07/17 10:18:42 by mbaxmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUB3D_H
-# define CUB3D_H
+#ifndef FT_LIST_H
+# define FT_LIST_H
 
-#define t_dim t_coord
-
-typedef struct	s_dim
+typedef struct s_list
 {
-	int			x;
-	int			y;
-}				t_dim;
+	char *data;
+	struct s_list *next;
+}				t_list;
 
-#include "init.h"
-#include "../mlx/mlx.h"
-#include "../libft/libft.h"
-#include "ft_list.h"
-#include <fcntl.h>
-#include <stdio.h>
+void		ft_free_lst(t_list *first);
+t_list		*ft_newlst(char *data);
+void		ft_add_list(t_list *first, t_list *to_add);
+int			ft_list_len(t_list *first);
+t_list		*ft_get_list(t_list *first, int number);
 
 #endif

@@ -11,6 +11,7 @@
 
 #include "zlib.h"
 
+
 #include <OpenGL/gl3.h>
 #include	"mlx_int.h"
 
