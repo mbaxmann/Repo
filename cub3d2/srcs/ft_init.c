@@ -6,12 +6,11 @@
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/14 09:17:33 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/07/17 10:56:56 by mbaxmann         ###   ########.fr       */
+/*   Updated: 2020/07/22 10:27:23 by mbaxmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
-#define A write(1, "A", 1);
 
 int		ft_check_data(t_data *data)
 {
@@ -111,7 +110,7 @@ void		ft_get_map(t_data *data, char *line, int fd)
 		i++;
 	}
 	data->map[i++] = current->data;
-	data->map[i] = NULL;
+	data->map[i] = ft_strdup("");
 }
 
 void		ft_init_data(t_data *data)
@@ -148,6 +147,11 @@ t_data		*ft_init(char *path)
 		exit(1);
 	}
 	ft_get_map(map, line, fd);
+	if (ft_check_map(map->map))
+	{
+		ft_printf("Error: Invalid map\n");
+		exit(1);
+	}
 	return (map);
 }
 
@@ -160,7 +164,7 @@ int main()
 	ft_printf("c : %d\nf : %d\n", data->ceil, data->floor);
 	ft_printf("x : %d	y : %d\n", data->res->x, data->res->y);
 	int i = 0;
-	while (data->map[i])
+	while (data->map[i][0])
 	{
 		ft_printf("%s\n", data->map[i]);
 		i++;
