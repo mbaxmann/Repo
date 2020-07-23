@@ -6,7 +6,7 @@
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/21 09:09:51 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/07/22 10:58:48 by mbaxmann         ###   ########.fr       */
+/*   Updated: 2020/07/23 10:56:41 by mbaxmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,22 +22,25 @@ int		ft_check_side_h(int j, char **map)
 	while (map[h][l] == ' ')
 		l++;
 	if (j)
-		while (map[h][l] == '1')
-			l++;
+		l = ft_strlen(map[h]) - 1;
+	ft_printf("size: %d\n", ft_strlen(map[h + 1]));
 	while (map[h + 1][0])
 	{
 		while (l <= ft_strlen(map[h + 1]) &&
 			   	map[h + 1][l] == '1')
 			h++;
 		if (l && map[h][l - 1] == '1')
-			while (l && map[h][l - 1] == '1')
+			while (l && map[h][l - 1] == '1' &&
+					(l >= ft_strlen(map[h + 1]) || map[h + 1][l] != '1'))
 				l--;
 		else
-			while (map[h][l + 1] == '1')
+			while (map[h][l + 1] == '1' && (l >= ft_strlen(map[h + 1]) ||
+					map[h + 1][l] != '1'))
 				l++;
-		if (!(l <= ft_strlen(map[h + 1]) && map[h + 1][l] == '1') &&
-				!(l && map[h][l - 1] == '1') &&
-				!(map[h][l + 1] == '1'))
+		printf("oui : %c	i: %d	j: %d\n", map[h][l], h, l);
+		if (map[h][l + 1] != '1' &&
+			(!l || map[h][l - 1] != '1') &&
+			(map[h + 1][l] != '1'))
 			return (1);
 	}
 	return (0);
@@ -66,12 +69,27 @@ int		ft_check_side_l(int j, char **map)
 		else
 			while (map[h + 1] && map[h + 1][l] == '1')
 				h++;
-		if ((map[h][l + 1] != '1') &&
-				!(h && map[h - 1][l] == '1') &&
-				!(map[h + 1] && map[h + 1][l] == '1'))
+		if (h && map[h - 1][l] != '1' &&
+				(!map[h + 1][0] || map[h + 1][l] != '1') &&
+				map[h][l + 1] != '1')
 			return (1);
 	}
 	return (0);
+}
+
+int		ft_check_hole(char **map, int i, int j)
+{
+	if (j && (map[i][j - 1] != '1' && map[i][j - 1] != ' '))
+		return (0);
+	if (map[i][j + 1] != '1' && map[i][j + 1] != ' ')
+		return (0);
+	if (i && j <= ft_strlen(map[i - 1]) &&
+		(map[i - 1][j] != '1' && map[i - 1][j] != ' '))
+		return (0);
+	if (map[i + 1][0] && j <= ft_strlen(map[i + 1]) &&
+				(map[i + 1][j] != '1' && map[i + 1][j] != ' '))
+		return (0);
+	return (1);
 }
 
 int		ft_check_char2(char **map, int i, int j)
@@ -86,19 +104,7 @@ int		ft_check_char2(char **map, int i, int j)
 		|| map[i][j] == 'W' || map[i][j] == 'E')
 		return (2);
 	else if (map[i][j] == ' ')
-	{
-		if (!i || map[i - 1][j] == '1')
-			k++;
-		if (!map[i + 1][0] ||
-			(j <= ft_strlen(map[i + 1]) && map[i + 1][j] == '1'))
-			k++;
-		if (!j || map[i][j - 1] == '1')
-			k++;
-		if (map[i][j + 1] == '1' || !map[i][j + 1])
-			k++;
-		if (k == 4)
-			return (1);
-	}
+		return (ft_check_hole(map, i, j));
 	return (0);
 }
 
@@ -113,8 +119,6 @@ int		ft_check_char(char **map)
 	k = 0;
 	while (map[i][0])
 	{
-		while (map[i][j] == ' ')
-			j++;
 		while (map[i][j])
 		{
 			if (k == 4)
@@ -139,14 +143,11 @@ int		ft_check_char(char **map)
 
 int		ft_check_map(char **map)
 {
-	int i;
-	int j;
-
 	if (ft_check_side_h(0, map))
 		return (1);
-	if (ft_check_side_h(1, map))
-		return (1);
 	if (ft_check_side_l(0, map))
+		return (1);
+	if (ft_check_side_h(1, map))
 		return (1);
 	if (ft_check_side_l(1, map))
 		return (1);
