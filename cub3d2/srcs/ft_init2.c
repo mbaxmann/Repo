@@ -6,88 +6,47 @@
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/21 09:09:51 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/07/23 10:56:41 by mbaxmann         ###   ########.fr       */
+/*   Updated: 2020/07/25 10:18:45 by mbaxmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
-int		ft_check_side_h(int j, char **map)
+int		ft_check_down(char **map, int i, int j)
 {
-	int h;
-	int l;
-
-	h = 0;
-	l = 0;
-	while (map[h][l] == ' ')
-		l++;
-	if (j)
-		l = ft_strlen(map[h]) - 1;
-	ft_printf("size: %d\n", ft_strlen(map[h + 1]));
-	while (map[h + 1][0])
-	{
-		while (l <= ft_strlen(map[h + 1]) &&
-			   	map[h + 1][l] == '1')
-			h++;
-		if (l && map[h][l - 1] == '1')
-			while (l && map[h][l - 1] == '1' &&
-					(l >= ft_strlen(map[h + 1]) || map[h + 1][l] != '1'))
-				l--;
-		else
-			while (map[h][l + 1] == '1' && (l >= ft_strlen(map[h + 1]) ||
-					map[h + 1][l] != '1'))
-				l++;
-		printf("oui : %c	i: %d	j: %d\n", map[h][l], h, l);
-		if (map[h][l + 1] != '1' &&
-			(!l || map[h][l - 1] != '1') &&
-			(map[h + 1][l] != '1'))
-			return (1);
-	}
+	if (i && j <= ft_strlen(map[i - 1]) && map[i - 1][j] == ' ')
+		return (1);
+	else if (!i || j > ft_strlen(map[i - 1]))
+		return (1);
+	else if (map[i - 1][j] && map[i - 1][j + 1] == ' ')
+		return (1);
+	else if (j && map[i - 1][j - 1] == ' ')
+		return (1);
 	return (0);
 }
 
-int		ft_check_side_l(int j, char **map)
+int		ft_check_up(char **map, int i, int j)
 {
-	int h;
-	int l;
-
-	h = 0;
-	l = 0;
-	while (map[h][l] == ' ')
-		h++;
-	if (j)
-		while (map[h + 1] && map[h][l] == '1')
-			h++;
-	while (map[h][l + 1])
-	{
-		ft_printf("h: %d	l: %d\n", h, l);
-		while (map[h][l + 1] == '1')
-			l++;
-		if (h && map[h - 1][l] == '1')
-			while (h && map[h - 1][l] == '1')
-				h--;
-		else
-			while (map[h + 1] && map[h + 1][l] == '1')
-				h++;
-		if (h && map[h - 1][l] != '1' &&
-				(!map[h + 1][0] || map[h + 1][l] != '1') &&
-				map[h][l + 1] != '1')
-			return (1);
-	}
+	if (map[i + 1][0] && j <= ft_strlen(map[i + 1])
+		&& map[i + 1][j] == ' ')
+		return (1);
+	else if (!map[i + 1][0] || j > ft_strlen(map[i + 1]))
+		return (1);
+	else if (map[i + 1][j] && map[i + 1][j + 1] == ' ')
+		return (1);
+	else if (j && map[i + 1][j - 1] == ' ')
+		return (1);
 	return (0);
 }
-
 int		ft_check_hole(char **map, int i, int j)
 {
-	if (j && (map[i][j - 1] != '1' && map[i][j - 1] != ' '))
+	if (!j || map[i][j - 1] == ' ')
 		return (0);
-	if (map[i][j + 1] != '1' && map[i][j + 1] != ' ')
+	if (map[i][j + 1] == ' ' || !map[i][j + 1])
 		return (0);
-	if (i && j <= ft_strlen(map[i - 1]) &&
-		(map[i - 1][j] != '1' && map[i - 1][j] != ' '))
+	if (ft_check_down(map, i, j))
 		return (0);
-	if (map[i + 1][0] && j <= ft_strlen(map[i + 1]) &&
-				(map[i + 1][j] != '1' && map[i + 1][j] != ' '))
+	if (ft_check_up(map, i, j))
 		return (0);
 	return (1);
 }
@@ -97,13 +56,13 @@ int		ft_check_char2(char **map, int i, int j)
 	int k;
 
 	k = 0;
-	if (map[i][j] == '0' || map[i][j] == '1'
-		|| map[i][j] == '2')
+	if (map[i][j] == '1'
+		|| map[i][j] == '2' || map[i][j] == ' ')
 		return (1);
 	else if (map[i][j] == 'N' || map[i][j] == 'S'
 		|| map[i][j] == 'W' || map[i][j] == 'E')
 		return (2);
-	else if (map[i][j] == ' ')
+	else if (map[i][j] == '0')
 		return (ft_check_hole(map, i, j));
 	return (0);
 }
@@ -122,17 +81,13 @@ int		ft_check_char(char **map)
 		while (map[i][j])
 		{
 			if (k == 4)
-			{
-				ft_printf("k: %d\n", k);
 				return (1);
-			}
-			if (!(k += ft_check_char2(map, i , j)))
-			{
-				ft_printf("i: %d	j: %d\n", i, j);
+			if (!ft_check_char2(map, i , j))
 				return (1);
-			}
-			if ((k % 2) + 1 == 1)
-				k = 0;
+			else
+				k += ft_check_char2(map, i, j);
+			if (k == 1 || k == 3)
+				k--;
 			j++;
 		}
 		j = 0;
@@ -143,14 +98,6 @@ int		ft_check_char(char **map)
 
 int		ft_check_map(char **map)
 {
-	if (ft_check_side_h(0, map))
-		return (1);
-	if (ft_check_side_l(0, map))
-		return (1);
-	if (ft_check_side_h(1, map))
-		return (1);
-	if (ft_check_side_l(1, map))
-		return (1);
 	if (ft_check_char(map))
 		return (1);
 	return (0);
