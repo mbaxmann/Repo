@@ -5,100 +5,57 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/07/21 09:09:51 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/07/25 10:18:45 by mbaxmann         ###   ########.fr       */
+/*   Created: 2020/07/25 10:34:49 by mbaxmann          #+#    #+#             */
+/*   Updated: 2020/07/25 10:36:08 by mbaxmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
-int		ft_check_down(char **map, int i, int j)
-{
-	if (i && j <= ft_strlen(map[i - 1]) && map[i - 1][j] == ' ')
-		return (1);
-	else if (!i || j > ft_strlen(map[i - 1]))
-		return (1);
-	else if (map[i - 1][j] && map[i - 1][j + 1] == ' ')
-		return (1);
-	else if (j && map[i - 1][j - 1] == ' ')
-		return (1);
-	return (0);
-}
-
-int		ft_check_up(char **map, int i, int j)
-{
-	if (map[i + 1][0] && j <= ft_strlen(map[i + 1])
-		&& map[i + 1][j] == ' ')
-		return (1);
-	else if (!map[i + 1][0] || j > ft_strlen(map[i + 1]))
-		return (1);
-	else if (map[i + 1][j] && map[i + 1][j + 1] == ' ')
-		return (1);
-	else if (j && map[i + 1][j - 1] == ' ')
-		return (1);
-	return (0);
-}
-int		ft_check_hole(char **map, int i, int j)
-{
-	if (!j || map[i][j - 1] == ' ')
-		return (0);
-	if (map[i][j + 1] == ' ' || !map[i][j + 1])
-		return (0);
-	if (ft_check_down(map, i, j))
-		return (0);
-	if (ft_check_up(map, i, j))
-		return (0);
-	return (1);
-}
-
-int		ft_check_char2(char **map, int i, int j)
-{
-	int k;
-
-	k = 0;
-	if (map[i][j] == '1'
-		|| map[i][j] == '2' || map[i][j] == ' ')
-		return (1);
-	else if (map[i][j] == 'N' || map[i][j] == 'S'
-		|| map[i][j] == 'W' || map[i][j] == 'E')
-		return (2);
-	else if (map[i][j] == '0')
-		return (ft_check_hole(map, i, j));
-	return (0);
-}
-
-int		ft_check_char(char **map)
+int			ft_check_data(t_data *data)
 {
 	int i;
-	int j;
-	int k;
 
 	i = 0;
-	j = 0;
-	k = 0;
-	while (map[i][0])
-	{
-		while (map[i][j])
-		{
-			if (k == 4)
-				return (1);
-			if (!ft_check_char2(map, i , j))
-				return (1);
-			else
-				k += ft_check_char2(map, i, j);
-			if (k == 1 || k == 3)
-				k--;
-			j++;
-		}
-		j = 0;
+	if (data->texture[0] && data->texture[1])
 		i++;
-	}
-	return (0);
+	if (data->texture[2] && data->texture[3])
+		i++;
+	if (data->sprite)
+		i++;
+	if (data->ceil && data->floor)
+		i++;
+	if (data->res->x && data->res->y)
+		i++;
+	if (i == 5)
+		return (1);
+	else
+		return (0);
 }
 
-int		ft_check_map(char **map)
+int			ft_get_rgb(char *nb)
 {
-	if (ft_check_char(map))
-		return (1);
-	return (0);
+	int		r;
+	int		g;
+	int		b;
+
+	r = 0;
+	g = 0;
+	b = 0;
+	r = ft_atoi(nb);
+	g = ft_atoi(nb + 4);
+	b = ft_atoi(nb + 8);
+	r = (r << 16) | (g << 8) | b;
+	return (r);
+}
+
+void		ft_set_res(t_dim *dim, char *res)
+{
+	int i;
+
+	i = 0;
+	dim->x = ft_atoi(res);
+	while (res[i] != ' ')
+		i++;
+	dim->y = ft_atoi(res + i);
 }

@@ -6,7 +6,7 @@
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 16:21:16 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/07/17 10:52:33 by mbaxmann         ###   ########.fr       */
+/*   Updated: 2020/07/25 10:31:08 by mbaxmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void				ft_free_lst(t_list *first)
 	}
 }
 
-t_list		*ft_newlst(char *data)
+t_list				*ft_newlst(char *data)
 {
 	t_list *new;
 
@@ -52,7 +52,7 @@ void				ft_add_list(t_list *first, t_list *to_add)
 int					ft_list_len(t_list *first)
 {
 	t_list	*current;
-	int				count;
+	int		count;
 
 	count = 0;
 	if (first)
@@ -66,10 +66,10 @@ int					ft_list_len(t_list *first)
 	return (count);
 }
 
-t_list		*ft_get_list(t_list *first, int number)
+t_list				*ft_get_list(t_list *first, int number)
 {
 	t_list	*current;
-	int				len;
+	int		len;
 
 	current = first;
 	number--;
