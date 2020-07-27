@@ -6,7 +6,7 @@
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/25 10:34:49 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/07/25 10:36:08 by mbaxmann         ###   ########.fr       */
+/*   Updated: 2020/07/27 08:59:36 by mbaxmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,12 @@ int			ft_get_rgb(char *nb)
 	g = 0;
 	b = 0;
 	r = ft_atoi(nb);
-	g = ft_atoi(nb + 4);
-	b = ft_atoi(nb + 8);
+	while (*nb != ',')
+		nb++;
+	g = ft_atoi(++nb);
+	while (*nb != ',')
+		nb++;
+	b = ft_atoi(++nb);
 	r = (r << 16) | (g << 8) | b;
 	return (r);
 }
