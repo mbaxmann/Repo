@@ -6,7 +6,7 @@
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/14 09:17:58 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/07/25 10:20:27 by mbaxmann         ###   ########.fr       */
+/*   Updated: 2020/07/29 10:58:18 by mbaxmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ typedef struct s_data
 t_data		*ft_init(char *path);
 void		ft_init_data(t_data *data);
 void		ft_get_map(t_data *data, char *line, int fd);
+void		ft_get_map2(t_data *data, char *line, int fd, t_list *first, t_list *current);
 void		ft_sort(t_data *data, char *line, int fd);
 void		ft_set_res(t_dim *dim, char *res);
 int			ft_get_rgb(char *nb);

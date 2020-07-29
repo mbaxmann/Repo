@@ -6,7 +6,7 @@
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/25 10:34:49 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/07/27 08:59:36 by mbaxmann         ###   ########.fr       */
+/*   Updated: 2020/07/29 10:57:55 by mbaxmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,14 +43,23 @@ int			ft_get_rgb(char *nb)
 	g = 0;
 	b = 0;
 	r = ft_atoi(nb);
-	while (*nb != ',')
+	while (*nb != ',' && *nb)
 		nb++;
 	g = ft_atoi(++nb);
-	while (*nb != ',')
+	while (*nb != ',' && *nb)
 		nb++;
+	if (!(*nb) || !(*(nb + 1)))
+	{
+		ft_printf("Error: Invalid RBG color\n");
+		exit(1);
+	}
 	b = ft_atoi(++nb);
-	r = (r << 16) | (g << 8) | b;
-	return (r);
+	if (r < 0 || g < 0 || b < 0 || r > 255 || g > 255 || b > 255)
+	{
+		ft_printf("Error: Invalid RGB range\n");
+		exit(1);
+	}
+	return ((r << 16) | (g << 8) | b);
 }
 
 void		ft_set_res(t_dim *dim, char *res)
@@ -59,7 +68,31 @@ void		ft_set_res(t_dim *dim, char *res)
 
 	i = 0;
 	dim->x = ft_atoi(res);
-	while (res[i] != ' ')
+	while (res[i] && res[i] != ' ')
 		i++;
 	dim->y = ft_atoi(res + i);
+}
+
+void		ft_get_map2(t_data *data, char *line, int fd, t_list *first, t_list *current)
+{
+	int i;
+
+	i = 0;
+	while (get_next_line(fd, &line))
+	{
+		if (ft_strncmp(line, "", 2))
+		{
+			ft_printf("Error: map is split and/or not at the end of file\n");
+			exit(1);
+		}
+		free(line);
+	}
+	data->map = (char **)malloc(sizeof(char *) * (ft_list_len(first) + 1));
+	while (current->next)
+	{
+		data->map[i++] = current->data;
+		current = current->next;
+	}
+	data->map[i++] = current->data;
+	data->map[i] = ft_strdup("");
 }

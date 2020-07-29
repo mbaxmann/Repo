@@ -6,7 +6,7 @@
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/14 09:27:20 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/07/21 10:45:42 by mbaxmann         ###   ########.fr       */
+/*   Updated: 2020/07/29 11:00:22 by mbaxmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@ typedef struct	s_dim
 	int			y;
 }				t_dim;
 
-#include "init.h"
 #include "../mlx/mlx.h"
 #include "../libft/libft.h"
 #include "ft_list.h"
+#include "init.h"
 #include <fcntl.h>
 #include <stdio.h>
 

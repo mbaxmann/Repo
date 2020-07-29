@@ -6,7 +6,7 @@
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/14 09:17:33 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/07/27 07:33:19 by mbaxmann         ###   ########.fr       */
+/*   Updated: 2020/07/29 10:59:35 by mbaxmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,20 +49,35 @@ void		ft_get_map(t_data *data, char *line, int fd)
 	i = 0;
 	get_next_line(fd, &line);
 	while (!ft_strncmp(line, "", 2))
+	{
+		free(line);
 		get_next_line(fd, &line);
+	}
 	first = ft_newlst(line);
 	current = first;
-	while (get_next_line(fd, &line))
-		ft_add_list(first, ft_newlst(line));
+	while (get_next_line(fd, &line) && ft_strncmp(line, "", 2))
+	{
+		ft_add_list(first, ft_newlst(ft_strdup(line)));
+		free(line);
+	}
+	/*while (get_next_line(fd, &line))
+	{
+		if (ft_strncmp(line, "", 2))
+		{
+			ft_printf("Error: map is split and/or not at the end of file\n");
+			exit(1);
+		}
+		free(line);
+	}
 	data->map = (char **)malloc(sizeof(char *) * (ft_list_len(first) + 1));
 	while (current->next)
 	{
-		data->map[i] = current->data;
+		data->map[i++] = current->data;
 		current = current->next;
-		i++;
 	}
 	data->map[i++] = current->data;
-	data->map[i] = ft_strdup("");
+	data->map[i] = ft_strdup("");*/
+	ft_get_map2(data, line, fd, first, current);
 }
 
 void		ft_init_data(t_data *data)
