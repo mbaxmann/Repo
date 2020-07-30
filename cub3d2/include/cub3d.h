@@ -6,7 +6,7 @@
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/14 09:27:20 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/07/29 11:00:22 by mbaxmann         ###   ########.fr       */
+/*   Updated: 2020/07/30 09:56:44 by mbaxmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,12 @@ typedef struct	s_dim
 	int			x;
 	int			y;
 }				t_dim;
+
+typedef	struct	s_mlx
+{
+	void	*ptr;
+	void	*win;
+}				t_mlx;
 
 #include "../mlx/mlx.h"
 #include "../libft/libft.h"

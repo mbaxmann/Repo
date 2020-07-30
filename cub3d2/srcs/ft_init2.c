@@ -6,7 +6,7 @@
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/25 10:34:49 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/07/29 10:57:55 by mbaxmann         ###   ########.fr       */
+/*   Updated: 2020/07/30 10:00:07 by mbaxmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,16 +68,20 @@ void		ft_set_res(t_dim *dim, char *res)
 
 	i = 0;
 	dim->x = ft_atoi(res);
+	dim->x = (dim->x > 1920) ? 1920 : dim->x;
 	while (res[i] && res[i] != ' ')
 		i++;
 	dim->y = ft_atoi(res + i);
+	dim->y = (dim->y > 1080) ? 1080 : dim->y;
 }
 
-void		ft_get_map2(t_data *data, char *line, int fd, t_list *first, t_list *current)
+void		ft_get_map2(t_data *data, char *line, int fd, t_list *first)
 {
-	int i;
+	int		i;
+	t_list	*current;
 
 	i = 0;
+	current = first;
 	while (get_next_line(fd, &line))
 	{
 		if (ft_strncmp(line, "", 2))

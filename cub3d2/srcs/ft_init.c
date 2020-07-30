@@ -6,7 +6,7 @@
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/14 09:17:33 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/07/29 10:59:35 by mbaxmann         ###   ########.fr       */
+/*   Updated: 2020/07/30 10:24:36 by mbaxmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ void		ft_sort(t_data *data, char *line, int fd)
 void		ft_get_map(t_data *data, char *line, int fd)
 {
 	t_list	*first;
-	t_list	*current;
 	int		i;
 
 	i = 0;
@@ -54,30 +53,12 @@ void		ft_get_map(t_data *data, char *line, int fd)
 		get_next_line(fd, &line);
 	}
 	first = ft_newlst(line);
-	current = first;
 	while (get_next_line(fd, &line) && ft_strncmp(line, "", 2))
 	{
 		ft_add_list(first, ft_newlst(ft_strdup(line)));
 		free(line);
 	}
-	/*while (get_next_line(fd, &line))
-	{
-		if (ft_strncmp(line, "", 2))
-		{
-			ft_printf("Error: map is split and/or not at the end of file\n");
-			exit(1);
-		}
-		free(line);
-	}
-	data->map = (char **)malloc(sizeof(char *) * (ft_list_len(first) + 1));
-	while (current->next)
-	{
-		data->map[i++] = current->data;
-		current = current->next;
-	}
-	data->map[i++] = current->data;
-	data->map[i] = ft_strdup("");*/
-	ft_get_map2(data, line, fd, first, current);
+	ft_get_map2(data, line, fd, first);
 }
 
 void		ft_init_data(t_data *data)
@@ -91,6 +72,7 @@ void		ft_init_data(t_data *data)
 	data->sprite = NULL;
 	data->floor = 0;
 	data->ceil = 0;
+	data->res = (t_dim *)malloc(sizeof(t_dim));
 	data->res->x = 0;
 	data->res->y = 0;
 }
@@ -120,21 +102,4 @@ t_data		*ft_init(char *path)
 		exit(1);
 	}
 	return (map);
-}
-
-int main()
-{
-	t_data *data = NULL;
-	data = ft_init("map2.cub");
-	ft_printf("%s\n%s\n%s\n%s\n", data->texture[0], data->texture[1], data->texture[2], data->texture[3]);
-	ft_printf("%s\n", data->sprite);
-	ft_printf("c : %d\nf : %d\n", data->ceil, data->floor);
-	ft_printf("x : %d	y : %d\n", data->res->x, data->res->y);
-	int i = 0;
-	while (data->map[i][0])
-	{
-		ft_printf("%s\n", data->map[i]);
-		i++;
-	}
-	return (0);
 }
