@@ -6,7 +6,7 @@
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/13 09:54:12 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/07/30 10:57:54 by mbaxmann         ###   ########.fr       */
+/*   Updated: 2020/08/01 10:13:16 by mbaxmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +17,18 @@ void		ft_open_window(t_mlx **mlx, t_data *data)
 	*mlx = (t_mlx *)malloc(sizeof(t_mlx));
 	if (((*mlx)->ptr = mlx_init()) == NULL)
 	{
-		ft_printf("mlx init failed");
+		ft_printf("Error: mlx init failed");
 		exit(1);
 	}
-	if (((*mlx)->win = mlx_new_window((*mlx)->ptr, data->res->x, data->res->y, "cub3d")) == NULL)
+	if (((*mlx)->win = mlx_new_window((*mlx)->ptr,
+		data->res->x, data->res->y, "cub3d")) == NULL)
 	{
-		ft_printf("mlx window failed");
+		ft_printf("Error: mlx window failed");
 		exit(1);
 	}
 }
 
-void	ft_valid_arg(int ac, char **av)
+void		ft_valid_arg(int ac, char **av)
 {
 	if (ac == 1)
 	{
@@ -54,17 +55,7 @@ void	ft_valid_arg(int ac, char **av)
 	}
 }
 
-int		ft_event(int keycode, void *param)
-{
-	if (keycode == 53)
-	{
-		mlx_destroy_window(((t_mlx *)param)->ptr, ((t_mlx *)param)->win);
-		exit(0);
-	}
-	return (1);
-}
-
-int		main(int ac, char **av)
+int			main(int ac, char **av)
 {
 	t_data	*data;
 	t_mlx	*mlx;
@@ -72,7 +63,7 @@ int		main(int ac, char **av)
 	ft_valid_arg(ac, av);
 	data = ft_init(av[1]);
 	ft_open_window(&mlx, data);
-	mlx_hook(mlx->win, 2, 1L << 0, &ft_event, mlx);
+	ft_event(mlx);
 	mlx_loop(mlx->ptr);
 	return (0);
 }
