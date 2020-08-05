@@ -6,12 +6,19 @@
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/14 09:17:58 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/08/01 10:00:55 by mbaxmann         ###   ########.fr       */
+/*   Updated: 2020/08/05 10:36:34 by mbaxmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef INIT_H
 # define INIT_H
+
+typedef struct s_player
+{
+	double		x;
+	double		y;
+	double		angle;
+}				t_player;
 
 typedef struct s_data
 {
@@ -21,6 +28,7 @@ typedef struct s_data
 	int			floor;
 	int			ceil;
 	t_dim		*res;
+	t_player	*player;
 }				t_data;
 
 t_data		*ft_init(char *path);
@@ -29,6 +37,7 @@ void		ft_get_map(t_data *data, char *line, int fd);
 void		ft_get_map2(t_data *data, char *line, int fd, t_list *first);
 void		ft_sort(t_data *data, char *line, int fd);
 void		ft_set_res(t_dim *dim, char *res);
+void		ft_init_player(t_data *data, t_player **player);
 int			ft_get_rgb(char *nb);
 int			ft_check_data(t_data *data);
 int			ft_check_map(char **map);

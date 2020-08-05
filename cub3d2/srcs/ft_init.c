@@ -6,7 +6,7 @@
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/14 09:17:33 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/07/30 10:24:36 by mbaxmann         ###   ########.fr       */
+/*   Updated: 2020/08/05 10:41:22 by mbaxmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,5 +101,6 @@ t_data		*ft_init(char *path)
 		ft_printf("Error: Invalid map\n");
 		exit(1);
 	}
+	ft_init_player(map, &map->player);
 	return (map);
 }

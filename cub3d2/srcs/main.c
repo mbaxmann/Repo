@@ -1,3 +1,5 @@
+#include "../include/cub3d.h"
+
 int main()
 {
 	t_data *data = NULL;
@@ -12,5 +14,6 @@ int main()
 		ft_printf("%s\n", data->map[i]);
 		i++;
 	}
+	ft_calculate_ray(data);
 	return (0);
 }

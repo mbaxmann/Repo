@@ -6,22 +6,31 @@
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/14 09:27:20 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/08/01 10:48:23 by mbaxmann         ###   ########.fr       */
+/*   Updated: 2020/08/05 12:42:13 by mbaxmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
-#define t_dim t_coord
 #define A write(1, "A", 1);
 #define B write(1, "B", 1);
+#define CUBE_SIZE 32
 
 typedef struct	s_dim
 {
 	int			x;
 	int			y;
 }				t_dim;
+
+typedef struct	s_vector
+{
+	int			x;
+	int			y;
+	int			dir_x;
+	int			dir_y;
+	double		angle;
+}				t_vector;
 
 typedef	struct	s_mlx
 {
@@ -37,5 +46,6 @@ typedef	struct	s_mlx
 #include "ft_raycasting.h"
 #include <fcntl.h>
 #include <stdio.h>
+#include <math.h>
 
 #endif
