@@ -14,6 +14,6 @@ int main()
 		ft_printf("%s\n", data->map[i]);
 		i++;
 	}
-	ft_calculate_ray(data);
+	ft_raycasting(data, NULL);
 	return (0);
 }
