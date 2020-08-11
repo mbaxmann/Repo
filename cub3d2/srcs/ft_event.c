@@ -6,7 +6,7 @@
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/01 09:55:23 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/08/01 10:19:02 by mbaxmann         ###   ########.fr       */
+/*   Updated: 2020/08/11 10:57:23 by mbaxmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,21 +16,31 @@ int		ft_button_event(int keycode, void *param)
 {
 	if (keycode == 53)
 	{
-		mlx_destroy_window(((t_mlx *)param)->ptr, ((t_mlx *)param)->win);
+		mlx_destroy_window(((t_data *)param)->mlx->ptr, ((t_data *)param)->mlx->win);
 		exit(0);
+	}
+	if (keycode == 124)
+	{
+		((t_data *)param)->player->angle -= M_PI / 80;
+		ft_raycasting(param, ((t_data *)param)->mlx);
+	}
+	if (keycode == 123)
+	{
+		((t_data *)param)->player->angle += M_PI / 80;
+		ft_raycasting(param, ((t_data *)param)->mlx);
 	}
 	return (1);
 }
 
 int		ft_close(void *param)
 {
-	mlx_destroy_window(((t_mlx *)param)->ptr, ((t_mlx *)param)->win);
+	mlx_destroy_window(((t_data *)param)->mlx->ptr, ((t_data *)param)->mlx->win);
 	exit(0);
 	return (1);
 }
 
-void	ft_event(t_mlx *mlx)
+void	ft_event(t_data *data)
 {
-	mlx_hook(mlx->win, 2, 1L << 0, &ft_button_event, mlx);
-	mlx_hook(mlx->win, 17, 1L << 17, &ft_close, mlx);
+	mlx_hook(data->mlx->win, 2, 1L << 0, &ft_button_event, data);
+	mlx_hook(data->mlx->win, 17, 1L << 17, &ft_close, data);
 }

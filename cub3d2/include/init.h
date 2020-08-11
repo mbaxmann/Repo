@@ -6,7 +6,7 @@
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/14 09:17:58 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/08/05 10:36:34 by mbaxmann         ###   ########.fr       */
+/*   Updated: 2020/08/11 10:04:19 by mbaxmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,15 @@ typedef struct s_player
 	double		angle;
 }				t_player;
 
+typedef struct	s_img
+{
+	int			bpp;
+	int			line;
+	int			endian;
+	void		*img;
+	char		*pt;
+}				t_img;
+
 typedef struct s_data
 {
 	char		**map;
@@ -29,6 +38,8 @@ typedef struct s_data
 	int			ceil;
 	t_dim		*res;
 	t_player	*player;
+	t_img		*img;
+	t_mlx		*mlx;
 }				t_data;
 
 t_data		*ft_init(char *path);

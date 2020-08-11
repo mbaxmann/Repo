@@ -1,20 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_event.h                                         :+:      :+:    :+:   */
+/*   ft_display.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/08/01 09:58:49 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/08/11 10:18:03 by mbaxmann         ###   ########.fr       */
+/*   Created: 2020/08/11 09:21:35 by mbaxmann          #+#    #+#             */
+/*   Updated: 2020/08/11 09:58:39 by mbaxmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_EVENT_H
-# define FT_EVENT_H
+#ifndef FT_DISPLAY_H
+# define FT_DISPLAY_H
 
-int		ft_button_event(int keycode, void *param);
-int		ft_close(void *param);
-void	ft_event(t_data *data);
+void		ft_load_ray(t_data *data, int size, int offset);
+void		ft_init_img(t_data *data);
 
 #endif

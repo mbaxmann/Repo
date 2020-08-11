@@ -6,7 +6,7 @@
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/14 09:17:33 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/08/05 10:41:22 by mbaxmann         ###   ########.fr       */
+/*   Updated: 2020/08/11 09:30:07 by mbaxmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,8 @@ void		ft_init_data(t_data *data)
 	data->res = (t_dim *)malloc(sizeof(t_dim));
 	data->res->x = 0;
 	data->res->y = 0;
+	data->img = NULL;
+	data->mlx = NULL;
 }
 
 t_data		*ft_init(char *path)

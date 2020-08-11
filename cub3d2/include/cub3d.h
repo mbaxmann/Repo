@@ -6,7 +6,7 @@
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/14 09:27:20 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/08/05 12:42:13 by mbaxmann         ###   ########.fr       */
+/*   Updated: 2020/08/11 09:56:19 by mbaxmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ typedef	struct	s_mlx
 #include "init.h"
 #include "ft_event.h"
 #include "ft_raycasting.h"
+#include "ft_display.h"
 #include <fcntl.h>
 #include <stdio.h>
 #include <math.h>

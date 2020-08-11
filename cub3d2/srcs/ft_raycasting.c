@@ -6,7 +6,7 @@
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/01 10:18:48 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/08/07 10:57:51 by mbaxmann         ###   ########.fr       */
+/*   Updated: 2020/08/11 11:00:06 by mbaxmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,12 +173,14 @@ int			ft_raycasting(t_data *data, t_mlx *mlx)
 
 	i = 0;
 	angle = data->player->angle + (M_PI / 6);
+	ft_init_img(data);
 	while (i < data->res->x)
 	{
 		size = ft_calculate_ray(data, angle);
-		printf("size: %d\n", size);
 		angle -= ((M_PI / 3) / data->res->x);
+		ft_load_ray(data, size, i);
 		i++;
 	}
+	mlx_put_image_to_window(data->mlx->ptr, data->mlx->win, data->img->img, 0, 0);
 	return (0);
 }
