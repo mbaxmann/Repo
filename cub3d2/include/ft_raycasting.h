@@ -6,7 +6,7 @@
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/01 10:23:29 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/08/07 10:57:56 by mbaxmann         ###   ########.fr       */
+/*   Updated: 2020/08/12 09:45:31 by mbaxmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,5 +21,6 @@ void		ft_init_pt(t_vector *pt, double aplha, t_data *data, int mode);
 void		ft_set_angle(double *angle, t_vector *pt_1, t_vector *pt_2);
 void		ft_init_player(t_data *data, t_player **player);
 void		ft_init_vector(t_vector **pt_1, t_vector **pt_2, double alpha);
+void		ft_modulo_pi(double *angle);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/01 09:55:23 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/08/11 10:57:23 by mbaxmann         ###   ########.fr       */
+/*   Updated: 2020/08/12 10:59:58 by mbaxmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,11 @@ int		ft_button_event(int keycode, void *param)
 		exit(0);
 	}
 	if (keycode == 124)
-	{
 		((t_data *)param)->player->angle -= M_PI / 80;
-		ft_raycasting(param, ((t_data *)param)->mlx);
-	}
 	if (keycode == 123)
-	{
 		((t_data *)param)->player->angle += M_PI / 80;
-		ft_raycasting(param, ((t_data *)param)->mlx);
-	}
+	ft_modulo_pi(&((t_data *)param)->player->angle);
+	ft_raycasting(param, ((t_data *)param)->mlx);
 	return (1);
 }
 
