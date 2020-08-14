@@ -6,7 +6,7 @@
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/01 10:18:48 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/08/13 10:56:36 by mbaxmann         ###   ########.fr       */
+/*   Updated: 2020/08/14 11:02:16 by mbaxmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,6 @@ void		ft_init_pt(t_vector	*pt, double alpha, t_data *data, int mode)
 			pt->x = data->player->x + (fabs(data->player->y - pt->y) / tan(alpha));
 		else
 			pt->x = data->player->x - (fabs(data->player->y - pt->y) / tan(alpha));
-		//printf("init x: %d		init y: %d\n", pt->x, pt->y);
 	}
 	else
 	{
@@ -100,23 +99,22 @@ int			ft_iswall(t_vector *pt, t_data *data)
 	int j;
 	int k;
 
-	i = round(pt->y / CUBE_SIZE);
-	j = round(pt->x / CUBE_SIZE);
+	if (pt->dir_y == 1)
+		i = floor(floor(pt->y) / CUBE_SIZE);
+	else
+		i = floor(ceil(pt->y) / CUBE_SIZE);
+	if (pt->dir_x == 1)
+		j = floor(floor(pt->x) / CUBE_SIZE);
+	else
+		j = floor(ceil(pt->x) / CUBE_SIZE);
 	k = 0;
 	while (data->map[k][0])
 		k++;
 	if (i < 0 || i >= k)
-	{
-		//printf("x: %d		y: %d\n", pt->x, pt->y);
 		return (1);
-	}
-	if (j < 0 || j > ft_strlen(data->map[i]) ||
+	if (j < 0 || j >= ft_strlen(data->map[i]) ||
 		data->map[i][j] != '0')
-	{
-		//printf("x: %d		y: %d\n", pt->x, pt->y);
 		return (1);
-	}
-	printf("x: %d		y: %d	round x: %d		round y: %d\n", pt->x, pt->y, j, i);
 	return (0);
 }
 
@@ -134,22 +132,19 @@ int	ft_calculate_slice(t_data *data, t_vector *pt_1, t_vector *pt_2, double angl
 	double	size_2;
 	double	res;
 
-	size_1 = hypot(((pt_1->x) - data->player->x), ((pt_1->y) - data->player->y));
-	size_2 = hypot(((pt_2->x) - data->player->x), ((pt_2->y) - data->player->y));
-	//printf("size1 : %f		size2 : %f		", size_1, size_2);
+	size_1 = hypot((pt_1->x - data->player->x), (pt_1->y - data->player->y));
+	size_2 = hypot((pt_2->x - data->player->x), (pt_2->y - data->player->y));
 	if (size_1 <= size_2)
 	{
-		//printf("size 1  selected\n");
-		size_1 *= fabs(cos(data->player->angle - pt_1->angle));
+		size_1 *= cos(data->player->angle - pt_1->angle);
 		res = (CUBE_SIZE * ((data->res->x / 2) / tan(M_PI / 6))) / size_1;
 	}
 	else
 	{
-		//printf("size 2 selected\n");
-		size_2 *= fabs(cos(data->player->angle - pt_2->angle));
+		size_2 *= cos(data->player->angle - pt_2->angle);
 		res = (CUBE_SIZE * ((data->res->x / 2) / tan(M_PI / 6))) / size_2;
 	}
-	return ((int)ceil(res));
+	return ((int)floor(res));
 }
 
 int		ft_calculate_ray(t_data *data, double alpha)
@@ -168,12 +163,9 @@ int		ft_calculate_ray(t_data *data, double alpha)
 	}
 	while (!ft_iswall(pt_2, data))
 	{
-		//printf("x: %d		y: %d\n", pt_2->x, pt_2->y);
 		pt_2->x += (CUBE_SIZE / tan(alpha)) * pt_2->dir_x;
 		pt_2->y += CUBE_SIZE * pt_2->dir_y;
 	}
-	//printf("\n\n\n");
-	//printf("x1: %d		y1: %d\nx2: %d		y2: %d\n\n",pt_1->x, pt_1->y, pt_2->x, pt_2->y);
 	return (ft_calculate_slice(data, pt_1, pt_2, alpha));
 }
 
