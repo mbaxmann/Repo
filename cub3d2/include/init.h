@@ -6,14 +6,14 @@
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/14 09:17:58 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/08/11 10:04:19 by mbaxmann         ###   ########.fr       */
+/*   Updated: 2020/08/15 10:59:31 by mbaxmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef INIT_H
 # define INIT_H
 
-typedef struct s_player
+typedef struct	s_player
 {
 	double		x;
 	double		y;

@@ -6,7 +6,7 @@
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/13 09:54:12 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/08/11 10:23:24 by mbaxmann         ###   ########.fr       */
+/*   Updated: 2020/08/15 09:25:02 by mbaxmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int			main(int ac, char **av)
 	data = ft_init(av[1]);
 	ft_open_window(&mlx, data);
 	data->mlx = mlx;
-	ft_raycasting(data, mlx);
+	ft_raycasting(data);
 	ft_event(data);
 	mlx_loop(mlx->ptr);
 	return (0);

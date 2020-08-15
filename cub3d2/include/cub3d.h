@@ -6,7 +6,7 @@
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/14 09:27:20 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/08/14 10:46:40 by mbaxmann         ###   ########.fr       */
+/*   Updated: 2020/08/15 10:35:53 by mbaxmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 #define A write(1, "A", 1);
 #define B write(1, "B", 1);
-#define CUBE_SIZE 34
+#define CUBE 34
 
 typedef struct	s_dim
 {
