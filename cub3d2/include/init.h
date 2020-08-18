@@ -6,7 +6,7 @@
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/14 09:17:58 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/08/15 10:59:31 by mbaxmann         ###   ########.fr       */
+/*   Updated: 2020/08/18 10:19:57 by mbaxmann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ typedef struct	s_img
 typedef struct s_data
 {
 	char		**map;
-	char		**texture;
+	void		**texture;
 	char		*sprite;
 	int			floor;
 	int			ceil;
