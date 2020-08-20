@@ -36,7 +36,10 @@ all: ${NAME}
 ${NAME}:	${OBJS}
 			make -C libft
 			make -C mlx
-			${CC} -o ${NAME} ${FLAGS} ${FRAMEWORK} ${OBJS} -L. ${LIB} -g
+			${CC} -o ${NAME} ${FLAGS} ${FRAMEWORK} ${OBJS} -L. ${LIB}
+linux:		${OBJS}
+			make -C libft
+			${CC} -o cub3d_linux ${FLAGS} ${OBJS} -L. libft/libft.a mlx_linux/libmlx_Linux.a -lm -lXext -lX11 -g
 
 clean:
 	make clean -C libft

@@ -20,15 +20,15 @@ void	ft_move_player(t_data *data, int keycode)
 
 int		ft_button_event(int keycode, void *param)
 {
-	if (keycode == 53)
+	if (keycode == 65307)
 	{
 		mlx_destroy_window(((t_data *)param)->mlx->ptr,
 		((t_data *)param)->mlx->win);
 		exit(0);
 	}
-	if (keycode == 124)
+	if (keycode == 65363)
 		((t_data *)param)->player->angle -= M_PI / 80;
-	if (keycode == 123)
+	if (keycode == 65361)
 		((t_data *)param)->player->angle += M_PI / 80;
 	ft_move_player((t_data *)param, keycode);
 	ft_modulo_pi(&((t_data *)param)->player->angle);

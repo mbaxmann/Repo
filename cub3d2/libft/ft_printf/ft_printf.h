@@ -13,6 +13,8 @@
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 
+#define A write(1, "A", 1);
+#define B write(1, "B", 1);
 # include <stdlib.h>
 # include <unistd.h>
 # include <stdarg.h>

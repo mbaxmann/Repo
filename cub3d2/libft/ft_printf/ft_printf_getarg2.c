@@ -64,13 +64,14 @@ void	ft_pr_getflags2(char **tab, const char *format, char *flags_tab, int i)
 	int r;
 
 	j = 0;
+	flags_nbr = 0;
 	while (format[++i])
 	{
 		r = 1;
 		if (format[i] == '%' && format[i + 1])
 		{
-			while ((r = ft_is_flags(flags_tab, format[i + 1 + flags_nbr], r))
-							&& format[i + 1 + flags_nbr])
+			while (format[i + 1 + flags_nbr] &&
+			(r = ft_is_flags(flags_tab, format[i + 1 + flags_nbr], r)))
 			{
 				r = (r == 2) ? 0 : 1;
 				flags_nbr++;

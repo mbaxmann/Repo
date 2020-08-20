@@ -38,7 +38,7 @@ typedef	struct	s_mlx
 	void	*win;
 }				t_mlx;
 
-#include "../mlx/mlx.h"
+#include "../mlx_linux/mlx.h"
 #include "../libft/libft.h"
 #include "ft_list.h"
 #include "init.h"

@@ -14,12 +14,6 @@
 
 void		ft_open_window(t_mlx **mlx, t_data *data)
 {
-	*mlx = (t_mlx *)malloc(sizeof(t_mlx));
-	if (((*mlx)->ptr = mlx_init()) == NULL)
-	{
-		ft_printf("Error: mlx init failed");
-		exit(1);
-	}
 	if (((*mlx)->win = mlx_new_window((*mlx)->ptr,
 		data->res->x, data->res->y, "cub3d")) == NULL)
 	{
@@ -61,7 +55,13 @@ int			main(int ac, char **av)
 	t_mlx	*mlx;
 
 	ft_valid_arg(ac, av);
-	data = ft_init(av[1]);
+	mlx = (t_mlx *)malloc(sizeof(t_mlx));
+	if ((mlx->ptr = mlx_init()) == NULL)
+	{
+		ft_printf("Error: mlx init failed");
+		exit(1);
+	}
+	data = ft_init(av[1], mlx->ptr);
 	ft_open_window(&mlx, data);
 	data->mlx = mlx;
 	ft_raycasting(data);

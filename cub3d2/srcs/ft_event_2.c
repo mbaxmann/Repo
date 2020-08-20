@@ -33,36 +33,36 @@ int		ft_hitbox(t_player *player, t_data *data)
 
 void	ft_move_part_1(t_data *data, int keycode)
 {
-	if (keycode == 13)
+	if (keycode == 122)
 	{
 		data->player->y -= 8 * sin(data->player->angle);
 		data->player->x += 8 * cos(data->player->angle);
 		if (ft_hitbox(data->player, data))
-			ft_move_player(data, 1);
+			ft_move_player(data, 115);
 	}
-	else if (keycode == 1)
+	else if (keycode == 115)
 	{
 		data->player->y += 8 * sin(data->player->angle);
 		data->player->x -= 8 * cos(data->player->angle);
 		if (ft_hitbox(data->player, data))
-			ft_move_player(data, 13);
+			ft_move_player(data, 122);
 	}
 }
 
 void	ft_move_part_2(t_data *data, int keycode)
 {
-	if (keycode == 0)
+	if (keycode == 113)
 	{
 		data->player->y -= sin(data->player->angle + M_PI_2) * 8;
 		data->player->x += cos(data->player->angle + M_PI_2) * 8;
 		if (ft_hitbox(data->player, data))
-			ft_move_player(data, 2);
+			ft_move_player(data, 100);
 	}
-	else if (keycode == 2)
+	else if (keycode == 100)
 	{
 		data->player->y -= sin(data->player->angle - M_PI_2) * 8;
 		data->player->x += cos(data->player->angle - M_PI_2) * 8;
 		if (ft_hitbox(data->player, data))
-			ft_move_player(data, 0);
+			ft_move_player(data, 113);
 	}
 }

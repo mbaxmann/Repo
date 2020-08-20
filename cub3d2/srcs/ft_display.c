@@ -23,55 +23,48 @@ void		ft_init_img(t_data *data)
 	&data->img->bpp, &data->img->line, &data->img->endian);
 }
 
-void		ft_load_textur(t_data *data)
+int		ft_choose_textur(t_data *data)
 {
-	t_textur	**tab;
-	int			i;
-
-	i = 0;
-	tab = (t_textur **)malloc(sizeof(t_textur *) * 5);
-	while (i < 4)
+	if (data->stock->x)
 	{
-		A
-		printf("%d\n", i);
-		tab[i] = (t_textur *)malloc(sizeof(t_textur));
-		tab[i]->img = mlx_xpm_file_to_image(data->mlx->ptr,
-		data->texture[i], &(tab[i]->width), &(tab[i]->height));
-		if (!(tab[i]->img))
-		{
-			ft_printf("Error: Could not load %s texture\n", data->texture[i]);
-			exit(1);
-		}
-		i++;
+		if (data->stock->angle <= M_PI)
+			return (0);
+		else
+			return (1);
 	}
-	while (i)
-		free(data->texture[--i]);
-	free(data->texture);
-	data->texture = (void **)tab;
-	//free(tab);
+	else
+	{
+		if (data->stock->angle >= M_PI_2 &&
+		data->stock->angle <= 3 * M_PI_2)
+			return (2);
+		else
+			return (3);
+	}
+}
+
+void		ft_put_pixel(char *img, char *xpm, int i, int j)
+{
+	*(unsigned int *)(img + i) = *(unsigned int *)(xpm + j);
 }
 
 void		ft_load_ray(t_data *data, int size, int offset)
 {
-	int i;
-	long long offset_2;
+	int 		tab[4];
+	unsigned int	rgb;
+	long long	offset_2;
 
-	i = 0;
+	tab[0] = 0;
+	tab[1] = size;
 	offset_2 = 0;
 	size = (size > data->res->y) ? data->res->y - 1: size;
 	offset_2 = (offset + 1) * 4 + data->res->x * 4 * ((data->res->y - size) / 2);
-	ft_load_textur(data);
-	/*while (i < 0)
+	tab[2] = ft_choose_textur(data);
+	tab[3] = 0;
+	while (tab[0] < size)
 	{
-		printf("%p\n%d\n%d\n\n", ((t_textur **)data->texture)[i]->img,
-		((t_textur **)data->texture)[i]->width, ((t_textur **)data->texture)[i]->height);
-		i++;
-	}*/
-	i = 0;
-	while (i < size)
-	{
-		*(unsigned int *)(data->img->pt + offset_2) = 100;
+		ft_put_rgb(data->image->pt, data->texture[tab[2]], offsett_2, tab[1]);
 		offset_2 += data->res->x * 4;
-		i++;
+		tab[1] = 
+		tab[0]++;
 	}
 }

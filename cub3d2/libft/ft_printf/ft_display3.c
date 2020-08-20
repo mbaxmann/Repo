@@ -45,7 +45,7 @@ int			ft_type(t_printf_list *current)
 	if (*(current->type) == 'x' || *(current->type) == 'X')
 		return (current->x);
 	else if (*(current->type) == 'p')
-		return ((int)current->p);
+		return ((long int)(current->p));
 	else
 		return (current->d);
 }

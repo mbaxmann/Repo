@@ -16,6 +16,7 @@ char			*ft_get_str(t_printf_list *current)
 {
 	char *str;
 
+	str = NULL;
 	if (*(current->type) == 's')
 		return (ft_strdup(current->s));
 	else if (*(current->type) == 'c')

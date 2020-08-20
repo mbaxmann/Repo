@@ -27,9 +27,6 @@ int		ft_check_hole(char **map, int i, int j)
 
 int		ft_check_char2(char **map, int i, int j)
 {
-	int k;
-
-	k = 0;
 	if (map[i][j] == '1' || map[i][j] == ' ')
 		return (1);
 	else if (map[i][j] == 'N' || map[i][j] == 'S'

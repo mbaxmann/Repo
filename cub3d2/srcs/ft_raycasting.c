@@ -24,12 +24,17 @@ int			ft_calculate_slice(t_data *data, t_vector *pt_1, t_vector *pt_2)
 	{
 		size_1 *= cos(data->player->angle - pt_1->angle);
 		res = ((double)CUBE * ((data->res->x / 2) / tan(M_PI / 6))) / size_1;
+		data->stock->x = 0;
+		data->stock->y = pt_1->y;
 	}
 	else
 	{
 		size_2 *= cos(data->player->angle - pt_2->angle);
 		res = ((double)CUBE * ((data->res->x / 2) / tan(M_PI / 6))) / size_2;
-	}
+		data->stock->x = pt_2->x;
+		data->stock->y = 0;
+}
+	data->stock->angle = pt_1->angle;
 	return ((int)floor(res));
 }
 
