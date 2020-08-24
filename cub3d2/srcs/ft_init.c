@@ -6,7 +6,7 @@
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/14 09:17:33 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/08/21 13:45:48 by user42           ###   ########.fr       */
+/*   Updated: 2020/08/24 16:09:24 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void		ft_sort(t_data *data, char *line, int fd, void *mlx_ptr)
 			else if (line[0] == 'E')
 				data->texture[3] = ft_load_t(ft_strtrim(line, " EA"), mlx_ptr);
 			else if (line[0] == 'S')
-				data->sprite = ft_strdup(ft_strtrim(line, " S"));
+				data->texture[4] = ft_load_t(ft_strtrim(line, " S"), mlx_ptr);
 			else if (line[0] == 'F')
 				data->floor = ft_get_rgb(ft_strtrim(line, " F"));
 			else if (line[0] == 'C')
@@ -84,12 +84,13 @@ void		ft_get_map(t_data *data, char *line, int fd)
 void		ft_init_data(t_data *data)
 {
 	data->map = NULL;
-	data->sprite = NULL;
-	data->texture = (t_textur **)malloc(sizeof(t_textur *) * 4);
+	data->sprite = ft_newlst(0);
+	data->texture = (t_textur **)malloc(sizeof(t_textur *) * 5);
 	data->texture[0] = NULL;
 	data->texture[1] = NULL;
 	data->texture[2] = NULL;
 	data->texture[3] = NULL;
+	data->texture[4] = NULL;
 	data->stock = (t_player *)malloc(sizeof(t_player));
 	data->floor = 0;
 	data->ceil = 0;

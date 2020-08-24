@@ -6,13 +6,13 @@
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/01 10:18:48 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/08/21 13:46:21 by user42           ###   ########.fr       */
+/*   Updated: 2020/08/24 17:22:05 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
-int			ft_calculate_slice(t_data *data, t_vector *pt_1, t_vector *pt_2)
+int			ft_calculate_slice(t_data *data, t_vector *pt_1, t_vector *pt_2, double *stock)
 {
 	double	size_1;
 	double	size_2;
@@ -26,6 +26,7 @@ int			ft_calculate_slice(t_data *data, t_vector *pt_1, t_vector *pt_2)
 		res = ((double)CUBE * ((data->res->x / 2) / tan(M_PI / 6))) / size_1;
 		data->stock->x = 0;
 		data->stock->y = pt_1->y;
+		*stock = size_1;
 	}
 	else
 	{
@@ -33,15 +34,17 @@ int			ft_calculate_slice(t_data *data, t_vector *pt_1, t_vector *pt_2)
 		res = ((double)CUBE * ((data->res->x / 2) / tan(M_PI / 6))) / size_2;
 		data->stock->x = pt_2->x;
 		data->stock->y = 0;
-}
+		*stock = size_2;
+	}
 	data->stock->angle = pt_1->angle;
 	return ((int)floor(res));
 }
 
-int			ft_calculate_ray(t_data *data, double alpha)
+int			ft_calculate_ray(t_data *data, double alpha, double *stock)
 {
 	t_vector	*pt_1;
 	t_vector	*pt_2;
+	int		size;
 
 	ft_init_vector(&pt_1, &pt_2, alpha);
 	ft_set_angle(&alpha, pt_1, pt_2);
@@ -57,7 +60,10 @@ int			ft_calculate_ray(t_data *data, double alpha)
 		pt_2->x += (CUBE / tan(alpha)) * pt_2->dir_x;
 		pt_2->y += CUBE * pt_2->dir_y;
 	}
-	return (ft_calculate_slice(data, pt_1, pt_2));
+	size = ft_calculate_slice(data, pt_1, pt_2, stock);
+	free(pt_1);
+	free(pt_2);
+	return (size);
 }
 
 void		ft_modulo_pi(double *angle)
@@ -73,16 +79,27 @@ int			ft_raycasting(t_data *data)
 	int		i;
 	int		size;
 	double	angle;
+	double	*stock;
 
 	i = 0;
 	angle = data->player->angle + (M_PI / 6);
+	stock = (double *)malloc(sizeof(double) * data->res->x);
 	while (i < data->res->x)
 	{
 		ft_modulo_pi(&angle);
-		size = ft_calculate_ray(data, angle);
+		size = ft_calculate_ray(data, angle, &stock[i]);
 		angle -= ((M_PI / 3) / data->res->x);
 		ft_load_ray(data, size, i);
 		i++;
+	}
+	t_list *test = data->sprite;
+	t_vector *pt;
+	ft_load_sprite(data, stock);
+	while (test->next)
+	{
+		pt = test->next->data;
+		printf("x: %f	y: %f	angle: %f\n", pt->x, pt->y, pt->angle);
+		test = test->next;
 	}
 	mlx_put_image_to_window(data->mlx->ptr,
 	data->mlx->win, data->img->img, 0, 0);

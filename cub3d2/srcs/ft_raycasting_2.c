@@ -6,7 +6,7 @@
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/15 09:12:46 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/08/15 10:26:58 by mbaxmann         ###   ########.fr       */
+/*   Updated: 2020/08/24 16:09:42 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ int			ft_iswall(t_vector *pt, t_data *data)
 	if (j < 0 || j >= (int)ft_strlen(data->map[i]) ||
 		data->map[i][j] == '1')
 		return (1);
+	ft_check_sprite(data, i, j);
 	return (0);
 }
 

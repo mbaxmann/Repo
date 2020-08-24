@@ -6,7 +6,7 @@
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 16:21:16 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/07/29 10:59:02 by mbaxmann         ###   ########.fr       */
+/*   Updated: 2020/08/24 14:50:05 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void				ft_free_lst(t_list *first)
 	}
 }
 
-t_list				*ft_newlst(char *data)
+t_list				*ft_newlst(void *data)
 {
 	t_list *new;
 
