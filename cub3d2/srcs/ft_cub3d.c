@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.c                                            :+:      :+:    :+:   */
+/*   ft_cub3d.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/13 09:54:12 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/08/15 09:25:02 by mbaxmann         ###   ########.fr       */
+/*   Updated: 2020/08/21 13:46:08 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ int			main(int ac, char **av)
 	data = ft_init(av[1], mlx->ptr);
 	ft_open_window(&mlx, data);
 	data->mlx = mlx;
+	ft_init_img(data);
 	ft_raycasting(data);
 	ft_event(data);
 	mlx_loop(mlx->ptr);

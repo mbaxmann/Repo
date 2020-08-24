@@ -6,7 +6,7 @@ EA ./textur/redbrick.xpm
 
 S ./path_to_the_sprite_texture
 F 220,100,0
-C 225,30,0
+C 245,99,142
 			
 
         1111111111 11111111111111

@@ -6,7 +6,7 @@
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/11 09:10:34 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/08/18 10:56:23 by mbaxmann         ###   ########.fr       */
+/*   Updated: 2020/08/21 13:34:58 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void		ft_init_img(t_data *data)
 	&data->img->bpp, &data->img->line, &data->img->endian);
 }
 
-int		ft_choose_textur(t_data *data)
+int			ft_choose_textur(t_data *data)
 {
 	if (data->stock->x)
 	{
@@ -63,29 +63,28 @@ void		ft_put_pixel(char *img, char *xpm, int i, int j)
 
 void		ft_load_ray(t_data *data, int size, int offset)
 {
-	int 		tab[4];
-	int		i;
+	int			tab[5];
 	long long	offset_2;
 
-	tab[0] = 0;
-	tab[1] = 0;
-	i = 0;
 	offset_2 = 0;
+	ft_init_tab(tab);
 	if (size > data->res->y)
 	{
 		tab[0] = (size - data->res->y) / 2;
 		size -= 2 * tab[0];
 	}
 	offset_2 = offset * 4 + data->res->x * 4 * ((data->res->y - size) / 2);
+	ft_coloring(data, 4 * offset, offset_2, 1);
 	tab[2] = ft_choose_textur(data);
-	tab[3] = 0;
-	i = tab[0];
+	tab[4] = tab[0];
 	size += 2 * tab[0];
-	while (tab[0] < size - i)
+	while (tab[0] < size - tab[4])
 	{
-		ft_put_pixel(data->img->pt, data->texture[tab[2]]->addr, offset_2, tab[1]);
+		ft_put_pixel(data->img->pt,
+		data->texture[tab[2]]->addr, offset_2, tab[1]);
 		offset_2 += data->res->x * 4;
 		ft_calculate_xpm_offset(tab, data, size);
 		tab[0]++;
 	}
+	ft_coloring(data, offset_2, data->res->x * data->res->y * 4, 0);
 }

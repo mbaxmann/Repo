@@ -6,7 +6,7 @@
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/01 10:18:48 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/08/18 09:31:18 by mbaxmann         ###   ########.fr       */
+/*   Updated: 2020/08/21 13:46:21 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,6 @@ int			ft_raycasting(t_data *data)
 
 	i = 0;
 	angle = data->player->angle + (M_PI / 6);
-	ft_init_img(data);
 	while (i < data->res->x)
 	{
 		ft_modulo_pi(&angle);
