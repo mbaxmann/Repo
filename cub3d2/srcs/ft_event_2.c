@@ -6,7 +6,7 @@
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/18 09:23:59 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/08/24 16:08:17 by user42           ###   ########.fr       */
+/*   Updated: 2020/08/25 17:54:32 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int		ft_hitbox(t_player *player, t_data *data)
 	if (i < 0 || i >= k)
 		return (1);
 	if (j < 0 || j >= (int)ft_strlen(data->map[i]) ||
-		data->map[i][j] == '1')
+	data->map[i][j] == '1' || data->map[i][j] == '2')
 		return (1);
 	return (0);
 }

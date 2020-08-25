@@ -6,7 +6,7 @@
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/01 10:18:48 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/08/24 17:22:05 by user42           ###   ########.fr       */
+/*   Updated: 2020/08/25 17:57:49 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,15 +92,7 @@ int			ft_raycasting(t_data *data)
 		ft_load_ray(data, size, i);
 		i++;
 	}
-	t_list *test = data->sprite;
-	t_vector *pt;
 	ft_load_sprite(data, stock);
-	while (test->next)
-	{
-		pt = test->next->data;
-		printf("x: %f	y: %f	angle: %f\n", pt->x, pt->y, pt->angle);
-		test = test->next;
-	}
 	mlx_put_image_to_window(data->mlx->ptr,
 	data->mlx->win, data->img->img, 0, 0);
 	return (0);
