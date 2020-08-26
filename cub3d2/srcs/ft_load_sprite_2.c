@@ -1,0 +1,59 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_load_sprite_2.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/08/01 10:18:48 by mbaxmann          #+#    #+#             */
+/*   Updated: 2020/08/26 13:49:21 by user42           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../include/cub3d.h"
+
+void	ft_setup_spritedisp(t_data *data, int offset[2], int var[5])
+{
+	int height;
+
+	height = (var[4] > data->res->y) ? data->res->y : var[4];
+	var[1] = 0;
+	var[2] = 0;
+        var[3] -= (var[4] / 2);
+        var[0] = (var[3] < 0) ? 0 : var[3];
+        offset[0] = 4 * (((data->res->y - height) / 2) * data->res->x + var[0]);
+        offset[1] = 0;
+	var[0] = 0;
+        if (data->res->y < var[4])
+		var[0] = (var[4] - data->res->y) / 2;
+        if (var[4] + var[3] >= data->res->x)
+                var[2] = data->res->x - (var[3] + var[4]);
+        var[1] = (var[3] < 0) ? var[1] - var[3] : var[1];
+        var[3] = (var[3] < 0) ? 0 : var[3];
+}
+
+void	ft_spritedisp_loop(t_data *data, double *cmp[2], int offset[2], int var[5])
+{
+	int i;
+	int j;
+
+	i = var[1];
+	j = 0;
+	while (i <= var[4] + var[2] && j < data->res->x)
+	{
+		offset[1] += 4 * ((i * data->texture[4]->width) / var[4]);
+		if (cmp[0][var[3]] > cmp[1][0] &&
+		*(unsigned int*)(data->texture[4]->addr + offset[1]))
+		{
+			*(unsigned int *)(data->img->pt + offset[0]) =
+			*(unsigned int *)(data->texture[4]->addr + offset[1]);
+		}
+		offset[0] += 4;
+		offset[1] -= 4 * ((i * data->texture[4]->width) / var[4]);
+		i++;
+		j++;
+		var[3]++;
+	}
+	var[3] -= j;
+	offset[0] += 4 * (data->res->x - j);
+}

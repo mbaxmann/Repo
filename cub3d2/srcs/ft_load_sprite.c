@@ -6,7 +6,7 @@
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/01 10:18:48 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/08/25 17:57:40 by user42           ###   ########.fr       */
+/*   Updated: 2020/08/26 13:40:22 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ int		ft_calculate_sp_angle(t_data *data, t_vector *pt)
 	pt->dir_y = (CUBE * pt->y > data->player->y) ? 1: -1;
 	angle = (pt->dir_x == 1) ? angle : (M_PI - angle);
 	angle = (pt->dir_y == -1) ? angle : (2 * M_PI - angle);
+	pt->dir_x = (int)round(pt->angle);
 	pt->angle *= cos(data->player->angle - angle);
 	angle = (M_PI / 3) - ((M_PI / 6) - (data->player->angle - angle));
 	res = (int)round((angle / ((M_PI / 3) / data->res->x)));
@@ -77,42 +78,22 @@ int		ft_calculate_sp_angle(t_data *data, t_vector *pt)
 
 void		ft_display_sprite(t_data *data, double *stock, t_vector *pt, int i)
 {
-	int	size;
+	int	var[5];
+	int	offset[2];
 	int	j;
-	int	k;
-	int	l;
-	int	r;
-	int	offset_1;
-	int	offset_2;
+	double	*cmp[2];
 
-	k = 0;
-	r = 0;
-	stock++;
-	size = (int)floor(((double)CUBE * ((data->res->x / 2) / tan(M_PI / 6))) / pt->angle);
-	i -= size / 2;
-	j = (i < 0) ? 0 : i;
-	offset_1 = 4 * (((data->res->y - size) / 2) * data->res->x + j);
-	offset_2 = 0;
 	j = 0;
-	l = 0;
-	if (size + i >= data->res->x)
-		l = data->res->x - (i + size);
-	r = (i < 0) ? i : 0;
-	i = (i < 0) ? 0 : i;
-	while (j < size)
+	var[3] = i;
+	var[4] = (int)floor(((double)CUBE * ((data->res->x / 2) / tan(M_PI / 6))) / pt->angle);
+	ft_setup_spritedisp(data, offset, var);
+	cmp[0] = stock;
+	cmp[1] = &(pt->angle);
+	while (var[0] + j < var[4] && j < data->res->y)
 	{
-		offset_2 = data->texture[4]->width * 4 * (j * data->texture[4]->height / size);
-		while (k < size + r + l && stock[i] > pt->angle)
-		{
-			offset_2 += 4 * (((k - r) *data->texture[4]->width) / size);
-			*(unsigned int *)(data->img->pt + offset_1) =
-			*(unsigned int *)(data->texture[4]->addr + offset_2);
-			offset_1 += 4;
-			offset_2 -= 4 * (((k - r) *data->texture[4]->width) / size);
-			k++;
-		}
-		offset_1 += 4 * (data->res->x - k);
-		k = 0;
+		offset[1] = data->texture[4]->width * 4 *
+		((var[0] + j) * data->texture[4]->height / var[4]);
+		ft_spritedisp_loop(data, cmp, offset, var);
 		j++;
 	}
 }
