@@ -6,7 +6,7 @@
 #    By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/26 13:34:50 by mbaxmann          #+#    #+#              #
-#    Updated: 2020/01/24 13:56:23 by mbaxmann         ###   ########.fr        #
+#    Updated: 2020/08/27 14:27:01 by user42           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ CFLAGS = -Wall -Wextra -Werror
 all:	${NAME}
 
 .c.o:
-	${CC} ${CFLAGS} -c $< -o ${<:.c=.o} -g
+	${CC} ${CFLAGS} -c $< -o ${<:.c=.o}
 
 ${NAME}:	${OBJS}
 	ar -rcs ${NAME} ${OBJS} ${HEADERS}

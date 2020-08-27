@@ -6,7 +6,7 @@
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/14 09:17:33 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/08/24 16:09:24 by user42           ###   ########.fr       */
+/*   Updated: 2020/08/27 20:07:48 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,20 +27,25 @@ t_textur	*ft_load_t(char *path, void *mlx_ptr)
 	if (!textur->img)
 	{
 		ft_printf("Error: Could not load %s\n", path);
+		free(path);
 		exit(1);
 	}
 	size_line = textur->width * 4;
 	textur->addr = mlx_get_data_addr(textur->img, &bpp, &size_line, &endian);
+	free(path);
 	return (textur);
 }
 
 void		ft_sort(t_data *data, char *line, int fd, void *mlx_ptr)
 {
-	while (get_next_line(fd, &line) && !ft_check_data(data))
+	char	*s;
+	while (!ft_check_data(data) && get_next_line(fd, &line))
 	{
 		if (ft_strncmp(line, "", 2))
 		{
-			line = ft_strtrim(line, " ");
+			s = line;
+			line = ft_strtrim(s, " ");
+			free(s);
 			if (line[0] == 'S' && line[1] == 'O')
 				data->texture[1] = ft_load_t(ft_strtrim(line, " SO"), mlx_ptr);
 			else if (line[0] == 'N')
@@ -57,8 +62,8 @@ void		ft_sort(t_data *data, char *line, int fd, void *mlx_ptr)
 				data->ceil = ft_get_rgb(ft_strtrim(line, " C"));
 			else if (line[0] == 'R')
 				ft_set_res(data->res, ft_strtrim(line, " R"));
-			free(line);
 		}
+		free(line);
 	}
 }
 
@@ -72,12 +77,14 @@ void		ft_get_map(t_data *data, char *line, int fd)
 		free(line);
 		get_next_line(fd, &line);
 	}
-	first = ft_newlst(line);
+	first = ft_newlst(ft_strdup(line));
+	free(line);
 	while (get_next_line(fd, &line) && ft_strncmp(line, "", 2))
 	{
 		ft_add_list(first, ft_newlst(ft_strdup(line)));
 		free(line);
 	}
+	free(line);
 	ft_get_map2(data, line, fd, first);
 }
 
@@ -97,6 +104,7 @@ void		ft_init_data(t_data *data)
 	data->res = (t_dim *)malloc(sizeof(t_dim));
 	data->res->x = 0;
 	data->res->y = 0;
+	data->player = NULL;
 	data->img = NULL;
 	data->mlx = NULL;
 }
@@ -120,6 +128,7 @@ t_data		*ft_init(char *path, void *mlx_ptr)
 		exit(1);
 	}
 	ft_get_map(map, line, fd);
+	close(fd);
 	if (ft_check_map(map->map))
 	{
 		ft_printf("Error: Invalid map\n");

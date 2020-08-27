@@ -6,7 +6,7 @@
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/01 09:55:23 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/08/18 09:24:55 by mbaxmann         ###   ########.fr       */
+/*   Updated: 2020/08/27 16:37:35 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,7 @@ int		ft_button_event(int keycode, void *param)
 {
 	if (keycode == 65307)
 	{
-		mlx_destroy_window(((t_data *)param)->mlx->ptr,
-		((t_data *)param)->mlx->win);
+		ft_free_data((t_data *)param);
 		exit(0);
 	}
 	if (keycode == 65363)
@@ -38,8 +37,7 @@ int		ft_button_event(int keycode, void *param)
 
 int		ft_close(void *param)
 {
-	mlx_destroy_window(((t_data *)param)->mlx->ptr,
-	((t_data *)param)->mlx->win);
+	ft_free_data((t_data *)param);
 	exit(0);
 	return (1);
 }

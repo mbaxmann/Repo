@@ -3,12 +3,9 @@ NO ./textur/greystone.xpm
 SO ./textur/wood.xpm
 WE ./textur/bluestone.xpm
 EA ./textur/redbrick.xpm
-
 S ./textur/Shrek__character_.xpm
 F 220,100,0
 C 245,99,142
-			
-
         1111111111 11111111111111
         1000020001110000000000001
         1011000001110000000000001

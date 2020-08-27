@@ -6,13 +6,13 @@
 #    By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/14 09:36:11 by mbaxmann          #+#    #+#              #
-#    Updated: 2020/08/26 11:57:53 by user42           ###   ########.fr        #
+#    Updated: 2020/08/27 18:09:23 by user42           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 OBJS = ${SRCS:.c=.o}
 
-SRCS =	srcs/ft_cub3d.c srcs/ft_init.c srcs/ft_check_map.c	srcs/ft_check_map2.c srcs/ft_init2.c srcs/ft_list.c srcs/ft_event.c	srcs/ft_raycasting.c srcs/ft_display.c srcs/ft_raycasting_2.c srcs/ft_raycasting_3.c srcs/ft_event_2.c srcs/ft_display_2.c srcs/ft_load_sprite.c srcs/ft_load_sprite_2.c
+SRCS =	srcs/ft_cub3d.c srcs/ft_init.c srcs/ft_check_map.c	srcs/ft_check_map2.c srcs/ft_init2.c srcs/ft_list.c srcs/ft_event.c	srcs/ft_raycasting.c srcs/ft_display.c srcs/ft_raycasting_2.c srcs/ft_raycasting_3.c srcs/ft_event_2.c srcs/ft_display_2.c srcs/ft_load_sprite.c srcs/ft_load_sprite_2.c srcs/ft_free_data.c
 
 HEADERS = include/cub3d.h include/init.h
 
@@ -31,7 +31,7 @@ RM = rm -rf
 all: ${NAME}
 
 .c.o:
-	${CC} ${FLAGS} -c $< -o ${<:.c=.o} -g
+	${CC} ${FLAGS} -static -g -c $< -o ${<:.c=.o}
 
 ${NAME}:	${OBJS}
 			make -C libft
@@ -39,7 +39,11 @@ ${NAME}:	${OBJS}
 			${CC} -o ${NAME} ${FLAGS} ${FRAMEWORK} ${OBJS} -L. ${LIB}
 linux:		${OBJS}
 			make -C libft
-			${CC} -o cub3d_linux ${FLAGS} ${OBJS} -L. libft/libft.a mlx_linux/libmlx_Linux.a -lm -lXext -lX11 -g
+			${CC} -g -L ./libft/ -L ./mlx_linux -o cub3d_linux ${OBJS} -lm -lXext -lX11 -lbsd -lft -lmlx
+
+linux_free:	${OBJS}
+			make -C libft
+			${CC} -L ./libft/ -L ./mlx_linux -fsanitize=address -o cub3d_linux ${OBJS} -lm -lXext -lX11 -lbsd -lft -lmlx
 
 clean:
 	make clean -C libft
