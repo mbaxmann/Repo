@@ -6,7 +6,7 @@
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/13 09:54:12 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/08/27 16:10:35 by user42           ###   ########.fr       */
+/*   Updated: 2020/08/27 20:56:35 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ int			main(int ac, char **av)
 	ft_init_img(data);
 	ft_raycasting(data);
 	ft_event(data);
+	mlx_loop_hook(mlx, &ft_raycasting, data);
 	mlx_loop(mlx->ptr);
 	return (0);
 }

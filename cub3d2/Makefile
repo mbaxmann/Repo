@@ -6,7 +6,7 @@
 #    By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/14 09:36:11 by mbaxmann          #+#    #+#              #
-#    Updated: 2020/08/27 18:09:23 by user42           ###   ########.fr        #
+#    Updated: 2020/08/27 20:14:59 by user42           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,7 @@ RM = rm -rf
 all: ${NAME}
 
 .c.o:
-	${CC} ${FLAGS} -static -g -c $< -o ${<:.c=.o}
+	${CC} ${FLAGS} -c $< -o ${<:.c=.o}
 
 ${NAME}:	${OBJS}
 			make -C libft
@@ -39,7 +39,7 @@ ${NAME}:	${OBJS}
 			${CC} -o ${NAME} ${FLAGS} ${FRAMEWORK} ${OBJS} -L. ${LIB}
 linux:		${OBJS}
 			make -C libft
-			${CC} -g -L ./libft/ -L ./mlx_linux -o cub3d_linux ${OBJS} -lm -lXext -lX11 -lbsd -lft -lmlx
+			${CC} -L ./libft/ -L ./mlx_linux -o cub3d_linux ${OBJS} -lm -lXext -lX11 -lbsd -lft -lmlx
 
 linux_free:	${OBJS}
 			make -C libft
