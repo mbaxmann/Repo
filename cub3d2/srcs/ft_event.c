@@ -6,7 +6,7 @@
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/01 09:55:23 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/08/27 16:37:35 by user42           ###   ########.fr       */
+/*   Updated: 2020/08/28 18:26:14 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ int		ft_button_event(int keycode, void *param)
 		((t_data *)param)->player->angle += M_PI / 80;
 	ft_move_player((t_data *)param, keycode);
 	ft_modulo_pi(&((t_data *)param)->player->angle);
-	ft_raycasting(param);
 	return (1);
 }
 

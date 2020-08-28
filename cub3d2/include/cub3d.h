@@ -6,7 +6,7 @@
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/14 09:27:20 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/08/27 12:02:37 by user42           ###   ########.fr       */
+/*   Updated: 2020/08/28 12:57:28 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,5 +50,6 @@ typedef	struct	s_mlx
 #include <fcntl.h>
 #include <stdio.h>
 #include <math.h>
+#include <time.h>
 
 #endif

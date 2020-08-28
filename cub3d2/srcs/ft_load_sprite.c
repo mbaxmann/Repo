@@ -6,7 +6,7 @@
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/01 10:18:48 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/08/26 13:40:22 by user42           ###   ########.fr       */
+/*   Updated: 2020/08/28 18:24:29 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,12 @@ void		ft_calculate_sprite_dist(t_data *data, t_list *sprite)
 
 	dist = 0;
 	current = sprite;
-	while (current->next)
+	while (current)
 	{
-		current = current->next;
 		temp = current->data;
 		temp->angle = hypot(((CUBE * temp->x) - data->player->x),
 		((CUBE * temp->y) - data->player->y));
+		current = current->next;
 	}
 }
 
@@ -41,7 +41,6 @@ void		ft_sort_sprite(t_list *sprite)
 	t_vector temp;
 	t_list *current;
 
-	sprite = sprite->next;
 	while (sprite)
 	{
 		current = sprite->next;
@@ -103,11 +102,9 @@ int		ft_load_sprite(t_data *data, double *stock)
 	t_list	*current;
 	int	i;
 
-	if (!stock)
-		A
-	if (!data->sprite->next)
+	if (!data->sprite)
 		return (0);
-	current = data->sprite->next;
+	current = data->sprite;
 	ft_calculate_sprite_dist(data, data->sprite);
 	ft_sort_sprite(data->sprite);
 	while (current)
@@ -116,8 +113,8 @@ int		ft_load_sprite(t_data *data, double *stock)
 		ft_display_sprite(data, stock, current->data, i);
 		current = current->next;
 	}
-	ft_free_lst(data->sprite->next);
-	data->sprite->next = NULL;
+	ft_free_lst(data->sprite);
+	data->sprite = NULL;
 	free(stock);
 	return (0);
 }

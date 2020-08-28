@@ -6,7 +6,7 @@
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/01 10:18:48 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/08/26 12:23:44 by user42           ###   ########.fr       */
+/*   Updated: 2020/08/28 18:22:44 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define FT_LOAD_SPRITE_H
 
 int	ft_load_sprite(t_data *data, double *stock);
+int	ft_spritestocked(t_list *first, int i, int j);
 void	ft_sort_sprite(t_list *sprite);
 void	ft_copy_data(t_vector *dest, t_vector *second);
 void	ft_calculate_sprite_dist(t_data *data, t_list * sprite);

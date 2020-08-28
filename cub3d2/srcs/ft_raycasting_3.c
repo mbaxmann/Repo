@@ -6,7 +6,7 @@
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/15 09:53:56 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/08/25 17:41:09 by user42           ###   ########.fr       */
+/*   Updated: 2020/08/28 18:23:36 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,18 +64,22 @@ void		ft_check_sprite(t_data *data, int i, int j)
 	t_list		*current;
 
 	current = data->sprite;
-	while (current->next)
-		current = current->next;
 	if (data->map[i][j] == '2')
         {
-		if (!current->data ||
-		!(((t_vector *)current->data)->x == (floor(j) + 0.5) &&
-		((t_vector *)current->data)->y == (floor(i) + 0.5)))
+		
+		if (!current)
+		{
+			sprite = (t_vector *)malloc(sizeof(t_vector));
+                        sprite->x = floor(j) + 0.5;
+                        sprite->y = floor(i) + 0.5;
+                        data->sprite = ft_newlst(sprite);
+		}
+		else if (!ft_spritestocked(current, i, j))
 		{
                 	sprite = (t_vector *)malloc(sizeof(t_vector));
                 	sprite->x = floor(j) + 0.5;
                 	sprite->y = floor(i) + 0.5;
                 	ft_add_list(data->sprite, ft_newlst(sprite));
 		}
-        }
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 16:21:16 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/08/27 17:38:11 by user42           ###   ########.fr       */
+/*   Updated: 2020/08/28 17:25:40 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,14 @@ void				ft_add_list(t_list *first, t_list *to_add)
 	current = first;
 	if (first != to_add)
 	{
-		while (current->next != NULL)
-			current = current->next;
-		current->next = to_add;
+		if (first)
+		{
+			while (current->next != NULL)
+				current = current->next;
+			current->next = to_add;
+		}
+		else
+			first = to_add;
 	}
 }
 

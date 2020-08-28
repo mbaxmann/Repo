@@ -6,7 +6,7 @@
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/13 09:54:12 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/08/27 16:38:53 by user42           ###   ########.fr       */
+/*   Updated: 2020/08/28 17:27:18 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ void            ft_free_data(t_data *data)
         	free(data->stock);
         ft_free_img(data->img);
         ft_free_mlx(data->mlx);
-        ft_free_lst(data->sprite);
+	if (data->sprite)
+        	ft_free_lst(data->sprite);
 	free(data);
 }

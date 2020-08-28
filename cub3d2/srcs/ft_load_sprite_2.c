@@ -6,11 +6,25 @@
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/01 10:18:48 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/08/27 20:59:53 by user42           ###   ########.fr       */
+/*   Updated: 2020/08/28 18:23:26 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
+
+int             ft_spritestocked(t_list *first, int i, int j)
+{
+        t_vector *tmp;
+
+        while (first)
+        {
+                tmp = first->data;
+                if (tmp->x - 0.5 == j && tmp->y - 0.5 == i)
+                        return (1);
+                first = first->next;
+        }
+        return (0);
+}
 
 void	ft_setup_spritedisp(t_data *data, int offset[2], int var[5])
 {

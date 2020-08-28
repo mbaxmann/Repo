@@ -6,7 +6,7 @@
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/14 09:17:33 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/08/27 20:07:48 by user42           ###   ########.fr       */
+/*   Updated: 2020/08/28 17:11:56 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ void		ft_get_map(t_data *data, char *line, int fd)
 void		ft_init_data(t_data *data)
 {
 	data->map = NULL;
-	data->sprite = ft_newlst(0);
+	data->sprite = NULL;
 	data->texture = (t_textur **)malloc(sizeof(t_textur *) * 5);
 	data->texture[0] = NULL;
 	data->texture[1] = NULL;
