@@ -6,7 +6,7 @@
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/01 10:18:48 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/08/28 18:24:29 by user42           ###   ########.fr       */
+/*   Updated: 2020/08/28 20:04:06 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,9 +68,25 @@ int		ft_calculate_sp_angle(t_data *data, t_vector *pt)
 	pt->dir_y = (CUBE * pt->y > data->player->y) ? 1: -1;
 	angle = (pt->dir_x == 1) ? angle : (M_PI - angle);
 	angle = (pt->dir_y == -1) ? angle : (2 * M_PI - angle);
-	pt->dir_x = (int)round(pt->angle);
 	pt->angle *= cos(data->player->angle - angle);
-	angle = (M_PI / 3) - ((M_PI / 6) - (data->player->angle - angle));
+	if (pt->dir_x == -1)
+		angle = (M_PI / 3) - ((M_PI / 6) - (data->player->angle - angle));
+	else
+	{
+		if (data->player->angle < M_PI && angle > M_PI)
+		{
+			angle -= 2 * M_PI;
+			angle = (M_PI / 3) - ((M_PI / 6) - (data->player->angle - angle));
+		}
+		else if (data->player->angle > M_PI && angle < M_PI)
+		{
+			angle += 2 * M_PI;
+			angle = (M_PI / 3) - ((M_PI / 6) - (data->player->angle - angle));
+		}
+		else
+			angle = (M_PI / 3) - ((M_PI / 6) - (data->player->angle - angle));
+	}
+	pt->dir_x = (int)round(pt->angle);
 	res = (int)round((angle / ((M_PI / 3) / data->res->x)));
 	return (res);
 }
