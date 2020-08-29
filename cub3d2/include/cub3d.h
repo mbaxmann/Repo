@@ -6,7 +6,7 @@
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/14 09:27:20 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/08/28 12:57:28 by user42           ###   ########.fr       */
+/*   Updated: 2020/08/29 18:27:49 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 #define A write(1, "A", 1);
 #define B write(1, "B", 1);
 #define CUBE 34
+#define SPEED 6
+#define R_SPEED 100
 
 typedef struct	s_dim
 {
@@ -47,6 +49,7 @@ typedef	struct	s_mlx
 #include "ft_display.h"
 #include "ft_load_sprite.h"
 #include "ft_free_data.h"
+#include "ft_loop.h"
 #include <fcntl.h>
 #include <stdio.h>
 #include <math.h>

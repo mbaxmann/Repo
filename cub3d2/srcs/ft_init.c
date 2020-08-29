@@ -6,7 +6,7 @@
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/14 09:17:33 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/08/29 17:12:11 by user42           ###   ########.fr       */
+/*   Updated: 2020/08/29 18:03:19 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,10 @@ void		ft_init_data(t_data *data)
 	data->player = NULL;
 	data->img = (t_img **)malloc(sizeof(t_img *) * 2);
 	data->mlx = NULL;
+	data->mov[0] = 0;
+	data->mov[1] = 0;
+	data->mov[2] = 0;
+	data->mov[3] = 0;
 }
 
 t_data		*ft_init(char *path, void *mlx_ptr)

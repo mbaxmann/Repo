@@ -6,7 +6,7 @@
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/01 09:55:23 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/08/29 17:24:06 by user42           ###   ########.fr       */
+/*   Updated: 2020/08/29 18:19:09 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,28 @@ int		ft_button_event(int keycode, void *param)
 		ft_free_data((t_data *)param);
 		exit(0);
 	}
-	if (keycode == 65363)
-		((t_data *)param)->player->angle -= M_PI / 80;
-	if (keycode == 65361)
-		((t_data *)param)->player->angle += M_PI / 80;
-	ft_move_player((t_data *)param, keycode);
-	ft_modulo_pi(&((t_data *)param)->player->angle);
+	else if (keycode == 65363 || keycode == 65361)
+	{
+		((t_data *)param)->mov[2] = 1;
+		((t_data *)param)->mov[3] = keycode;
+	}
+	else if (keycode == 122 || keycode == 115
+	|| keycode == 113 || keycode == 100)
+        {
+                ((t_data *)param)->mov[0] = 1;
+                ((t_data *)param)->mov[1] = keycode;
+        }
 	return (1);
+}
+
+int             ft_button_event_2(int keycode, void *param)
+{
+        if (keycode == 65363 || keycode == 65361)
+                ((t_data *)param)->mov[2] = 0;
+        else if (keycode == 122 || keycode == 115
+        || keycode == 113 || keycode == 100)
+                ((t_data *)param)->mov[0] = 0;
+        return (1);
 }
 
 int		ft_close(void *param)
@@ -44,5 +59,6 @@ int		ft_close(void *param)
 void	ft_event(t_data *data)
 {
 	mlx_hook(data->mlx->win, 2, 1L << 0, &ft_button_event, data);
+	mlx_hook(data->mlx->win, 3, 1L << 1, &ft_button_event_2, data);
 	mlx_hook(data->mlx->win, 17, 1L << 17, &ft_close, data);
 }

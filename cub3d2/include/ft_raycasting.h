@@ -6,7 +6,7 @@
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/01 10:23:29 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/08/24 15:20:40 by user42           ###   ########.fr       */
+/*   Updated: 2020/08/29 17:30:44 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,6 @@ void		ft_spot_player(t_data *data, int i, int j);
 void		ft_init_pt_mode_0(t_vector *pt, double alpha, t_data *data);
 void		ft_init_pt_mode_1(t_vector *pt, double alpha, t_data *data);
 void		ft_check_sprite(t_data *data, int i, int j);
+void		ft_swp_img(t_data *data);
 
 #endif

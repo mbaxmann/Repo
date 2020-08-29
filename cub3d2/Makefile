@@ -6,13 +6,13 @@
 #    By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/14 09:36:11 by mbaxmann          #+#    #+#              #
-#    Updated: 2020/08/28 17:23:39 by user42           ###   ########.fr        #
+#    Updated: 2020/08/29 18:37:14 by user42           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 OBJS = ${SRCS:.c=.o}
 
-SRCS =	srcs/ft_cub3d.c srcs/ft_init.c srcs/ft_check_map.c	srcs/ft_check_map2.c srcs/ft_init2.c srcs/ft_list.c srcs/ft_event.c	srcs/ft_raycasting.c srcs/ft_display.c srcs/ft_raycasting_2.c srcs/ft_raycasting_3.c srcs/ft_event_2.c srcs/ft_display_2.c srcs/ft_load_sprite.c srcs/ft_load_sprite_2.c srcs/ft_free_data.c
+SRCS =	srcs/ft_cub3d.c srcs/ft_init.c srcs/ft_check_map.c	srcs/ft_check_map2.c srcs/ft_init2.c srcs/ft_list.c srcs/ft_event.c	srcs/ft_raycasting.c srcs/ft_display.c srcs/ft_raycasting_2.c srcs/ft_raycasting_3.c srcs/ft_event_2.c srcs/ft_display_2.c srcs/ft_load_sprite.c srcs/ft_load_sprite_2.c srcs/ft_free_data.c srcs/ft_loop.c
 
 HEADERS = include/cub3d.h include/init.h
 
@@ -31,7 +31,7 @@ RM = rm -rf
 all: ${NAME}
 
 .c.o:
-	${CC} ${FLAGS} -c $< -o ${<:.c=.o} -g
+	${CC} ${FLAGS} -c $< -o ${<:.c=.o}
 
 ${NAME}:	${OBJS}
 			make -C libft
