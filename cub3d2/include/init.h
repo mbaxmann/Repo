@@ -6,7 +6,7 @@
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/14 09:17:58 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/08/24 14:52:38 by user42           ###   ########.fr       */
+/*   Updated: 2020/08/29 17:11:37 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ typedef struct s_data
 	t_dim		*res;
 	t_player	*player;
 	t_player	*stock;
-	t_img		*img;
+	t_img		**img;
 	t_mlx		*mlx;
 	t_list		*sprite;
 }				t_data;

@@ -6,7 +6,7 @@
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/11 09:10:34 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/08/24 15:47:18 by user42           ###   ########.fr       */
+/*   Updated: 2020/08/29 17:16:47 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,20 @@
 
 void		ft_init_img(t_data *data)
 {
-	data->img = (t_img *)malloc(sizeof(t_img));
-	data->img->bpp = 32;
-	data->img->line = data->res->x * 4;
-	data->img->endian = 0;
-	data->img->img = mlx_new_image(data->mlx->ptr, data->res->x, data->res->y);
-	data->img->pt = mlx_get_data_addr(data->img->img,
-	&data->img->bpp, &data->img->line, &data->img->endian);
+	int i;
+
+	i = 0;
+	while (i < 2)
+	{
+		data->img[i] = (t_img *)malloc(sizeof(t_img));
+		data->img[i]->bpp = 32;
+		data->img[i]->line = data->res->x * 4;
+		data->img[i]->endian = 0;
+		data->img[i]->img = mlx_new_image(data->mlx->ptr, data->res->x, data->res->y);
+		data->img[i]->pt = mlx_get_data_addr(data->img[i]->img,
+		&data->img[i]->bpp, &data->img[i]->line, &data->img[i]->endian);
+		i++;
+	}
 }
 
 int			ft_choose_textur(t_data *data)
@@ -80,7 +87,7 @@ void		ft_load_ray(t_data *data, int size, int offset)
 	size += 2 * tab[0];
 	while (tab[0] < size - tab[4])
 	{
-		ft_put_pixel(data->img->pt,
+		ft_put_pixel(data->img[0]->pt,
 		data->texture[tab[2]]->addr, offset_2, tab[1]);
 		offset_2 += data->res->x * 4;
 		ft_calculate_xpm_offset(tab, data, size);

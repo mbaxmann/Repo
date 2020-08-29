@@ -6,7 +6,7 @@
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/01 10:18:48 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/08/28 18:24:03 by user42           ###   ########.fr       */
+/*   Updated: 2020/08/29 17:24:33 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,14 @@ void		ft_modulo_pi(double *angle)
 		(*angle) += 2 * M_PI;
 }
 
+void			ft_swp_img(t_data *data)
+{
+	t_img *tmp;
+	tmp = data->img[0];
+	data->img[0] = data->img[1];
+	data->img[1] = tmp;
+}
+
 int			ft_raycasting(t_data *data)
 {
 	int		i;
@@ -94,6 +102,7 @@ int			ft_raycasting(t_data *data)
 	}
 	ft_load_sprite(data, stock);
 	mlx_put_image_to_window(data->mlx->ptr,
-	data->mlx->win, data->img->img, 0, 0);
+	data->mlx->win, data->img[0]->img, 0, 0);
+	ft_swp_img(data);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/13 09:54:12 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/08/28 17:27:18 by user42           ###   ########.fr       */
+/*   Updated: 2020/08/29 17:14:34 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,17 @@ void		ft_free_texture(t_textur **texture)
 	}
 }
 
-void		ft_free_img(t_img *img)
+void		ft_free_img(t_img **img)
 {
-	if (img)
+	int i;
+
+	i = 0;
+	if (i < 2)
 	{
-		free(img->img);
-		free(img);
+		free(img[i]->img);
+		free(img[i]);
 	}
+	free(img);
 }
 
 void		ft_free_mlx(t_mlx *mlx)

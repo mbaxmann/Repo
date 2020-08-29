@@ -6,28 +6,47 @@
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/18 09:23:59 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/08/28 14:49:20 by user42           ###   ########.fr       */
+/*   Updated: 2020/08/29 16:20:37 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
+void		ft_sethitbox(int hitbox[8])
+{
+	hitbox[0] = CUBE / 3;
+	hitbox[1] = CUBE / 3;
+	hitbox[2] = -CUBE / 3;
+	hitbox[3] = -CUBE / 3;
+	hitbox[4] = -CUBE / 3;
+	hitbox[5] = CUBE / 3;
+	hitbox[6] = CUBE / 3;
+	hitbox[7] = -CUBE / 3;
+}
+
 int		ft_hitbox(t_player *player, t_data *data)
 {
-	int i;
-	int j;
+	int pos[2];
+	int hitbox[8];
 	int k;
+	int n;
 
-	i = floor(player->y / CUBE);
-	j = floor(player->x / CUBE);
+	ft_sethitbox(hitbox);
 	k = 0;
-	while (data->map[k][0])
-		k++;
-	if (i < 0 || i >= k)
-		return (1);
-	if (j < 0 || j >= (int)ft_strlen(data->map[i]) ||
-	data->map[i][j] == '1' || data->map[i][j] == '2')
-		return (1);
+	n = 0;
+	while (n < 8)
+	{
+		pos[0] = floor((player->y + hitbox[n]) / CUBE);
+        	pos[1] = floor((player->x + hitbox[n + 1])/ CUBE);
+		while (data->map[k][0])
+			k++;
+		if (pos[0] < 0 || pos[0] >= k)
+			return (1);
+		if (pos[1] < 0 || pos[1] >= (int)ft_strlen(data->map[pos[0]]) ||
+		data->map[pos[0]][pos[1]] == '1' || data->map[pos[0]][pos[1]] == '2')
+			return (1);
+		n += 2;
+	}
 	return (0);
 }
 

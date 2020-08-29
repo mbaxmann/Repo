@@ -6,7 +6,7 @@
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/01 10:18:48 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/08/28 20:04:06 by user42           ###   ########.fr       */
+/*   Updated: 2020/08/29 17:00:40 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ void		ft_display_sprite(t_data *data, double *stock, t_vector *pt, int i)
 
 	j = 0;
 	var[3] = i;
-	var[4] = (int)floor(((double)CUBE * ((data->res->x / 2) / tan(M_PI / 6))) / pt->angle);
+	var[4] = ft_spritesize(data, pt);
 	ft_setup_spritedisp(data, offset, var);
 	cmp[0] = stock;
 	cmp[1] = &(pt->angle);

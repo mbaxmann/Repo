@@ -6,7 +6,7 @@
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/11 09:10:34 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/08/24 15:48:42 by user42           ###   ########.fr       */
+/*   Updated: 2020/08/29 17:17:49 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	ft_coloring(t_data *data, long long i, long long j, int mode)
 	unsigned int	color;
 	char			*img;
 
-	img = data->img->pt;
+	img = data->img[0]->pt;
 	if (mode)
 		color = (unsigned int)data->ceil;
 	else

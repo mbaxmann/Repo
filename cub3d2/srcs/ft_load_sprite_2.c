@@ -6,11 +6,23 @@
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/01 10:18:48 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/08/28 19:22:14 by user42           ###   ########.fr       */
+/*   Updated: 2020/08/29 17:18:37 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
+
+int		ft_spritesize(t_data *data, t_vector *pt)
+{
+	int size;
+	int size_max;
+
+	size = (int)floor(((double)CUBE * ((data->res->x / 2) / tan(M_PI / 6))) / pt->dir_x);
+	size_max = (int)floor(((double)CUBE * ((data->res->x / 2) / tan(M_PI / 6))) / (CUBE / 2));
+	if (size > size_max)
+		return (size_max);
+	return (size);
+}
 
 int             ft_spritestocked(t_list *first, int i, int j)
 {
@@ -53,13 +65,14 @@ void	ft_spritedisp_loop(t_data *data, double *cmp[2], int offset[2], int var[5])
 
 	i = var[1];
 	j = 0;
+	//printf("var[1]: %d	var[2]: %d	var[4]: %d\n", var[1], var[2], var[4]);
 	while (i <= var[4] + var[2] && j < data->res->x)
 	{
 		offset[1] += 4 * ((i * data->texture[4]->width) / var[4]);
-		if (cmp[0][var[3]] > cmp[1][0] &&
+		if ((cmp[0][var[3]] > cmp[1][0]) &&
 		*(unsigned int*)(data->texture[4]->addr + offset[1]))
 		{
-			*(unsigned int *)(data->img->pt + offset[0]) =
+			*(unsigned int *)(data->img[0]->pt + offset[0]) =
 			*(unsigned int *)(data->texture[4]->addr + offset[1]);
 		}
 		offset[0] += 4;

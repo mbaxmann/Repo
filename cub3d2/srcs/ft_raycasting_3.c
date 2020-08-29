@@ -6,7 +6,7 @@
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/15 09:53:56 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/08/28 18:23:36 by user42           ###   ########.fr       */
+/*   Updated: 2020/08/29 16:29:44 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,6 @@ void		ft_check_sprite(t_data *data, int i, int j)
 	current = data->sprite;
 	if (data->map[i][j] == '2')
         {
-		
 		if (!current)
 		{
 			sprite = (t_vector *)malloc(sizeof(t_vector));
