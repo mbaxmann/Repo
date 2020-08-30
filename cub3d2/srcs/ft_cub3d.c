@@ -6,47 +6,64 @@
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/13 09:54:12 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/08/30 18:23:31 by user42           ###   ########.fr       */
+/*   Updated: 2020/08/30 20:26:16 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
+void		ft_error(t_data *data, char *err)
+{
+	if (!ft_strncmp(err, "win", 4))
+		ft_putendl_fd("Error\nmlx window failed", 1);
+	else if (!ft_strncmp(err, "arg", 4))
+		ft_putendl_fd("Error\nIncorrect number of argument", 1);
+	else if (!ft_strncmp(err, "cub", 4))
+		ft_putendl_fd("Error\nInvalid map extension", 1);
+	else if (!ft_strncmp(err, "save", 5))
+		ft_putendl_fd("Error\nInvalid argument", 1);
+	else if (!ft_strncmp(err, "mlx", 4))
+		ft_putendl_fd("Error\nmlx init failed", 1);
+	else if (!ft_strncmp(err, "path", 5))
+		ft_putendl_fd("Error\nCould not open .cub file", 1);
+	else if (!ft_strncmp(err, "file", 5))
+		ft_putendl_fd("Error\nIncomplete file", 1);
+	else if (!ft_strncmp(err, "map", 4))
+		ft_putendl_fd("Error\nInvalid map", 1);
+	else if (!ft_strncmp(err, "texture", 8))
+		ft_putendl_fd("Error\nCould not load texture or/and sprite", 1);
+	else if (!ft_strncmp(err, "split", 6))
+		ft_putendl_fd("Error\nMap is split and/or not at the end of file", 1);
+	else if (!ft_strncmp(err, "rgb_inv", 8))
+		ft_putendl_fd("Error\nInvalid RGB color", 1);
+	else if (!ft_strncmp(err, "rgb_ran", 8))
+		ft_putendl_fd("Error\nInvalid RGB range", 1);
+	else if (!ft_strncmp(err, "bmp", 8))
+                ft_putendl_fd("Error\nCould not load save.bmp", 1);
+	ft_free_data(data);
+	exit(1);
+}
+
 void		ft_open_window(t_mlx **mlx, t_data *data)
 {
 	if (((*mlx)->win = mlx_new_window((*mlx)->ptr,
 		data->res->x, data->res->y, "cub3d")) == NULL)
-	{
-		ft_putendl_fd("Error\nmlx window failed", 1);
-		exit(1);
-	}
+		ft_error(data, "win");
 }
 
 void		ft_valid_arg(int ac, char **av)
 {
 	if (ac == 1)
-	{
-		ft_putendl_fd("Error\nNot enough argument", 1);
-		exit(1);
-	}
+		ft_error(NULL, "arg");
 	else if (ac < 4)
 	{
 		if (ft_strncmp(av[1] + (ft_strlen(av[1]) - 4), ".cub", 4))
-		{
-			ft_putendl_fd("Error\nInvalid map extension", 1);
-			exit(1);
-		}
+			ft_error(NULL, "cub");
 		if (ac == 3 && ft_strncmp(av[2], "--save", 7) && ft_strncmp(av[2], "-save", 6))
-		{
-			ft_putendl_fd("Error\nInvalid argument", 1);
-			exit(1);
-		}
+			ft_error(NULL, "save");
 	}
 	else
-	{
-		ft_putendl_fd("Error\nToo much argument", 1);
-		exit(1);
-	}
+		ft_error(NULL, "arg");
 }
 
 int			main(int ac, char **av)
@@ -56,13 +73,11 @@ int			main(int ac, char **av)
 	static short b;
 
 	b = 1;
+	data = NULL;
 	ft_valid_arg(ac, av);
 	mlx = (t_mlx *)malloc(sizeof(t_mlx));
 	if ((mlx->ptr = mlx_init()) == NULL)
-	{
-		ft_putendl_fd("Error\nmlx init failed", 1);
-		exit(1);
-	}
+		ft_error(data, "mlx");
 	data = ft_init(av[1], mlx->ptr);
 	data->mlx = mlx;
 	ft_init_img(data);

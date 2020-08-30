@@ -6,7 +6,7 @@
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/13 09:54:12 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/08/30 18:29:32 by user42           ###   ########.fr       */
+/*   Updated: 2020/08/30 20:21:26 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,11 +81,7 @@ void		ft_save_img(t_data *data)
 	int fd;
 
 	if ((fd = open("save.bmp", O_CREAT | O_TRUNC | O_RDWR)) <= 0)
-	{
-		ft_putendl_fd("Error\nCould not load save.bmp", 1);
-		ft_free_data(data);
-		exit(1);
-	}
+		ft_error(data, "bmp");
 	else
 	{
 		ft_raycasting(data);

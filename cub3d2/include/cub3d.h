@@ -6,7 +6,7 @@
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/14 09:27:20 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/08/30 15:40:55 by user42           ###   ########.fr       */
+/*   Updated: 2020/08/30 20:15:08 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,5 +55,9 @@ typedef	struct	s_mlx
 #include <stdio.h>
 #include <math.h>
 #include <time.h>
+
+void	ft_valid_arg(int ac, char **av);
+void	ft_open_window(t_mlx **mlx, t_data *data);
+void	ft_error(t_data *data, char *err);
 
 #endif

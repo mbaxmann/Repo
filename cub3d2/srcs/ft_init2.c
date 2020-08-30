@@ -6,7 +6,7 @@
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/25 10:34:49 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/08/30 18:31:31 by user42           ###   ########.fr       */
+/*   Updated: 2020/08/30 20:36:17 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int			ft_check_data(t_data *data)
 		return (0);
 }
 
-int			ft_get_rgb(char *nb)
+int			ft_get_rgb(t_data *data, char *nb)
 {
 	int		r;
 	int		g;
@@ -52,16 +52,14 @@ int			ft_get_rgb(char *nb)
 		nb++;
 	if (!(*nb) || !(*(nb + 1)))
 	{
-		ft_putendl_fd("Error\nInvalid RGB color", 1);
 		free(stock);
-		exit(1);
+		ft_error(data, "rgb_inv");
 	}
 	b = ft_atoi(++nb);
 	if (r < 0 || g < 0 || b < 0 || r > 255 || g > 255 || b > 255)
 	{
-		ft_putendl_fd("Error\nInvalid RGB range", 1);
 		free(stock);
-		exit(1);
+		ft_error(data, "rgb_ran");
 	}
 	free(stock);
 	return ((r << 16) | (g << 8) | b);
@@ -92,11 +90,10 @@ void		ft_get_map2(t_data *data, char *line, int fd, t_list *first)
 	{
 		if (ft_strncmp(line, "", 2))
 		{
-			ft_putendl_fd("Error\nMap is split and/or not at the end of file", 1);
 			ft_free_lst(first);
 			ft_free_data(data);
 			free(line);
-			exit(1);
+			ft_error(data, "split");
 		}
 		free(line);
 	}
