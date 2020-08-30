@@ -6,7 +6,7 @@
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/14 09:27:20 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/08/29 18:27:49 by user42           ###   ########.fr       */
+/*   Updated: 2020/08/30 15:40:55 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ typedef	struct	s_mlx
 #include "ft_load_sprite.h"
 #include "ft_free_data.h"
 #include "ft_loop.h"
+#include "ft_save_img.h"
 #include <fcntl.h>
 #include <stdio.h>
 #include <math.h>

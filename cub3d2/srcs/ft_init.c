@@ -6,7 +6,7 @@
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/14 09:17:33 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/08/29 18:03:19 by user42           ###   ########.fr       */
+/*   Updated: 2020/08/30 18:26:50 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ t_textur	*ft_load_t(char *path, void *mlx_ptr)
 	&(textur->width), &(textur->height));
 	if (!textur->img)
 	{
-		ft_printf("Error: Could not load %s\n", path);
+		ft_putendl_fd("Error\nCould not load texture or/and sprite", 1);
 		free(path);
 		exit(1);
 	}
@@ -124,18 +124,22 @@ t_data		*ft_init(char *path, void *mlx_ptr)
 	fd = 0;
 	map = (t_data *)malloc(sizeof(t_data));
 	ft_init_data(map);
-	fd = open(path, O_RDONLY);
+	if ((fd = open(path, O_RDONLY)) <= 0)
+	{
+		ft_putendl_fd("Error\n mlx init failed", 1);
+		exit(1);
+	}
 	ft_sort(map, line, fd, mlx_ptr);
 	if (!ft_check_data(map))
 	{
-		ft_printf("Error: Incomplete file\n");
+		ft_putendl_fd("Error\nIncomplete file", 1);
 		exit(1);
 	}
 	ft_get_map(map, line, fd);
 	close(fd);
 	if (ft_check_map(map->map))
 	{
-		ft_printf("Error: Invalid map\n");
+		ft_putendl_fd("Error\nInvalid map", 1);
 		exit(1);
 	}
 	ft_init_player(map, &map->player);

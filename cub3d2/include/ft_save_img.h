@@ -1,32 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_loop.c                                          :+:      :+:    :+:   */
+/*   ft_save_img.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/13 09:54:12 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/08/30 18:09:15 by user42           ###   ########.fr       */
+/*   Updated: 2020/08/30 18:14:33 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub3d.h"
+#ifndef FT_SAVE_IMG_H
+# define FT_SAVE_IMG_H
 
-int	ft_loop(t_data *data)
-{
-	if (data->mov[0])
-		ft_move_player(data, data->mov[1]);
-	if (data->mov[2])
-	{
-		if (data->mov[3] == 65363)
-			data->player->angle -= M_PI / R_SPEED;
-		else
-			data->player->angle += M_PI / R_SPEED;
-		ft_modulo_pi(&data->player->angle);
-	}
-	ft_raycasting(data);
-	mlx_put_image_to_window(data->mlx->ptr,
-        data->mlx->win, data->img[0]->img, 0, 0);
-        ft_swp_img(data);
-	return (0);
-}
+void		ft_save_img(t_data *data);
+void		ft_write_bmp(t_data *data, int fd);
+void		ft_wimg_header(t_data *data, int fd);
+void		ft_wfile_header(t_data *data, int fd);
+
+#endif

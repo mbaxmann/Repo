@@ -6,7 +6,7 @@
 #    By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/04 11:14:51 by mbaxmann          #+#    #+#              #
-#    Updated: 2020/08/27 14:12:30 by user42           ###   ########.fr        #
+#    Updated: 2020/08/30 18:17:02 by user42           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,15 +29,12 @@ all: 		${NAME}
 	${CC} ${CFLAGS} -c $< -o ${<:.c=.o}
 
 ${NAME}:	${OBJS}
-	make -C ft_printf
-	cp ft_printf/libftprintf.a ./$(NAME)
+
 	ar -rcs ${NAME} ${OBJS} ${HEADERS}
 clean:
-	(cd ft_printf; make clean)
 	${RM} ${OBJS}
 
 fclean:		clean
-	(cd ft_printf; make fclean)
 	${RM} ${NAME}
 
 re:			fclean all

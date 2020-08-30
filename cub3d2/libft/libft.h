@@ -6,7 +6,7 @@
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 14:08:58 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/01/24 13:57:44 by mbaxmann         ###   ########.fr       */
+/*   Updated: 2020/08/30 18:24:18 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include "get_next_line.h"
-# include "ft_printf/ft_printf.h"
 
 int		ft_isdigit(int c);
 int		ft_isprint(int c);
