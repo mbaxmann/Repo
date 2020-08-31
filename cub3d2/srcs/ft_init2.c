@@ -6,7 +6,7 @@
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/25 10:34:49 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/08/30 20:36:17 by user42           ###   ########.fr       */
+/*   Updated: 2020/08/31 22:45:08 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,36 +33,32 @@ int			ft_check_data(t_data *data)
 		return (0);
 }
 
-int			ft_get_rgb(t_data *data, char *nb)
+int			ft_get_rgb(t_data *data, char *nb, int fd)
 {
-	int		r;
-	int		g;
-	int		b;
-	char		*stock;
+	int		tab[3];
+	char	*stock;
 
-	r = 0;
-	g = 0;
-	b = 0;
-	r = ft_atoi(nb);
+	tab[0] = ft_atoi(nb);
 	stock = nb;
 	while (*nb != ',' && *nb)
 		nb++;
-	g = ft_atoi(++nb);
+	tab[1] = ft_atoi(++nb);
 	while (*nb != ',' && *nb)
 		nb++;
 	if (!(*nb) || !(*(nb + 1)))
 	{
 		free(stock);
-		ft_error(data, "rgb_inv");
+		ft_error(data, "rgb_inv", fd);
 	}
-	b = ft_atoi(++nb);
-	if (r < 0 || g < 0 || b < 0 || r > 255 || g > 255 || b > 255)
+	tab[2] = ft_atoi(++nb);
+	if (tab[0] < 0 || tab[1] < 0 || tab[2] < 0 ||
+	tab[0] > 255 || tab[1] > 255 || tab[2] > 255)
 	{
 		free(stock);
-		ft_error(data, "rgb_ran");
+		ft_error(data, "rgb_ran", fd);
 	}
 	free(stock);
-	return ((r << 16) | (g << 8) | b);
+	return ((tab[0] << 16) | (tab[1] << 8) | tab[2]);
 }
 
 void		ft_set_res(t_dim *dim, char *res)
@@ -72,32 +68,34 @@ void		ft_set_res(t_dim *dim, char *res)
 	i = 0;
 	dim->x = ft_atoi(res);
 	dim->x = (dim->x > 1920) ? 1920 : dim->x;
+	dim->x = (dim->x < 510) ? 510 : dim->x;
 	while (res[i] && res[i] != ' ')
 		i++;
 	dim->y = ft_atoi(res + i);
 	dim->y = (dim->y > 1080) ? 1080 : dim->y;
+	dim->y = (dim->y < 254) ? 254 : dim->y;
 	free(res);
 }
 
-void		ft_get_map2(t_data *data, char *line, int fd, t_list *first)
+void		ft_get_map2(t_data *data, int fd, t_list *first)
 {
 	int		i;
 	t_list	*current;
 
 	i = 0;
 	current = first;
-	while (get_next_line(fd, &line))
+	free(data->line);
+	while (get_next_line(fd, &(data->line)))
 	{
-		if (ft_strncmp(line, "", 2))
+		if (ft_strncmp(data->line, "", 1))
 		{
 			ft_free_lst(first);
-			ft_free_data(data);
-			free(line);
-			ft_error(data, "split");
+			ft_error(data, "split", fd);
 		}
-		free(line);
+		free(data->line);
 	}
-	free(line);
+	free(data->line);
+	data->line = NULL;
 	data->map = (char **)malloc(sizeof(char *) * (ft_list_len(first) + 1));
 	while (current)
 	{

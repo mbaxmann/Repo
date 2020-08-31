@@ -6,7 +6,7 @@
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/14 09:17:58 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/08/30 20:27:27 by user42           ###   ########.fr       */
+/*   Updated: 2020/08/31 22:58:26 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ typedef struct	s_img
 
 typedef struct s_data
 {
+	char		*line;
 	char		**map;
 	t_textur	**texture;
 	int			floor;
@@ -52,15 +53,17 @@ typedef struct s_data
 	int		mov[4];
 }				t_data;
 
-t_data		*ft_init(char *path, void *mlx_ptr);
-t_textur	*ft_load_t(t_data *data, char *path, void *mlx_ptr);
+t_data		*ft_init(char *path, t_mlx *mlx);
+t_textur	*ft_load_t(t_data *data, char *path, void *mlx_ptr, int fd);
 void		ft_init_data(t_data *data);
-void		ft_get_map(t_data *data, char *line, int fd);
-void		ft_get_map2(t_data *data, char *line, int fd, t_list *first);
-void		ft_sort(t_data *data, char *line, int fd, void *mlx_ptr);
+void		ft_get_map(t_data *data, int fd);
+void		ft_get_map2(t_data *data, int fd, t_list *first);
+void		ft_sort(t_data *data, int fd, t_mlx *mlx);
+void            ft_sort_2(t_data *data, int fd, t_mlx *mlx);
+void            ft_sort_3(t_data *data, int fd, t_mlx *mlx);
 void		ft_set_res(t_dim *dim, char *res);
 void		ft_init_player(t_data *data, t_player **player);
-int			ft_get_rgb(t_data *data, char *nb);
+int			ft_get_rgb(t_data *data, char *nb, int fd);
 int			ft_check_data(t_data *data);
 int			ft_check_map(char **map);
 int			ft_check_char(char **map);

@@ -1,11 +1,15 @@
-R 1020 510
+R 1080 800
 NO ./textur/greystone.xpm
 SO ./textur/wood.xpm
 WE ./textur/bluestone.xpm
 EA ./textur/redbrick.xpm
+
 S ./textur/pillar.xpm
-F 220, -100,0
+
+F 220, 100,0
+
 C 245,99,142
+
         1111111111 11111111111111
         1000000001110000002000011
         1011000021110000000000021

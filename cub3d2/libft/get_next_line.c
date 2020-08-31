@@ -6,7 +6,7 @@
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/11 10:57:31 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/08/27 18:59:15 by user42           ###   ########.fr       */
+/*   Updated: 2020/08/31 14:12:18 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ int		ft_stock(char **stock, char **line)
 	len = ft_strlen(stock[0]) - j - i;
 	ft_memmove(stock[0], &(stock[0][j + i]), len + 1);
 	len = ft_strlen(line[0]);
+	len = (len == 0) ? 1 : len;
 	if (line[0][len - 1] == 3)
 	{
 		line[0][len - 1] = '\0';

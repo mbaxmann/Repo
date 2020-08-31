@@ -6,7 +6,7 @@
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/13 09:54:12 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/08/30 20:21:26 by user42           ###   ########.fr       */
+/*   Updated: 2020/08/31 14:40:45 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,12 +81,12 @@ void		ft_save_img(t_data *data)
 	int fd;
 
 	if ((fd = open("save.bmp", O_CREAT | O_TRUNC | O_RDWR)) <= 0)
-		ft_error(data, "bmp");
+		ft_error(data, "bmp", 0);
 	else
 	{
 		ft_raycasting(data);
 		ft_write_bmp(data, fd);
-		ft_free_data(data);
+		ft_free_data(data, 0);
 		exit(0);
 	}
 }

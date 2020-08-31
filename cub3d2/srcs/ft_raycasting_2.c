@@ -6,7 +6,7 @@
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/15 09:12:46 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/08/29 17:27:13 by user42           ###   ########.fr       */
+/*   Updated: 2020/08/31 22:13:41 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,24 +42,25 @@ void		ft_set_angle(double *angle, t_vector *pt_1, t_vector *pt_2)
 {
 	pt_1->dir_x = 1;
 	pt_1->dir_y = -1;
-	if ((*angle) >= M_PI_2 && (*angle) < M_PI)
+	if ((*angle) > M_PI_2 && (*angle) < M_PI)
 	{
 		(*angle) = M_PI - (*angle);
 		pt_1->dir_x = -1;
 	}
-	else if ((*angle) >= M_PI && (*angle) < 3 * M_PI_2)
+	else if ((*angle) > M_PI && (*angle) <= 3 * M_PI_2)
 	{
 		(*angle) = (*angle) - M_PI;
 		pt_1->dir_x = -1;
 		pt_1->dir_y = 1;
 	}
-	else if ((*angle) >= 3 * M_PI_2 && (*angle) < 2 * M_PI)
+	else if ((*angle) > 3 * M_PI_2 && (*angle) <= 2 * M_PI)
 	{
 		(*angle) = 2 * M_PI - (*angle);
 		pt_1->dir_y = 1;
 	}
 	pt_2->dir_x = pt_1->dir_x;
-	pt_2->dir_y = pt_1->dir_y;
+        pt_2->dir_y = pt_1->dir_y;
+
 }
 
 void		ft_init_pt(t_vector *pt, double alpha, t_data *data, int mode)

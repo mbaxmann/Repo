@@ -6,7 +6,7 @@
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/11 09:10:34 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/08/29 17:16:47 by user42           ###   ########.fr       */
+/*   Updated: 2020/08/31 22:28:16 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ void		ft_init_img(t_data *data)
 		data->img[i]->bpp = 32;
 		data->img[i]->line = data->res->x * 4;
 		data->img[i]->endian = 0;
-		data->img[i]->img = mlx_new_image(data->mlx->ptr, data->res->x, data->res->y);
+		data->img[i]->img = mlx_new_image(data->mlx->ptr,
+		data->res->x, data->res->y);
 		data->img[i]->pt = mlx_get_data_addr(data->img[i]->img,
 		&data->img[i]->bpp, &data->img[i]->line, &data->img[i]->endian);
 		i++;

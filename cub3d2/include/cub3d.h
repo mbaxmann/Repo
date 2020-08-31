@@ -6,18 +6,16 @@
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/14 09:27:20 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/08/30 20:15:08 by user42           ###   ########.fr       */
+/*   Updated: 2020/08/31 22:25:44 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
-#define A write(1, "A", 1);
-#define B write(1, "B", 1);
-#define CUBE 34
-#define SPEED 6
-#define R_SPEED 100
+#define CUBE 64
+#define SPEED 16
+#define R_SPEED 130
 
 typedef struct	s_dim
 {
@@ -58,6 +56,7 @@ typedef	struct	s_mlx
 
 void	ft_valid_arg(int ac, char **av);
 void	ft_open_window(t_mlx **mlx, t_data *data);
-void	ft_error(t_data *data, char *err);
+void	ft_error(t_data *data, char *err, int fd);
+void	ft_error_2(char *err);
 
 #endif

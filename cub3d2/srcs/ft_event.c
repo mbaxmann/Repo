@@ -6,7 +6,7 @@
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/01 09:55:23 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/08/29 18:19:09 by user42           ###   ########.fr       */
+/*   Updated: 2020/08/31 22:31:53 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int		ft_button_event(int keycode, void *param)
 {
 	if (keycode == 65307)
 	{
-		ft_free_data((t_data *)param);
+		ft_free_data((t_data *)param, 0);
 		exit(0);
 	}
 	else if (keycode == 65363 || keycode == 65361)
@@ -32,26 +32,26 @@ int		ft_button_event(int keycode, void *param)
 	}
 	else if (keycode == 122 || keycode == 115
 	|| keycode == 113 || keycode == 100)
-        {
-                ((t_data *)param)->mov[0] = 1;
-                ((t_data *)param)->mov[1] = keycode;
-        }
+	{
+		((t_data *)param)->mov[0] = 1;
+		((t_data *)param)->mov[1] = keycode;
+	}
 	return (1);
 }
 
-int             ft_button_event_2(int keycode, void *param)
+int		ft_button_event_2(int keycode, void *param)
 {
-        if (keycode == 65363 || keycode == 65361)
-                ((t_data *)param)->mov[2] = 0;
-        else if (keycode == 122 || keycode == 115
-        || keycode == 113 || keycode == 100)
-                ((t_data *)param)->mov[0] = 0;
-        return (1);
+	if (keycode == 65363 || keycode == 65361)
+		((t_data *)param)->mov[2] = 0;
+	else if (keycode == 122 || keycode == 115
+	|| keycode == 113 || keycode == 100)
+		((t_data *)param)->mov[0] = 0;
+	return (1);
 }
 
 int		ft_close(void *param)
 {
-	ft_free_data((t_data *)param);
+	ft_free_data((t_data *)param, 0);
 	exit(0);
 	return (1);
 }
