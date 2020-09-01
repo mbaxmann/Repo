@@ -6,12 +6,12 @@
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/14 09:27:20 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/09/01 12:34:20 by user42           ###   ########.fr       */
+/*   Updated: 2020/09/01 16:15:27 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUB3D_H
-# define CUB3D_H
+#ifndef FT_CUB3D_H
+# define FT_CUB3D_H
 
 # define UP 122
 # define DOWN 115
@@ -35,8 +35,6 @@
 # include <fcntl.h>
 # include <stdio.h>
 # include <math.h>
-# include <time.h>
-# include <stdio.h>
 
 void			ft_valid_arg(int ac, char **av);
 void			ft_open_window(t_mlx **mlx, t_data *data);

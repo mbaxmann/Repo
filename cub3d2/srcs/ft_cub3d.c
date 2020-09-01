@@ -6,7 +6,7 @@
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/13 09:54:12 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/09/01 12:02:45 by user42           ###   ########.fr       */
+/*   Updated: 2020/09/01 17:48:11 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ void		ft_error(t_data *data, char *err, int fd)
 		ft_putendl_fd("Error\nInvalid argument", 1);
 	else if (!ft_strncmp(err, "mlx", 4))
 		ft_putendl_fd("Error\nmlx init failed", 1);
+	else if (!ft_strncmp(err, "cor_file", 4))
+		ft_putendl_fd("Error\nFile information are incorrect", 1);
 	ft_error_2(err);
 	ft_free_data(data, fd);
 	exit(1);

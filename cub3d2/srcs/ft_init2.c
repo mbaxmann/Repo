@@ -6,7 +6,7 @@
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/25 10:34:49 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/09/01 12:03:54 by user42           ###   ########.fr       */
+/*   Updated: 2020/09/01 18:04:35 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int			ft_check_data(t_data *data)
 		i++;
 	if (data->texture[4])
 		i++;
-	if (data->ceil && data->floor)
+	if (data->ceil != -1 && data->floor != -1)
 		i++;
 	if (data->res->x && data->res->y)
 		i++;

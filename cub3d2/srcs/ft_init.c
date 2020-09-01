@@ -6,7 +6,7 @@
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/14 09:17:33 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/09/01 12:04:13 by user42           ###   ########.fr       */
+/*   Updated: 2020/09/01 18:04:45 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,8 @@ void		ft_init_data(t_data *data)
 	data->texture[3] = NULL;
 	data->texture[4] = NULL;
 	data->stock = (t_player *)malloc(sizeof(t_player));
-	data->floor = 0;
-	data->ceil = 0;
+	data->floor = -1;
+	data->ceil = -1;
 	data->res = (t_dim *)malloc(sizeof(t_dim));
 	data->res->x = 0;
 	data->res->y = 0;

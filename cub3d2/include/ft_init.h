@@ -6,12 +6,12 @@
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/14 09:17:58 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/09/01 15:00:14 by user42           ###   ########.fr       */
+/*   Updated: 2020/09/01 18:12:38 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef INIT_H
-# define INIT_H
+#ifndef FT_INIT_H
+# define FT_INIT_H
 
 # define CUBE 64
 # define SPEED 16
@@ -84,7 +84,7 @@ void			ft_init_data(t_data *data);
 void			ft_get_map(t_data *data, int fd);
 void			ft_get_map2(t_data *data, int fd, t_list *first);
 void			ft_sort(t_data *data, int fd, t_mlx *mlx);
-void			ft_sort_2(t_data *data, int fd, t_mlx *mlx);
+int			ft_sort_2(t_data *data, int fd, t_mlx *mlx);
 void			ft_sort_3(t_data *data, int fd, t_mlx *mlx);
 void			ft_set_res(t_dim *dim, char *res);
 void			ft_init_player(t_data *data, t_player **player);
