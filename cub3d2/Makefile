@@ -6,49 +6,49 @@
 #    By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/14 09:36:11 by mbaxmann          #+#    #+#              #
-#    Updated: 2020/09/01 12:32:19 by user42           ###   ########.fr        #
+#    Updated: 2020/09/01 14:54:05 by user42           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-OBJS = $(SRCS:.c=.o)
+OBJS    =       ${SRCS:.c=.o}
 
-SRCS =	srcs/ft_cub3d.c srcs/ft_init.c srcs/ft_check_map.c	srcs/ft_check_map2.c srcs/ft_init2.c srcs/ft_list.c srcs/ft_event.c	srcs/ft_raycasting.c srcs/ft_display.c srcs/ft_raycasting_2.c srcs/ft_raycasting_3.c srcs/ft_event_2.c srcs/ft_display_2.c srcs/ft_load_sprite.c srcs/ft_load_sprite_2.c srcs/ft_free_data.c srcs/ft_loop.c srcs/ft_save_img.c srcs/ft_free_data_2.c srcs/ft_init_3.c srcs/ft_load_sprite_3.c
+SRCS    =       srcs/ft_cub3d.c srcs/ft_init.c srcs/ft_check_map.c      srcs/ft_check_map2.c srcs/ft_init2.c srcs/ft_list.c srcs/ft_event.c     srcs/ft_raycasting.c srcs/ft_display.c srcs/ft_raycasting_2.c srcs/ft_raycasting_3.c srcs/ft_event_2.c srcs/ft_display_2.c srcs/ft_load_sprite.c srcs/ft_load_sprite_2.c srcs/ft_free_data.c srcs/ft_loop.c srcs/ft_save_img.c srcs/ft_free_data_2.c srcs/ft_init_3.c srcs/ft_load_sprite_3.c
 
-HEADERS = include/ft_cub3d.h include/ft_init.h
+CC      =       clang
 
-CC = clang
+FLAGS   =       -Wall -Wextra -Werror
 
-FLAGS = -Wall -Wextra -Werror 
+NAME    =       cub3d
 
-LINK = -lm -lXext -lX11 -lft -lmlx
+LINK	=	-lm -lXext -lX11 -lft -lmlx
 
-NAME = cub3d
+LIB     =       libft/libft.a mlx/libmlx.a
 
-LIB = libft/libft.a mlx/libmlx.a
+RM      =       rm -rf
 
-PATH = -L ./libft/ -L ./mlx
+LIB_PATH	=	-L ./libft/ -L ./mlx
 
-RM = rm -rf
-
-all: 	$(NAME)
+all:    ${NAME}
 
 .c.o:
-	$(CC) $(FLAGS) -c $< -o $(<:.c=.o)
+	${CC} ${FLAGS} -c $< -o ${<:.c=.o}
 
-$(NAME): $(OBJS)
+${NAME}:        ${OBJS}
 		make -C libft
 		make -C mlx
-		$(CC) $(PATH) -o $(NAME) $(OBJS) $(LINK)
+		${CC} ${LIB_PATH} -o ${NAME} ${OBJS} ${LINK}
 
 clean:
 	make clean -C libft
-	$(RM) $(OBJS)
+	make clean -C mlx
+	${RM} ${OBJS}
 
-fclean:		clean
+fclean:         clean
 	make fclean -C libft
 	make clean -C mlx
-	$(RM) $(NAME)
+	${RM} ${NAME}
 
-re:		fclean all
+re:	fclean all
 
-.PHONY:	all clean fclean re
+.PHONY: all clean fclean re
+
