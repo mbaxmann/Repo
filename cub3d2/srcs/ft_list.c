@@ -6,11 +6,11 @@
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 16:21:16 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/08/28 17:25:40 by user42           ###   ########.fr       */
+/*   Updated: 2020/09/01 12:04:27 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub3d.h"
+#include "../include/ft_cub3d.h"
 
 void				ft_free_lst(t_list *first)
 {

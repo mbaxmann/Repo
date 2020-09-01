@@ -6,13 +6,13 @@
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/01 10:18:48 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/08/31 22:14:06 by user42           ###   ########.fr       */
+/*   Updated: 2020/09/01 12:05:42 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub3d.h"
+#include "../include/ft_cub3d.h"
 
-int			ft_calculate_slice(t_data *data, t_vector *pt_1, t_vector *pt_2, double *stock)
+int		ft_calc_sl(t_data *data, t_vector *pt_1, t_vector *pt_2, double *stock)
 {
 	double	size_1;
 	double	size_2;
@@ -40,11 +40,11 @@ int			ft_calculate_slice(t_data *data, t_vector *pt_1, t_vector *pt_2, double *s
 	return ((int)floor(res));
 }
 
-int			ft_calculate_ray(t_data *data, double alpha, double *stock)
+int		ft_calculate_ray(t_data *data, double alpha, double *stock)
 {
 	t_vector	*pt_1;
 	t_vector	*pt_2;
-	int		size;
+	int			size;
 
 	ft_init_vector(&pt_1, &pt_2, alpha);
 	ft_set_angle(&alpha, pt_1, pt_2);
@@ -60,13 +60,13 @@ int			ft_calculate_ray(t_data *data, double alpha, double *stock)
 		pt_2->x += (CUBE / tan(alpha)) * pt_2->dir_x;
 		pt_2->y += CUBE * pt_2->dir_y;
 	}
-	size = ft_calculate_slice(data, pt_1, pt_2, stock);
+	size = ft_calc_sl(data, pt_1, pt_2, stock);
 	free(pt_1);
 	free(pt_2);
 	return (size);
 }
 
-void		ft_modulo_pi(double *angle)
+void	ft_modulo_pi(double *angle)
 {
 	while ((*angle) >= 2 * M_PI)
 		(*angle) -= 2 * M_PI;
@@ -74,15 +74,16 @@ void		ft_modulo_pi(double *angle)
 		(*angle) += 2 * M_PI;
 }
 
-void			ft_swp_img(t_data *data)
+void	ft_swp_img(t_data *data)
 {
 	t_img *tmp;
+
 	tmp = data->img[0];
 	data->img[0] = data->img[1];
 	data->img[1] = tmp;
 }
 
-int			ft_raycasting(t_data *data)
+int		ft_raycasting(t_data *data)
 {
 	int		i;
 	int		size;
@@ -91,7 +92,7 @@ int			ft_raycasting(t_data *data)
 
 	i = 0;
 	angle = data->player->angle + (M_PI / 6);
-	stock = (double *)malloc(sizeof(double) * data->res->x);
+	stock = (double *)malloc(sizeof(double) * (data->res->x));
 	while (i < data->res->x)
 	{
 		ft_modulo_pi(&angle);

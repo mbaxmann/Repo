@@ -6,11 +6,11 @@
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/15 09:53:56 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/08/31 15:53:41 by user42           ###   ########.fr       */
+/*   Updated: 2020/09/01 12:05:32 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub3d.h"
+#include "../include/ft_cub3d.h"
 
 void		ft_spot_player(t_data *data, int i, int j)
 {
@@ -65,20 +65,20 @@ void		ft_check_sprite(t_data *data, int i, int j)
 
 	current = data->sprite;
 	if (data->map[i][j] == '2')
-        {
+	{
 		if (!current)
 		{
 			sprite = (t_vector *)malloc(sizeof(t_vector));
-                        sprite->x = floor(j) + 0.5;
-                        sprite->y = floor(i) + 0.5;
-                        data->sprite = ft_newlst(sprite);
+			sprite->x = floor(j) + 0.5;
+			sprite->y = floor(i) + 0.5;
+			data->sprite = ft_newlst(sprite);
 		}
 		else if (!ft_spritestocked(current, i, j))
 		{
-                	sprite = (t_vector *)malloc(sizeof(t_vector));
-                	sprite->x = floor(j) + 0.5;
-                	sprite->y = floor(i) + 0.5;
-                	ft_add_list(data->sprite, ft_newlst(sprite));
+			sprite = (t_vector *)malloc(sizeof(t_vector));
+			sprite->x = floor(j) + 0.5;
+			sprite->y = floor(i) + 0.5;
+			ft_add_list(data->sprite, ft_newlst(sprite));
 		}
 	}
 }

@@ -6,11 +6,11 @@
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/18 09:23:59 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/08/31 22:30:08 by user42           ###   ########.fr       */
+/*   Updated: 2020/09/01 12:03:20 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub3d.h"
+#include "../include/ft_cub3d.h"
 
 void	ft_sethitbox(int hitbox[8])
 {
@@ -43,7 +43,7 @@ int		ft_hitbox(t_player *player, t_data *data)
 		if (pos[0] < 0 || pos[0] >= k)
 			return (1);
 		if (pos[1] < 0 || pos[1] >= (int)ft_strlen(data->map[pos[0]]) ||
-		data->map[pos[0]][pos[1]] == '1' || data->map[pos[0]][pos[1]] == '2')
+		data->map[pos[0]][pos[1]] == '1')
 			return (1);
 		n += 2;
 	}
@@ -52,36 +52,36 @@ int		ft_hitbox(t_player *player, t_data *data)
 
 void	ft_move_part_1(t_data *data, int keycode)
 {
-	if (keycode == 122)
+	if (keycode == UP)
 	{
 		data->player->y -= SPEED * sin(data->player->angle);
 		data->player->x += SPEED * cos(data->player->angle);
 		if (ft_hitbox(data->player, data))
-			ft_move_player(data, 115);
+			ft_move_player(data, DOWN);
 	}
-	else if (keycode == 115)
+	else if (keycode == DOWN)
 	{
 		data->player->y += SPEED * sin(data->player->angle);
 		data->player->x -= SPEED * cos(data->player->angle);
 		if (ft_hitbox(data->player, data))
-			ft_move_player(data, 122);
+			ft_move_player(data, UP);
 	}
 }
 
 void	ft_move_part_2(t_data *data, int keycode)
 {
-	if (keycode == 113)
+	if (keycode == LEFT)
 	{
 		data->player->y -= sin(data->player->angle + M_PI_2) * SPEED;
 		data->player->x += cos(data->player->angle + M_PI_2) * SPEED;
 		if (ft_hitbox(data->player, data))
-			ft_move_player(data, 100);
+			ft_move_player(data, RIGHT);
 	}
-	else if (keycode == 100)
+	else if (keycode == RIGHT)
 	{
 		data->player->y -= sin(data->player->angle - M_PI_2) * SPEED;
 		data->player->x += cos(data->player->angle - M_PI_2) * SPEED;
 		if (ft_hitbox(data->player, data))
-			ft_move_player(data, 113);
+			ft_move_player(data, LEFT);
 	}
 }

@@ -6,11 +6,11 @@
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/25 10:36:53 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/08/15 09:21:48 by mbaxmann         ###   ########.fr       */
+/*   Updated: 2020/09/01 12:02:25 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub3d.h"
+#include "../include/ft_cub3d.h"
 
 int		ft_check_down(char **map, int i, int j)
 {

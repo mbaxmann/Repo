@@ -6,11 +6,11 @@
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/11 09:10:34 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/08/29 17:17:49 by user42           ###   ########.fr       */
+/*   Updated: 2020/09/01 12:02:54 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub3d.h"
+#include "../include/ft_cub3d.h"
 
 void	ft_init_tab(int tab[5])
 {

@@ -6,16 +6,16 @@
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/13 09:54:12 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/08/31 14:40:45 by user42           ###   ########.fr       */
+/*   Updated: 2020/09/01 12:06:46 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub3d.h"
+#include "../include/ft_cub3d.h"
 
 void		ft_wfile_header(t_data *data, int fd)
 {
-	unsigned int val;
-	short val2;
+	unsigned int	val;
+	short			val2;
 
 	write(fd, "BM", 2);
 	val = data->res->x * data->res->y * 4 + 54;
@@ -29,8 +29,8 @@ void		ft_wfile_header(t_data *data, int fd)
 
 void		ft_wimg_header(t_data *data, int fd)
 {
-	unsigned int val;
-	short val2;
+	unsigned int	val;
+	short			val2;
 
 	val = 40;
 	write(fd, &val, 4);
@@ -56,10 +56,10 @@ void		ft_wimg_header(t_data *data, int fd)
 
 void		ft_write_bmp(t_data *data, int fd)
 {
-	int i;
-	int offset;
-	int tab[2];
-	unsigned int rgb;
+	int				i;
+	int				offset;
+	int				tab[2];
+	unsigned int	rgb;
 
 	i = 0;
 	ft_wfile_header(data, fd);
@@ -69,7 +69,7 @@ void		ft_write_bmp(t_data *data, int fd)
 		tab[0] = i / data->res->x;
 		tab[1] = i % data->res->x;
 		offset = 4 * ((data->res->x * (data->res->y - tab[0] - 1)) + tab[1]);
-		rgb = *(unsigned int *)(data->img[1]->pt + offset);
+		rgb = *(unsigned int *)(data->img[0]->pt + offset);
 		write(fd, &rgb, 4);
 		i++;
 	}

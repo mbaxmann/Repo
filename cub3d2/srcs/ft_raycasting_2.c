@@ -6,11 +6,11 @@
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/15 09:12:46 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/08/31 22:13:41 by user42           ###   ########.fr       */
+/*   Updated: 2020/09/01 12:05:22 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub3d.h"
+#include "../include/ft_cub3d.h"
 
 void		ft_init_player(t_data *data, t_player **player)
 {
@@ -59,8 +59,7 @@ void		ft_set_angle(double *angle, t_vector *pt_1, t_vector *pt_2)
 		pt_1->dir_y = 1;
 	}
 	pt_2->dir_x = pt_1->dir_x;
-        pt_2->dir_y = pt_1->dir_y;
-
+	pt_2->dir_y = pt_1->dir_y;
 }
 
 void		ft_init_pt(t_vector *pt, double alpha, t_data *data, int mode)

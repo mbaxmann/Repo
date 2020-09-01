@@ -6,11 +6,11 @@
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/14 09:17:33 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/08/31 23:06:12 by user42           ###   ########.fr       */
+/*   Updated: 2020/09/01 12:04:13 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub3d.h"
+#include "../include/ft_cub3d.h"
 
 t_textur	*ft_load_t(t_data *data, char *path, void *mlx_ptr, int fd)
 {
@@ -78,9 +78,8 @@ void		ft_init_data(t_data *data)
 	data->img[1] = NULL;
 	data->mlx = NULL;
 	data->mov[0] = 0;
-	data->mov[1] = 0;
 	data->mov[2] = 0;
-	data->mov[3] = 0;
+	data->mov[4] = 0;
 	data->line = NULL;
 }
 

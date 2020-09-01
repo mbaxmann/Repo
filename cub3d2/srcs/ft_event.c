@@ -6,11 +6,11 @@
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/01 09:55:23 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/08/31 22:31:53 by user42           ###   ########.fr       */
+/*   Updated: 2020/09/01 12:03:27 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub3d.h"
+#include "../include/ft_cub3d.h"
 
 void	ft_move_player(t_data *data, int keycode)
 {
@@ -20,32 +20,37 @@ void	ft_move_player(t_data *data, int keycode)
 
 int		ft_button_event(int keycode, void *param)
 {
-	if (keycode == 65307)
+	if (keycode == ESC)
 	{
 		ft_free_data((t_data *)param, 0);
 		exit(0);
 	}
-	else if (keycode == 65363 || keycode == 65361)
+	else if (keycode == T_LEFT || keycode == T_RIGHT)
 	{
 		((t_data *)param)->mov[2] = 1;
 		((t_data *)param)->mov[3] = keycode;
 	}
-	else if (keycode == 122 || keycode == 115
-	|| keycode == 113 || keycode == 100)
+	else if (keycode == UP || keycode == DOWN)
 	{
 		((t_data *)param)->mov[0] = 1;
 		((t_data *)param)->mov[1] = keycode;
+	}
+	else if (keycode == LEFT || keycode == RIGHT)
+	{
+		((t_data *)param)->mov[4] = 1;
+		((t_data *)param)->mov[5] = keycode;
 	}
 	return (1);
 }
 
 int		ft_button_event_2(int keycode, void *param)
 {
-	if (keycode == 65363 || keycode == 65361)
+	if (keycode == T_LEFT || keycode == T_RIGHT)
 		((t_data *)param)->mov[2] = 0;
-	else if (keycode == 122 || keycode == 115
-	|| keycode == 113 || keycode == 100)
+	else if (keycode == UP || keycode == DOWN)
 		((t_data *)param)->mov[0] = 0;
+	else if (keycode == LEFT || keycode == RIGHT)
+		((t_data *)param)->mov[4] = 0;
 	return (1);
 }
 
