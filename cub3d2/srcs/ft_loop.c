@@ -6,13 +6,27 @@
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/13 09:54:12 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/09/01 12:05:12 by user42           ###   ########.fr       */
+/*   Updated: 2020/09/02 11:02:32 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/ft_cub3d.h"
 
-int	ft_loop(t_data *data)
+void	ft_check_line(t_data *data, int fd)
+{
+	int i;
+
+	i = 0;
+	while (data->line[i])
+	{
+		if (data->line[i] != '0' && data->line[i] != '1'
+		&& data->line[i] != '2' && data->line[i] != ' ')
+			ft_error(data, "cor_map", fd);
+		i++;
+	}
+}
+
+int		ft_loop(t_data *data)
 {
 	if (data->mov[0])
 		ft_move_player(data, data->mov[1]);

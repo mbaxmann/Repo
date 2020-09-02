@@ -6,7 +6,7 @@
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/14 09:17:58 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/09/01 18:12:38 by user42           ###   ########.fr       */
+/*   Updated: 2020/09/02 10:52:48 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,10 +84,12 @@ void			ft_init_data(t_data *data);
 void			ft_get_map(t_data *data, int fd);
 void			ft_get_map2(t_data *data, int fd, t_list *first);
 void			ft_sort(t_data *data, int fd, t_mlx *mlx);
-int			ft_sort_2(t_data *data, int fd, t_mlx *mlx);
-void			ft_sort_3(t_data *data, int fd, t_mlx *mlx);
-void			ft_set_res(t_dim *dim, char *res);
+int				ft_sort_2(t_data *data, int fd, t_mlx *mlx);
+int				ft_sort_3(t_data *data, int fd, t_mlx *mlx);
+void			ft_sort_4(t_data *dat, int fd);
+void			ft_set_res(t_data *data, char *res);
 void			ft_init_player(t_data *data, t_player **player);
+void			ft_check_line(t_data *data, int fd);
 int				ft_get_rgb(t_data *data, char *nb, int fd);
 int				ft_check_data(t_data *data);
 int				ft_check_map(char **map);

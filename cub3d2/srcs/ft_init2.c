@@ -6,7 +6,7 @@
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/25 10:34:49 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/09/01 18:04:35 by user42           ###   ########.fr       */
+/*   Updated: 2020/09/02 09:26:35 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,19 +61,24 @@ int			ft_get_rgb(t_data *data, char *nb, int fd)
 	return ((tab[0] << 16) | (tab[1] << 8) | tab[2]);
 }
 
-void		ft_set_res(t_dim *dim, char *res)
+void		ft_set_res(t_data *data, char *res)
 {
 	int i;
+	int max_x;
+	int max_y;
 
 	i = 0;
-	dim->x = ft_atoi(res);
-	dim->x = (dim->x > 1920) ? 1920 : dim->x;
-	dim->x = (dim->x < 510) ? 510 : dim->x;
+	max_x = 0;
+	max_y = 0;
+	mlx_get_screen_size(data->mlx->ptr, &max_x, &max_y);
+	data->res->x = ft_atoi(res);
+	data->res->x = (data->res->x > max_x) ? max_x : data->res->x;
+	data->res->x = (data->res->x < 510) ? 510 : data->res->x;
 	while (res[i] && res[i] != ' ')
 		i++;
-	dim->y = ft_atoi(res + i);
-	dim->y = (dim->y > 1080) ? 1080 : dim->y;
-	dim->y = (dim->y < 254) ? 254 : dim->y;
+	data->res->y = ft_atoi(res + i);
+	data->res->y = (data->res->y > max_y) ? max_y : data->res->y;
+	data->res->y = (data->res->y < 254) ? 254 : data->res->y;
 	free(res);
 }
 

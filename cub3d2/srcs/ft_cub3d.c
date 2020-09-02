@@ -6,7 +6,7 @@
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/13 09:54:12 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/09/01 17:48:11 by user42           ###   ########.fr       */
+/*   Updated: 2020/09/02 09:31:08 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,7 @@ void		ft_valid_arg(int ac, char **av)
 	{
 		if (ft_strncmp(av[1] + (ft_strlen(av[1]) - 4), ".cub", 4))
 			ft_error(NULL, "cub", 0);
-		if (ac == 3 && ft_strncmp(av[2], "--save", 7)
-		&& ft_strncmp(av[2], "-save", 6))
+		if (ac == 3 && ft_strncmp(av[2], "--save", 7))
 			ft_error(NULL, "save", 0);
 	}
 	else

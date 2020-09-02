@@ -6,7 +6,7 @@
 #    By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/14 09:36:11 by mbaxmann          #+#    #+#              #
-#    Updated: 2020/09/01 16:10:14 by user42           ###   ########.fr        #
+#    Updated: 2020/09/02 10:22:03 by user42           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ CC      =       clang
 
 FLAGS   =       -Wall -Wextra -Werror
 
-NAME    =       Cub3D
+NAME    =       cub3D
 
 LINK	=	-lm -lXext -lX11 -lft -lmlx -lbsd
 

@@ -6,7 +6,7 @@
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/14 09:17:33 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/09/01 18:04:45 by user42           ###   ########.fr       */
+/*   Updated: 2020/09/02 11:00:21 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,19 @@ t_textur	*ft_load_t(t_data *data, char *path, void *mlx_ptr, int fd)
 void		ft_get_map(t_data *data, int fd)
 {
 	t_list	*first;
+	char	*tmp;
 
-	while (!ft_strncmp(data->line, "", 2))
+	tmp = ft_strtrim(data->line, " ");
+	while (!ft_strncmp(tmp, "", 2))
 	{
+		free(tmp);
 		free(data->line);
 		get_next_line(fd, &(data->line));
+		tmp = ft_strtrim(data->line, " ");
 	}
+	ft_check_line(data, fd);
 	first = ft_newlst(ft_strdup(data->line));
+	free(tmp);
 	free(data->line);
 	while (get_next_line(fd, &(data->line)) && ft_strncmp(data->line, "", 1))
 	{
