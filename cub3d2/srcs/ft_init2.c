@@ -6,7 +6,7 @@
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/25 10:34:49 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/09/05 13:59:59 by user42           ###   ########.fr       */
+/*   Updated: 2020/09/05 16:23:19 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int			ft_get_rgb(t_data *data, char *nb, int fd)
 	return ((tab[0] << 16) | (tab[1] << 8) | tab[2]);
 }
 
-void		ft_set_res(t_data *data, char *res)
+void		ft_set_res(t_data *data, char *res, int fd)
 {
 	int i;
 	int max_x;
@@ -71,14 +71,19 @@ void		ft_set_res(t_data *data, char *res)
 	max_x = 0;
 	max_y = 0;
 	mlx_get_screen_size(data->mlx->ptr, &max_x, &max_y);
+	if (!(res[i] >= '0' && res[i] <= '9') && res[i] != ' ')
+	{
+		free(res);
+		ft_error(data, "cor_file", fd);
+	}
 	data->res->x = ft_atoi(res);
 	data->res->x = (data->res->x > max_x) ? max_x : data->res->x;
 	data->res->x = (data->res->x < 510) ? 510 : data->res->x;
-	while (res[i] && res[i] != ' ')
+	while (res[i] && (res[i] >= '0' && res[i] <= '9'))
 		i++;
-	data->res->y = ft_atoi(res + i);
-	data->res->y = (data->res->y > max_y) ? max_y : data->res->y;
-	data->res->y = (data->res->y < 254) ? 254 : data->res->y;
+	while (res[i] && res[i] == ' ')
+		i++;
+	ft_set_res_2(data, res, fd, i);
 	free(res);
 }
 

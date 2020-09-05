@@ -6,7 +6,7 @@
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/14 09:17:58 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/09/05 12:16:24 by user42           ###   ########.fr       */
+/*   Updated: 2020/09/05 16:20:19 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,8 @@ void			ft_sort(t_data *data, int fd, t_mlx *mlx);
 int				ft_sort_2(t_data *data, int fd, t_mlx *mlx);
 int				ft_sort_3(t_data *data, int fd, t_mlx *mlx);
 void			ft_sort_4(t_data *dat, int fd);
-void			ft_set_res(t_data *data, char *res);
+void			ft_set_res(t_data *data, char *res, int fd);
+void			ft_set_res_2(t_data *data, char *res, int fd, int i);
 void			ft_init_player(t_data *data, t_player **player);
 void			ft_check_line(t_data *data, int fd);
 int				ft_get_rgb(t_data *data, char *nb, int fd);

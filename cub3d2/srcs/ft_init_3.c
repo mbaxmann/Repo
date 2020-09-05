@@ -6,7 +6,7 @@
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/14 09:17:33 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/09/02 10:00:32 by user42           ###   ########.fr       */
+/*   Updated: 2020/09/05 15:55:22 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	ft_sort_4(t_data *data, int fd)
 	{
 		if (data->res->x)
 			ft_error(data, "cor_file", fd);
-		ft_set_res(data, ft_strtrim(data->line, " R"));
+		ft_set_res(data, ft_strtrim(data->line, " R"), fd);
 	}
 	else if (ft_strncmp(data->line, "", 1))
 		ft_error(data, "cor_file", fd);
