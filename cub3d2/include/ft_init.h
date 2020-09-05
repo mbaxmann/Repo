@@ -6,7 +6,7 @@
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/14 09:17:58 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/09/02 10:52:48 by user42           ###   ########.fr       */
+/*   Updated: 2020/09/05 12:16:24 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,8 +81,10 @@ typedef struct	s_data
 t_data			*ft_init(char *path, t_mlx *mlx);
 t_textur		*ft_load_t(t_data *data, char *path, void *mlx_ptr, int fd);
 void			ft_init_data(t_data *data);
+void			ft_id_2(t_data *data);
 void			ft_get_map(t_data *data, int fd);
 void			ft_get_map2(t_data *data, int fd, t_list *first);
+void			ft_get_map3(t_data *data, int fd, t_list *first);
 void			ft_sort(t_data *data, int fd, t_mlx *mlx);
 int				ft_sort_2(t_data *data, int fd, t_mlx *mlx);
 int				ft_sort_3(t_data *data, int fd, t_mlx *mlx);

@@ -6,13 +6,13 @@
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/15 09:12:46 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/09/01 12:05:22 by user42           ###   ########.fr       */
+/*   Updated: 2020/09/05 12:10:59 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/ft_cub3d.h"
 
-void		ft_init_player(t_data *data, t_player **player)
+void	ft_init_player(t_data *data, t_player **player)
 {
 	int	i;
 	int	j;
@@ -20,6 +20,8 @@ void		ft_init_player(t_data *data, t_player **player)
 	i = 0;
 	j = 0;
 	*player = (t_player *)malloc(sizeof(t_player));
+	if (!(*player))
+		ft_error(data, "malloc", 0);
 	while (data->map[++i][0])
 	{
 		while (data->map[i][++j])
@@ -38,7 +40,7 @@ void		ft_init_player(t_data *data, t_player **player)
 	}
 }
 
-void		ft_set_angle(double *angle, t_vector *pt_1, t_vector *pt_2)
+void	ft_set_angle(double *angle, t_vector *pt_1, t_vector *pt_2)
 {
 	pt_1->dir_x = 1;
 	pt_1->dir_y = -1;
@@ -62,7 +64,7 @@ void		ft_set_angle(double *angle, t_vector *pt_1, t_vector *pt_2)
 	pt_2->dir_y = pt_1->dir_y;
 }
 
-void		ft_init_pt(t_vector *pt, double alpha, t_data *data, int mode)
+void	ft_init_pt(t_vector *pt, double alpha, t_data *data, int mode)
 {
 	if (!mode)
 		ft_init_pt_mode_0(pt, alpha, data);
@@ -70,7 +72,7 @@ void		ft_init_pt(t_vector *pt, double alpha, t_data *data, int mode)
 		ft_init_pt_mode_1(pt, alpha, data);
 }
 
-int			ft_iswall(t_vector *pt, t_data *data)
+int		ft_iswall(t_vector *pt, t_data *data)
 {
 	int i;
 	int j;
@@ -96,10 +98,12 @@ int			ft_iswall(t_vector *pt, t_data *data)
 	return (0);
 }
 
-void		ft_init_vector(t_vector **pt_1, t_vector **pt_2, double alpha)
+void	ft_in_vec(t_vector **pt_1, t_vector **pt_2, double alpha, t_data *data)
 {
-	*pt_1 = (t_vector *)malloc(sizeof(t_vector));
-	*pt_2 = (t_vector *)malloc(sizeof(t_vector));
+	if (!(*pt_1 = (t_vector *)malloc(sizeof(t_vector))))
+		ft_error(data, "malloc", 0);
+	if (!(*pt_2 = (t_vector *)malloc(sizeof(t_vector))))
+		ft_error(data, "malloc", 0);
 	(*pt_1)->angle = alpha;
 	(*pt_2)->angle = alpha;
 }

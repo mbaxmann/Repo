@@ -6,7 +6,7 @@
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/11 09:10:34 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/09/01 12:03:09 by user42           ###   ########.fr       */
+/*   Updated: 2020/09/05 12:05:16 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ void		ft_init_img(t_data *data)
 	i = 0;
 	while (i < 2)
 	{
-		data->img[i] = (t_img *)malloc(sizeof(t_img));
+		if (!(data->img[i] = (t_img *)malloc(sizeof(t_img))))
+			ft_error(data, "malloc", 0);
 		data->img[i]->bpp = 32;
 		data->img[i]->line = data->res->x * 4;
 		data->img[i]->endian = 0;

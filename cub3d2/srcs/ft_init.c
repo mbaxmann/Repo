@@ -6,7 +6,7 @@
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/14 09:17:33 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/09/02 11:00:21 by user42           ###   ########.fr       */
+/*   Updated: 2020/09/05 11:55:49 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ t_textur	*ft_load_t(t_data *data, char *path, void *mlx_ptr, int fd)
 	bpp = 32;
 	endian = 1;
 	textur = (t_textur *)malloc(sizeof(t_textur));
+	if (!textur)
+		ft_error(data, "malloc", fd);
 	textur->img = mlx_xpm_file_to_image(mlx_ptr, path,
 	&(textur->width), &(textur->height));
 	if (!textur->img)
@@ -62,33 +64,6 @@ void		ft_get_map(t_data *data, int fd)
 	ft_get_map2(data, fd, first);
 }
 
-void		ft_init_data(t_data *data)
-{
-	data->map = NULL;
-	data->sprite = NULL;
-	data->texture = (t_textur **)malloc(sizeof(t_textur *) * 5);
-	data->texture[0] = NULL;
-	data->texture[1] = NULL;
-	data->texture[2] = NULL;
-	data->texture[3] = NULL;
-	data->texture[4] = NULL;
-	data->stock = (t_player *)malloc(sizeof(t_player));
-	data->floor = -1;
-	data->ceil = -1;
-	data->res = (t_dim *)malloc(sizeof(t_dim));
-	data->res->x = 0;
-	data->res->y = 0;
-	data->player = NULL;
-	data->img = (t_img **)malloc(sizeof(t_img *) * 2);
-	data->img[0] = NULL;
-	data->img[1] = NULL;
-	data->mlx = NULL;
-	data->mov[0] = 0;
-	data->mov[2] = 0;
-	data->mov[4] = 0;
-	data->line = NULL;
-}
-
 t_data		*ft_init(char *path, t_mlx *mlx)
 {
 	t_data	*map;
@@ -97,6 +72,8 @@ t_data		*ft_init(char *path, t_mlx *mlx)
 	map = NULL;
 	fd = 0;
 	map = (t_data *)malloc(sizeof(t_data));
+	if (!map)
+		ft_error(map, "malloc", 0);
 	ft_init_data(map);
 	map->mlx = mlx;
 	if ((fd = open(path, O_RDONLY)) <= 0)

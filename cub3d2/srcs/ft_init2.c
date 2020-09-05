@@ -6,7 +6,7 @@
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/25 10:34:49 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/09/02 09:26:35 by user42           ###   ########.fr       */
+/*   Updated: 2020/09/05 12:15:28 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,18 +90,12 @@ void		ft_get_map2(t_data *data, int fd, t_list *first)
 	i = 0;
 	current = first;
 	free(data->line);
-	while (get_next_line(fd, &(data->line)))
-	{
-		if (ft_strncmp(data->line, "", 1))
-		{
-			ft_free_lst(first);
-			ft_error(data, "split", fd);
-		}
-		free(data->line);
-	}
+	ft_get_map3(data, fd, first);
 	free(data->line);
 	data->line = NULL;
 	data->map = (char **)malloc(sizeof(char *) * (ft_list_len(first) + 1));
+	if (!data->map)
+		ft_error(data, "malloc", fd);
 	while (current)
 	{
 		data->map[i++] = ft_strdup(current->data);

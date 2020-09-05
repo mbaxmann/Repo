@@ -6,7 +6,7 @@
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/01 10:18:48 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/09/01 12:05:42 by user42           ###   ########.fr       */
+/*   Updated: 2020/09/05 12:11:14 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int		ft_calculate_ray(t_data *data, double alpha, double *stock)
 	t_vector	*pt_2;
 	int			size;
 
-	ft_init_vector(&pt_1, &pt_2, alpha);
+	ft_in_vec(&pt_1, &pt_2, alpha, data);
 	ft_set_angle(&alpha, pt_1, pt_2);
 	ft_init_pt(pt_1, alpha, data, 1);
 	ft_init_pt(pt_2, alpha, data, 0);
@@ -93,6 +93,8 @@ int		ft_raycasting(t_data *data)
 	i = 0;
 	angle = data->player->angle + (M_PI / 6);
 	stock = (double *)malloc(sizeof(double) * (data->res->x));
+	if (!stock)
+		ft_error(data, "malloc", 0);
 	while (i < data->res->x)
 	{
 		ft_modulo_pi(&angle);

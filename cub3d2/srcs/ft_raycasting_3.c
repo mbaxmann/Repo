@@ -6,7 +6,7 @@
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/15 09:53:56 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/09/01 12:05:32 by user42           ###   ########.fr       */
+/*   Updated: 2020/09/05 11:59:17 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,14 +68,16 @@ void		ft_check_sprite(t_data *data, int i, int j)
 	{
 		if (!current)
 		{
-			sprite = (t_vector *)malloc(sizeof(t_vector));
+			if (!(sprite = (t_vector *)malloc(sizeof(t_vector))))
+				ft_error(data, "malloc", 0);
 			sprite->x = floor(j) + 0.5;
 			sprite->y = floor(i) + 0.5;
 			data->sprite = ft_newlst(sprite);
 		}
 		else if (!ft_spritestocked(current, i, j))
 		{
-			sprite = (t_vector *)malloc(sizeof(t_vector));
+			if (!(sprite = (t_vector *)malloc(sizeof(t_vector))))
+				ft_error(data, "malloc", 0);
 			sprite->x = floor(j) + 0.5;
 			sprite->y = floor(i) + 0.5;
 			ft_add_list(data->sprite, ft_newlst(sprite));
