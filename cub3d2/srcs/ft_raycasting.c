@@ -6,7 +6,7 @@
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/01 10:18:48 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/09/05 12:11:14 by user42           ###   ########.fr       */
+/*   Updated: 2020/09/05 18:45:24 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,5 +104,6 @@ int		ft_raycasting(t_data *data)
 		i++;
 	}
 	ft_load_sprite(data, stock);
+	free(stock);
 	return (0);
 }

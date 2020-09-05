@@ -6,7 +6,7 @@
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/14 09:17:58 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/09/05 17:58:05 by user42           ###   ########.fr       */
+/*   Updated: 2020/09/05 18:38:59 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,4 @@ int				ft_check_char2(char **map, int i, int j);
 int				ft_check_down(char **map, int i, int j);
 int				ft_check_up(char **map, int i, int j);
 int				ft_check_hole(char **map, int i, int j);
-int				ft_skip_space(char **map, int i, int j, int mode);
-int				ft_check_valid(char **map, int i, int j);
-
 #endif

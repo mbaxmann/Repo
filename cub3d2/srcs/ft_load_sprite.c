@@ -6,7 +6,7 @@
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/01 10:18:48 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/09/01 12:05:00 by user42           ###   ########.fr       */
+/*   Updated: 2020/09/05 18:45:43 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,5 @@ int			ft_load_sprite(t_data *data, double *stock)
 	}
 	ft_free_lst(data->sprite);
 	data->sprite = NULL;
-	free(stock);
 	return (0);
 }
