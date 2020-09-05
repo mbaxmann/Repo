@@ -6,7 +6,7 @@
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/13 09:54:12 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/09/02 11:02:32 by user42           ###   ########.fr       */
+/*   Updated: 2020/09/05 13:59:15 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	ft_check_line(t_data *data, int fd)
 	{
 		if (data->line[i] != '0' && data->line[i] != '1'
 		&& data->line[i] != '2' && data->line[i] != ' ')
-			ft_error(data, "cor_map", fd);
+			ft_error(data, "cor_file", fd);
 		i++;
 	}
 }

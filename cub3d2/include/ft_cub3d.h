@@ -6,17 +6,17 @@
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/14 09:27:20 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/09/01 16:15:27 by user42           ###   ########.fr       */
+/*   Updated: 2020/09/05 14:27:23 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_CUB3D_H
 # define FT_CUB3D_H
 
-# define UP 122
+# define UP 119
 # define DOWN 115
 # define RIGHT 100
-# define LEFT 113
+# define LEFT 97
 # define T_RIGHT 65361
 # define T_LEFT 65363
 # define ESC 65307

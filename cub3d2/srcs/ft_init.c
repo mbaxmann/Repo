@@ -6,7 +6,7 @@
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/14 09:17:33 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/09/05 11:55:49 by user42           ###   ########.fr       */
+/*   Updated: 2020/09/05 14:12:04 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,9 @@ void		ft_get_map(t_data *data, int fd)
 		get_next_line(fd, &(data->line));
 		tmp = ft_strtrim(data->line, " ");
 	}
+	free(tmp);
 	ft_check_line(data, fd);
 	first = ft_newlst(ft_strdup(data->line));
-	free(tmp);
 	free(data->line);
 	while (get_next_line(fd, &(data->line)) && ft_strncmp(data->line, "", 1))
 	{
