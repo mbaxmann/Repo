@@ -6,11 +6,36 @@
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/13 09:54:12 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/09/05 13:59:15 by user42           ###   ########.fr       */
+/*   Updated: 2020/09/05 18:24:54 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/ft_cub3d.h"
+
+void	ft_del_space(char **map)
+{
+	int i;
+	int j;
+	int k;
+
+	i = 0;
+	j = 0;
+	k = 0;
+	while (map[i][0])
+	{
+		while (map[i][j])
+		{
+			if (map[i][j] == ' ')
+			{
+				k = ft_strlen(&map[i][j + 1]) + 1;
+				ft_memmove(&map[i][j], &map[i][j + 1], k);
+			}
+			j++;
+		}
+		j = 0;
+		i++;
+	}
+}
 
 void	ft_check_line(t_data *data, int fd)
 {
@@ -24,6 +49,8 @@ void	ft_check_line(t_data *data, int fd)
 			ft_error(data, "cor_file", fd);
 		i++;
 	}
+	if (data->line[0] == ' ')
+		ft_error(data, "map", fd);
 }
 
 int		ft_loop(t_data *data)
