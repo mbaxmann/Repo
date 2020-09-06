@@ -6,7 +6,7 @@
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/14 09:17:58 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/09/05 18:38:59 by user42           ###   ########.fr       */
+/*   Updated: 2020/09/06 11:23:29 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,6 @@ typedef struct	s_data
 
 t_data			*ft_init(char *path, t_mlx *mlx);
 t_textur		*ft_load_t(t_data *data, char *path, void *mlx_ptr, int fd);
-void			ft_del_space(char **map);
 void			ft_init_data(t_data *data);
 void			ft_id_2(t_data *data);
 void			ft_get_map(t_data *data, int fd);

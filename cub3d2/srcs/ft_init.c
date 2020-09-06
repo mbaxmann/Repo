@@ -6,7 +6,7 @@
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/14 09:17:33 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/09/05 18:23:56 by user42           ###   ########.fr       */
+/*   Updated: 2020/09/06 11:32:50 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void		ft_get_map(t_data *data, int fd)
 	free(data->line);
 	while (get_next_line(fd, &(data->line)) && ft_strncmp(data->line, "", 1))
 	{
-		ft_add_list(first, ft_newlst(ft_strtrim(data->line, " ")));
+		ft_add_list(first, ft_newlst(ft_strdup(data->line)));
 		free(data->line);
 	}
 	ft_get_map2(data, fd, first);
@@ -83,7 +83,6 @@ t_data		*ft_init(char *path, t_mlx *mlx)
 		ft_error(map, "file", fd);
 	ft_get_map(map, fd);
 	close(fd);
-	ft_del_space(map->map);
 	if (ft_check_map(map->map))
 		ft_error(map, "map", 0);
 	ft_init_player(map, &map->player);
