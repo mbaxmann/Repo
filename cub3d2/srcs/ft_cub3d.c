@@ -6,7 +6,7 @@
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/13 09:54:12 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/09/05 11:54:09 by user42           ###   ########.fr       */
+/*   Updated: 2020/09/06 11:51:54 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void		ft_error_2(char *err)
 	else if (!ft_strncmp(err, "map", 4))
 		ft_putendl_fd("Error\nInvalid map", 1);
 	else if (!ft_strncmp(err, "texture", 8))
-		ft_putendl_fd("Error\nCould not load texture or/and sprite", 1);
+		ft_putendl_fd("Error\nTexture path is invalid", 1);
 	else if (!ft_strncmp(err, "split", 6))
 		ft_putendl_fd("Error\nMap is split and/or not at the end of file", 1);
 	else if (!ft_strncmp(err, "rgb_inv", 8))
