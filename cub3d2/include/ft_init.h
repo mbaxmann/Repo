@@ -6,7 +6,7 @@
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/14 09:17:58 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/09/06 11:23:29 by user42           ###   ########.fr       */
+/*   Updated: 2020/09/07 11:07:42 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,8 @@ void			ft_set_res(t_data *data, char *res, int fd);
 void			ft_set_res_2(t_data *data, char *res, int fd, int i);
 void			ft_init_player(t_data *data, t_player **player);
 void			ft_check_line(t_data *data, int fd);
+void			ft_rgb_pass(char **nb, char *stock, int fd, t_data *data);
+void			ft_free_rgb(t_data *data, char *stock, int fd);
 int				ft_get_rgb(t_data *data, char *nb, int fd);
 int				ft_check_data(t_data *data);
 int				ft_check_map(char **map);

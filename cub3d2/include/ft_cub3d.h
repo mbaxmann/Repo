@@ -6,7 +6,7 @@
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/14 09:27:20 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/09/05 14:27:23 by user42           ###   ########.fr       */
+/*   Updated: 2020/09/07 10:27:27 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,5 +40,6 @@ void			ft_valid_arg(int ac, char **av);
 void			ft_open_window(t_mlx **mlx, t_data *data);
 void			ft_error(t_data *data, char *err, int fd);
 void			ft_error_2(char *err);
+int			ft_nblen(int nb);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/25 10:34:49 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/09/05 16:23:19 by user42           ###   ########.fr       */
+/*   Updated: 2020/09/07 11:09:32 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,25 +38,26 @@ int			ft_get_rgb(t_data *data, char *nb, int fd)
 	int		tab[3];
 	char	*stock;
 
-	tab[0] = ft_atoi(nb);
 	stock = nb;
-	while (*nb != ',' && *nb)
+	while (*nb == ' ')
 		nb++;
-	tab[1] = ft_atoi(++nb);
-	while (*nb != ',' && *nb)
+	if (!ft_isdigit(*nb))
+		ft_free_rgb(data, stock, fd);
+	tab[0] = ft_atoi(nb);
+	nb += ft_nblen(tab[0]);
+	ft_rgb_pass(&nb, stock, fd, data);
+	tab[1] = ft_atoi(nb);
+	nb += ft_nblen(tab[1]);
+	ft_rgb_pass(&nb, stock, fd, data);
+	tab[2] = ft_atoi(nb);
+	nb += ft_nblen(tab[2]);
+	while (*nb == ' ')
 		nb++;
-	if (!(*nb) || !(*(nb + 1)))
-	{
-		free(stock);
-		ft_error(data, "rgb_inv", fd);
-	}
-	tab[2] = ft_atoi(++nb);
+	if (*nb)
+		ft_free_rgb(data, stock, fd);
 	if (tab[0] < 0 || tab[1] < 0 || tab[2] < 0 ||
 	tab[0] > 255 || tab[1] > 255 || tab[2] > 255)
-	{
-		free(stock);
-		ft_error(data, "rgb_ran", fd);
-	}
+		ft_free_rgb(data, stock, fd);
 	free(stock);
 	return ((tab[0] << 16) | (tab[1] << 8) | tab[2]);
 }

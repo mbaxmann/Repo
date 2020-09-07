@@ -6,11 +6,26 @@
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/13 09:54:12 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/09/06 11:32:15 by user42           ###   ########.fr       */
+/*   Updated: 2020/09/07 10:40:42 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/ft_cub3d.h"
+
+int	ft_nblen(int nb)
+{
+	int i;
+
+	i = 0;
+	if (!nb)
+		return (1);
+	while (nb)
+	{
+		nb /= 10;
+		i++;
+	}
+	return (i);
+}
 
 void	ft_check_line(t_data *data, int fd)
 {

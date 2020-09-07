@@ -1,7 +1,6 @@
+R  900    500
 
 
-
-R 900   500
 
 NO      ./textur/greystone.xpm
 
@@ -13,7 +12,7 @@ EA ./textur/redbrick.xpm
 
      S    ./textur/barrel.xpm
 
-F    220,  100,0  
+F    220 , 100, 0   
 
 C 245,   99  ,142
 
