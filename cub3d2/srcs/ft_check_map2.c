@@ -6,7 +6,7 @@
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/25 10:36:53 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/09/01 12:02:25 by user42           ###   ########.fr       */
+/*   Updated: 2020/09/08 11:09:06 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ int		ft_check_down(char **map, int i, int j)
 		return (1);
 	else if (!i || j > (int)ft_strlen(map[i - 1]))
 		return (1);
-	else if (map[i - 1][j] && map[i - 1][j + 1] == ' ')
+	else if (map[i - 1][j] &&
+	(map[i - 1][j + 1] == ' ' || !map[i - 1][j + 1]))
 		return (1);
 	else if (j && map[i - 1][j - 1] == ' ')
 		return (1);
@@ -32,7 +33,8 @@ int		ft_check_up(char **map, int i, int j)
 		return (1);
 	else if (!map[i + 1][0] || j > (int)ft_strlen(map[i + 1]))
 		return (1);
-	else if (map[i + 1][j] && map[i + 1][j + 1] == ' ')
+	else if (map[i + 1][j] &&
+	(map[i + 1][j + 1] == ' ' || !map[i + 1][j + 1]))
 		return (1);
 	else if (j && map[i + 1][j - 1] == ' ')
 		return (1);

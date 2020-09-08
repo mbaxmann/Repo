@@ -6,7 +6,7 @@
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/25 10:28:50 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/09/01 12:02:36 by user42           ###   ########.fr       */
+/*   Updated: 2020/09/08 10:58:50 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,11 @@ int		ft_check_char2(char **map, int i, int j)
 		return (1);
 	else if (map[i][j] == 'N' || map[i][j] == 'S'
 		|| map[i][j] == 'W' || map[i][j] == 'E')
+	{
+		if (!ft_check_hole(map, i, j))
+			return (0);
 		return (2);
+	}
 	else if (map[i][j] == '0' || map[i][j] == '2')
 		return (ft_check_hole(map, i, j));
 	return (0);

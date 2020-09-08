@@ -6,17 +6,17 @@
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/14 09:27:20 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/09/07 10:27:27 by user42           ###   ########.fr       */
+/*   Updated: 2020/09/08 11:07:58 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_CUB3D_H
 # define FT_CUB3D_H
 
-# define UP 119
+# define UP 122
 # define DOWN 115
 # define RIGHT 100
-# define LEFT 97
+# define LEFT 113
 # define T_RIGHT 65361
 # define T_LEFT 65363
 # define ESC 65307
@@ -40,6 +40,6 @@ void			ft_valid_arg(int ac, char **av);
 void			ft_open_window(t_mlx **mlx, t_data *data);
 void			ft_error(t_data *data, char *err, int fd);
 void			ft_error_2(char *err);
-int			ft_nblen(int nb);
+int				ft_nblen(int nb);
 
 #endif

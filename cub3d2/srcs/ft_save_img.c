@@ -6,7 +6,7 @@
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/13 09:54:12 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/09/01 12:06:46 by user42           ###   ########.fr       */
+/*   Updated: 2020/09/08 10:28:19 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,8 @@ void		ft_save_img(t_data *data)
 {
 	int fd;
 
-	if ((fd = open("save.bmp", O_CREAT | O_TRUNC | O_RDWR)) <= 0)
+	if ((fd = open("save.bmp", O_CREAT | O_TRUNC | O_RDWR,
+	S_IRWXU | S_IRWXG | S_IRWXO)) <= 0)
 		ft_error(data, "bmp", 0);
 	else
 	{
