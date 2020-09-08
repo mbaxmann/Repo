@@ -6,7 +6,7 @@
 /*   By: mbaxmann <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/25 10:34:49 by mbaxmann          #+#    #+#             */
-/*   Updated: 2020/09/07 11:09:32 by user42           ###   ########.fr       */
+/*   Updated: 2020/09/08 15:52:44 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int			ft_get_rgb(t_data *data, char *nb, int fd)
 	ft_rgb_pass(&nb, stock, fd, data);
 	tab[2] = ft_atoi(nb);
 	nb += ft_nblen(tab[2]);
-	while (*nb == ' ')
+	while (*nb == ' ' || ft_isdigit(*nb))
 		nb++;
 	if (*nb)
 		ft_free_rgb(data, stock, fd);
